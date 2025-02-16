@@ -61,4 +61,4 @@ profiles:
 - learner-profiles.md
 
 
-disable_sidebar_numbering: false
+disable_sidebar_numbering: true
