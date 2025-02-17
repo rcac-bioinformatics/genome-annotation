@@ -13,6 +13,27 @@
     <loc>https://genome-annotation.github.io/NA/aio.html</loc>
   </url>
   <url>
+    <loc>https://genome-annotation.github.io/NA/annotation-assesment.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/annotation-setup.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/annotation-strategies.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/functional-annotation-with-entap.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/gene-annotation-with-braker.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/gene-annotation-with-easel.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/gene-annotation-with-helixer.html</loc>
+  </url>
+  <url>
     <loc>https://genome-annotation.github.io/NA/images.html</loc>
   </url>
   <url>
@@ -29,6 +50,27 @@
   </url>
   <url>
     <loc>https://genome-annotation.github.io/NA/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/annotation-assesment.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/annotation-setup.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/annotation-strategies.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/functional-annotation-with-entap.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/gene-annotation-with-braker.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/gene-annotation-with-easel.html</loc>
+  </url>
+  <url>
+    <loc>https://genome-annotation.github.io/NA/instructor/gene-annotation-with-helixer.html</loc>
   </url>
   <url>
     <loc>https://genome-annotation.github.io/NA/instructor/images.html</loc>

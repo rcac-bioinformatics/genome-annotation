@@ -234,7 +234,91 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">introduction</a>
+        <a href="introduction.html">1. Introduction to Genome Annotation</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="annotation-strategies.html">2. Annotation Strategies</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="annotation-setup.html">3. Annotation Setup</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="gene-annotation-with-braker.html">4. Annotation using BRAKER</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="gene-annotation-with-helixer.html">5. Annotation using Helixer</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="gene-annotation-with-easel.html">6. Annotation using Easel</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="functional-annotation-with-entap.html">7. Functional annotation using EnTAP</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="annotation-assesment.html">8. Annotation Assesment</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -297,17 +381,108 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="introduction"><h2 class="section-heading"><a href="introduction.html">introduction</a></h2>
+<section id="introduction"><h2 class="section-heading"><a href="introduction.html">Introduction to Genome Annotation</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>.md</code> files for episodes when you want static
-content</li>
-<li>Use <code>.Rmd</code> files for episodes when you need to generate
-output</li>
-<li>Run <code>sandpaper::check_lesson()</code> to identify any issues
-with your lesson</li>
-<li>Run <code>sandpaper::build_lesson()</code> to preview your lesson
-locally</li>
+<li>Genome annotation identifies functional elements in a genome,
+including genes, regulatory regions, and non-coding RNAs.</li>
+<li>Structural annotation predicts gene structures, while functional
+annotation assigns biological roles to genes.</li>
+<li>Challenges in annotation include incomplete assemblies, alternative
+splicing, pseudogenes, and data quality issues.</li>
+<li>Data sources like RNA-seq, proteomics, comparative genomics, and
+epigenomics improve annotation accuracy.</li>
+<li>This workshop focuses on eukaryotic gene annotation using
+computational tools and diverse datasets.</li>
+</ul></section><section id="annotation-strategies"><h2 class="section-heading"><a href="annotation-strategies.html">Annotation Strategies</a></h2>
+<hr class="half-width">
+<ul>
+<li>Genome annotation strategies include <strong>ab initio,
+evidence-based, hybrid, multi-evidence, and large model-based
+methods</strong>, each with different strengths and data
+requirements.<br>
+</li>
+<li>
+<strong>Ab initio methods</strong> predict genes using sequence
+patterns, while <strong>evidence-based methods</strong> use RNA-seq,
+proteins, and evolutionary conservation for refinement.<br>
+</li>
+<li>
+<strong>Multi-evidence approaches</strong> integrate diverse
+biological data such as ribosome profiling, proteomics, and long-read
+RNA-seq to improve accuracy.<br>
+</li>
+<li>
+<strong>Large model-based methods</strong>, like Helixer, use deep
+learning to predict genes without requiring manual training,
+outperforming traditional tools in complex genomes.<br>
+</li>
+<li>The workshop focuses on <strong>protein-coding gene
+annotation</strong> using tools like <strong>BRAKER, Helixer, EASEL, and
+EnTAP</strong>, followed by assessment with BUSCO, OMARK, and structural
+metrics.</li>
+</ul></section><section id="annotation-setup"><h2 class="section-heading"><a href="annotation-setup.html">Annotation Setup</a></h2>
+<hr class="half-width">
+<ul>
+<li>Organizing files and directories ensures a reproducible and
+efficient workflow<br>
+</li>
+<li>Mapping RNA-seq reads to the genome provides essential evidence for
+gene prediction<br>
+</li>
+<li>Repeat masking prevents transposable elements from being
+mis-annotated as genes<br>
+</li>
+<li>Preprocessing steps are crucial for accurate and high-quality genome
+annotation</li>
+</ul></section><section id="gene-annotation-with-braker"><h2 class="section-heading"><a href="gene-annotation-with-braker.html">Annotation using BRAKER</a></h2>
+<hr class="half-width">
+<ul>
+<li>BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to
+predict genes in eukaryotic genomes</li>
+<li>BRAKER3 can be used with different input datasets to improve gene
+prediction accuracy</li>
+<li>BRAKER3 can be run in different scenarios to predict genes in a
+genome</li>
+</ul></section><section id="gene-annotation-with-helixer"><h2 class="section-heading"><a href="gene-annotation-with-helixer.html">Annotation using Helixer</a></h2>
+<hr class="half-width">
+<ul>
+<li>Helixer is a deep learning-based gene prediction tool that uses a
+convolutional neural network (CNN) to predict genes in eukaryotic
+genomes.</li>
+<li>Helixer can predict genes wihtout any extrinisic information such as
+RNA-seq data or homology information, purely based on the sequence of
+the genome.</li>
+<li>Helixer requires a trained model and GPU for prediction.</li>
+<li>Helixer predicts genes in the GFF3 format, but will not predict
+isoforms.</li>
+</ul></section><section id="gene-annotation-with-easel"><h2 class="section-heading"><a href="gene-annotation-with-easel.html">Annotation using Easel</a></h2>
+<hr class="half-width">
+<ul>
+<li>to do1</li>
+<li>to do2</li>
+<li>to do3</li>
+</ul></section><section id="functional-annotation-with-entap"><h2 class="section-heading"><a href="functional-annotation-with-entap.html">Functional annotation using EnTAP</a></h2>
+<hr class="half-width"></section><section id="annotation-assesment"><h2 class="section-heading"><a href="annotation-assesment.html">Annotation Assesment</a></h2>
+<hr class="half-width">
+<ul>
+<li>
+<code>busco</code> and <code>omark</code> assess how well conserved
+genes are represented in the predicted gene set<br>
+</li>
+<li>
+<code>gff3</code> metrics provide structural insights and highlight
+discrepancies compared to known annotations<br>
+</li>
+<li>
+<code>featureCounts</code> assignment quantifies the number of
+RNA-seq reads aligning to predicted features<br>
+</li>
+<li>Reference annotation comparison evaluates how closely the predicted
+genes match an established reference<br>
+</li>
+<li>Multiple assessment methods ensure a comprehensive evaluation of
+annotation quality</li>
 </ul></section>
 </div>
     </main>
@@ -356,8 +531,8 @@ locally</li>
   "url": "https://genome-annotation.github.io/NA/key-points.html",
   "identifier": "https://genome-annotation.github.io/NA/key-points.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-02-16",
-  "datePublished": "2025-02-16"
+  "dateModified": "2025-02-17",
+  "datePublished": "2025-02-17"
 }
 
   </script><script>
