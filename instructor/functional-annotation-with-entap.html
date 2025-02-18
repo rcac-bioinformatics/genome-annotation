@@ -265,6 +265,7 @@
 <li><a href="#running-entap">Running EnTAP</a></li>
 <li><a href="#step-1-prepare-files"><strong>Step 1:</strong> Prepare files</a></li>
 <li><a href="#step-2-run-entap"><strong>Step 2:</strong> Run EnTAP</a></li>
+<li><a href="#interpreting-results">Interpreting Results</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -612,7 +613,41 @@ directory for EnTAP results and the correct input file</p>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
-<div id="keypoints1" class="callout keypoints">
+</section><section><h2 class="section-heading" id="interpreting-results">Interpreting Results<a class="anchor" aria-label="anchor" href="#interpreting-results"></a></h2>
+<hr class="half-width"><p>EnTAP generates several output files, but the key results will be in
+the <code>entap_out/final_results</code> directory.</p>
+</section><div class="section level1">
+<h1 id="entap-output-files-summary">EnTAP Output Files Summary<a class="anchor" aria-label="anchor" href="#entap-output-files-summary"></a></h1>
+<table class="table"><colgroup><col width="42%"><col width="57%"></colgroup><thead><tr class="header"><th align="left"><strong>File/Directory</strong></th>
+<th><strong>Description</strong></th>
+</tr></thead><tbody><tr class="odd"><td align="left"><strong>Final Results
+(<code>final_results/</code>)</strong></td>
+<td></td>
+</tr><tr class="even"><td align="left"><code>annotated.fnn</code></td>
+<td>FASTA file of <strong>annotated</strong> transcripts.</td>
+</tr><tr class="odd"><td align="left"><code>annotated.tsv</code></td>
+<td>Tab-separated file with <strong>functional
+annotations</strong>.</td>
+</tr><tr class="even"><td align="left"><code>annotated_gene_ontology_terms.tsv</code></td>
+<td>GO terms assigned to annotated transcripts.</td>
+</tr><tr class="odd"><td align="left"><code>entap_results.tsv</code></td>
+<td>
+<strong>Master summary</strong> of all results, including
+annotations.</td>
+</tr><tr class="even"><td align="left"><code>unannotated.fnn</code></td>
+<td>FASTA file of <strong>unannotated</strong> transcripts.</td>
+</tr><tr class="odd"><td align="left"><code>unannotated.tsv</code></td>
+<td>List of transcripts that <strong>failed</strong> annotation.</td>
+</tr><tr class="even"><td align="left"><strong><code>gene_family/</code></strong></td>
+<td>Stores <strong>eggNOG</strong> gene family assignments, including
+orthologs and functional annotations.</td>
+</tr><tr class="odd"><td align="left"><strong><code>similarity_search/</code></strong></td>
+<td>Contains results from <strong>DIAMOND BLASTX</strong> searches
+against selected databases.</td>
+</tr><tr class="even"><td align="left"><strong><code>transcriptomes/</code></strong></td>
+<td>Holds the <strong>input transcriptome (CDS)</strong> and the
+<strong>processed</strong> version after filtering.</td>
+</tr></tbody></table><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -635,7 +670,11 @@ improving downstream biological interpretations.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></div> <!-- / div.lesson-content -->
+</div>
+
+
+
+      </div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/gene-annotation-with-easel.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/annotation-assesment.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

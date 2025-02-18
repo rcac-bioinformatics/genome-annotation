@@ -2506,6 +2506,73 @@ directory for EnTAP results and the correct input file</p>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
+</section><section><h2 class="section-heading" id="interpreting-results">Interpreting Results<a class="anchor" aria-label="anchor" href="#interpreting-results"></a>
+</h2>
+<hr class="half-width">
+<p>EnTAP generates several output files, but the key results will be in
+the <code>entap_out/final_results</code> directory.</p>
+</section><div class="section level1">
+<h1 id="entap-output-files-summary">EnTAP Output Files Summary<a class="anchor" aria-label="anchor" href="#entap-output-files-summary"></a>
+</h1>
+<table class="table">
+<colgroup>
+<col width="42%">
+<col width="57%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"><strong>File/Directory</strong></th>
+<th><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Final Results
+(<code>final_results/</code>)</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td align="left"><code>annotated.fnn</code></td>
+<td>FASTA file of <strong>annotated</strong> transcripts.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>annotated.tsv</code></td>
+<td>Tab-separated file with <strong>functional
+annotations</strong>.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>annotated_gene_ontology_terms.tsv</code></td>
+<td>GO terms assigned to annotated transcripts.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>entap_results.tsv</code></td>
+<td>
+<strong>Master summary</strong> of all results, including
+annotations.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>unannotated.fnn</code></td>
+<td>FASTA file of <strong>unannotated</strong> transcripts.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>unannotated.tsv</code></td>
+<td>List of transcripts that <strong>failed</strong> annotation.</td>
+</tr>
+<tr class="even">
+<td align="left"><strong><code>gene_family/</code></strong></td>
+<td>Stores <strong>eggNOG</strong> gene family assignments, including
+orthologs and functional annotations.</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong><code>similarity_search/</code></strong></td>
+<td>Contains results from <strong>DIAMOND BLASTX</strong> searches
+against selected databases.</td>
+</tr>
+<tr class="even">
+<td align="left"><strong><code>transcriptomes/</code></strong></td>
+<td>Holds the <strong>input transcriptome (CDS)</strong> and the
+<strong>processed</strong> version after filtering.</td>
+</tr>
+</tbody>
+</table>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2531,9 +2598,9 @@ improving downstream biological interpretations.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-annotation-assesment"><p>Content from <a href="annotation-assesment.html">Annotation Assesment</a></p>
+</div></section><section id="aio-annotation-assesment"><p>Content from <a href="annotation-assesment.html">Annotation Assesment</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-assesment.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2669,30 +2736,186 @@ quality assessment. It provides measures of proteome completeness,
 characterizes the consistency of all protein coding genes with regard to
 their homologs, and identifies the presence of contamination from other
 species.</p>
+<p>The proteomes should be filtered to take only primary isoforms before
+running OMark.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">ml</span> omark</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">ml</span> seqkit</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="va">database</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/08_assessment/omark/LUCA.h5"</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>.pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$pep</span> .pep.fa<span class="va">)</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="ex">omamer</span> search <span class="dt">\</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>       <span class="at">--db</span> <span class="va">${database}</span> <span class="dt">\</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>       <span class="at">--query</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>       <span class="at">--nthreads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="ex">omark</span> <span class="dt">\</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>       <span class="at">--file</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>       <span class="at">--database</span> <span class="va">${database}</span> <span class="dt">\</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>       <span class="at">--outputFolder</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span> <span class="dt">\</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>       <span class="at">--og_fasta</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>       <span class="at">--isoform_file</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.splice</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>.pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$pep</span> .pep.fa<span class="va">)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"\.t1$"</span> <span class="va">$pep</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.ids</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="ex">seqkit</span> grep <span class="at">-f</span> <span class="va">${base}</span>.primary.ids <span class="va">$pep</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.pep.fa</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  OMark Results Summary
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p><strong>Conserved HOGs in Brassicaceae</strong></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Category</strong></th>
+<th align="right"><strong>Count</strong></th>
+<th align="center"><strong>Percentage</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Total Conserved HOGs</strong></td>
+<td align="right">17,996</td>
+<td align="center">100%</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Single-Copy HOGs (S)</strong></td>
+<td align="right">16,237</td>
+<td align="center">90.23%</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Duplicated HOGs (D)</strong></td>
+<td align="right">1,315</td>
+<td align="center">7.31%</td>
+</tr>
+<tr class="even">
+<td align="left"><em>Unexpected Duplications (U)</em></td>
+<td align="right">351</td>
+<td align="center">1.95%</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>Expected Duplications (E)</em></td>
+<td align="right">964</td>
+<td align="center">5.36%</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Missing HOGs (M)</strong></td>
+<td align="right">444</td>
+<td align="center">2.47%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Proteome Composition</strong></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Category</strong></th>
+<th align="right"><strong>Count</strong></th>
+<th align="right"><strong>Percentage</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Total Proteins</strong></td>
+<td align="right">26,994</td>
+<td align="right">100%</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Consistent (A)</strong></td>
+<td align="right">25,480</td>
+<td align="right">94.39%</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>Partial Hits (P)</em></td>
+<td align="right">1,306</td>
+<td align="right">4.84%</td>
+</tr>
+<tr class="even">
+<td align="left"><em>Fragmented (F)</em></td>
+<td align="right">630</td>
+<td align="right">2.33%</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Inconsistent (I)</strong></td>
+<td align="right">167</td>
+<td align="right">0.62%</td>
+</tr>
+<tr class="even">
+<td align="left"><em>Partial Hits (P)</em></td>
+<td align="right">106</td>
+<td align="right">0.39%</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>Fragmented (F)</em></td>
+<td align="right">29</td>
+<td align="right">0.11%</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Likely Contamination (C)</strong></td>
+<td align="right">0</td>
+<td align="right">0.00%</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>Partial Hits (P)</em></td>
+<td align="right">0</td>
+<td align="right">0.00%</td>
+</tr>
+<tr class="even">
+<td align="left"><em>Fragmented (F)</em></td>
+<td align="right">0</td>
+<td align="right">0.00%</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Unknown (U)</strong></td>
+<td align="right">1,347</td>
+<td align="right">4.99%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HOG Placement - Detected Species</strong></p>
+<table class="table">
+<colgroup>
+<col width="53%">
+<col width="15%">
+<col width="15%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th><strong>Species</strong></th>
+<th align="right"><strong>NCBI TaxID</strong></th>
+<th align="right"><strong>Associated Proteins</strong></th>
+<th align="right"><strong>% of Total Proteome</strong></th>
+</tr></thead>
+<tbody><tr class="odd">
+<td><em>Arabidopsis thaliana</em></td>
+<td align="right">3702</td>
+<td align="right">25,647</td>
+<td align="right">95.01%</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> omark</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="va">database</span><span class="op">=</span><span class="st">"/depot/itap/datasets/omark/LUCA.h5"</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>.primary.pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$pep</span> .primary.pep.fa<span class="va">)</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="ex">omamer</span> search <span class="dt">\</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>       <span class="at">--db</span> <span class="va">${database}</span> <span class="dt">\</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>       <span class="at">--query</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>       <span class="at">--nthreads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    <span class="ex">omark</span> <span class="dt">\</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>       <span class="at">--file</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>       <span class="at">--database</span> <span class="va">${database}</span> <span class="dt">\</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>       <span class="at">--outputFolder</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span> <span class="dt">\</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>       <span class="at">--og_fasta</span> <span class="va">${pep}</span> </span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="feature-assignment">Feature assignment<a class="anchor" aria-label="anchor" href="#feature-assignment"></a>
 </h2>
@@ -2700,51 +2923,51 @@ species.</p>
 <p>To measure the number of raw reads assigned to the features predicted
 by the annotation, we will use <code>featureCounts</code> from the
 <code>subread</code> package.</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> subread</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> featureCounts</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$f</span> .gff3<span class="va">)</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="ex">featureCounts</span> <span class="dt">\</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>        <span class="at">-T</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        <span class="at">-a</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        <span class="at">-o</span> featureCounts/<span class="va">${base}</span>_featureCounts.txt <span class="dt">\</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>        <span class="at">-s</span> 2 <span class="dt">\</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>        <span class="at">-p</span> <span class="at">--countReadPairs</span> <span class="dt">\</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>        <span class="at">-t</span> gene <span class="at">-g</span> ID <span class="dt">\</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>        <span class="at">--tmpDir</span> /dev/shm <span class="dt">\</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>        <span class="va">${WORKSHOP_DIR}</span>/00_datasets/bamfiles/<span class="pp">*</span>.bam</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">ml</span> subread</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> featureCounts</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$f</span> .gff3<span class="va">)</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="ex">featureCounts</span> <span class="dt">\</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>        <span class="at">-T</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>        <span class="at">-a</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>        <span class="at">-o</span> featureCounts/<span class="va">${base}</span>_featureCounts.txt <span class="dt">\</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>        <span class="at">-s</span> 2 <span class="dt">\</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>        <span class="at">-p</span> <span class="at">--countReadPairs</span> <span class="dt">\</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>        <span class="at">-t</span> gene <span class="at">-g</span> ID <span class="dt">\</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>        <span class="at">--tmpDir</span> /dev/shm <span class="dt">\</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>        <span class="va">${WORKSHOP_DIR}</span>/00_datasets/bamfiles/<span class="pp">*</span>.bam</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="reference-annotation-comparison">Reference annotation comparison<a class="anchor" aria-label="anchor" href="#reference-annotation-comparison"></a>
 </h2>
 <hr class="half-width">
 <p>We will use <code>gffcompare</code> to compare the reference
 annotation with the predicted annotation.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> gffcompare</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$gff3</span> .gff3<span class="va">)</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="ex">gffcompare</span> <span class="dt">\</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>       <span class="at">-r</span> <span class="va">${WORKSHOP_DIR}</span>/00_datasets/annotation/athaliana.gff3 <span class="dt">\</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>       <span class="at">-o</span> gffcompare/<span class="va">${base}</span> <span class="dt">\</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>       <span class="va">${gff3}</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> gffcompare</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$gff3</span> .gff3<span class="va">)</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    <span class="ex">gffcompare</span> <span class="dt">\</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>       <span class="at">-r</span> <span class="va">${WORKSHOP_DIR}</span>/00_datasets/annotation/athaliana.gff3 <span class="dt">\</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>       <span class="at">-o</span> gffcompare/<span class="va">${base}</span> <span class="dt">\</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>       <span class="va">${gff3}</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
