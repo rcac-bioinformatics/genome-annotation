@@ -116,9 +116,70 @@ done
 generate_plot.py –wd busco_results
 ```
 
+
 ## Omark assesment
 
 OMArk is a software for proteome (protein-coding gene repertoire) quality assessment. It provides measures of proteome completeness, characterizes the consistency of all protein coding genes with regard to their homologs, and identifies the presence of contamination from other species. 
+
+The proteomes should be filtered to take only primary isoforms before running OMark.
+
+```bash
+ml --force purge
+ml biocontainers
+ml seqkit
+WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
+workdir=${WORKSHOP_DIR}/08_assessment
+cd ${workdir}
+for pep in *.pep.fa; do
+    base=$(basename $pep .pep.fa)
+    grep "\.t1$" $pep > ${base}.primary.ids
+    seqkit grep -f ${base}.primary.ids $pep > ${base}.primary.pep.fa
+done
+```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## **OMark Results Summary**
+
+**Conserved HOGs in Brassicaceae**
+
+| **Category** | **Count** | **Percentage** |
+|:-----------------|------:|:--------:|
+| **Total Conserved HOGs** | 17,996 | 100% |
+| **Single-Copy HOGs (S)** | 16,237 | 90.23% |
+| **Duplicated HOGs (D)** | 1,315 | 7.31% |
+|  _Unexpected Duplications (U)_ | 351 | 1.95% |
+|  _Expected Duplications (E)_ | 964 | 5.36% |
+| **Missing HOGs (M)** | 444 | 2.47% |
+
+
+**Proteome Composition**
+
+| **Category** | **Count** | **Percentage** |
+|:--------|---:|----:|
+| **Total Proteins** | 26,994 | 100% |
+| **Consistent (A)** | 25,480 | 94.39% |
+| _Partial Hits (P)_ | 1,306 | 4.84% |
+| _Fragmented (F)_ | 630 | 2.33% |
+| **Inconsistent (I)** | 167 | 0.62% |
+| _Partial Hits (P)_ | 106 | 0.39% |
+| _Fragmented (F)_ | 29 | 0.11% |
+| **Likely Contamination (C)** | 0 | 0.00% |
+| _Partial Hits (P)_ | 0 | 0.00% |
+| _Fragmented (F)_ | 0 | 0.00% |
+| **Unknown (U)** | 1,347 | 4.99% |
+
+
+
+**HOG Placement - Detected Species**
+
+| **Species** | **NCBI TaxID** | **Associated Proteins** | **% of Total Proteome** |
+|--------------|---:|---:|---:|
+| _Arabidopsis thaliana_ | 3702 | 25,647 | 95.01% |
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ```bash
 ml --force purge
@@ -126,10 +187,10 @@ ml biocontainers
 ml omark
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 workdir=${WORKSHOP_DIR}/08_assessment
-database="${WORKSHOP_DIR}/08_assessment/omark/LUCA.h5"
+database="/depot/itap/datasets/omark/LUCA.h5"
 cd ${workdir}
-for pep in *.pep.fa; do
-    base=$(basename $pep .pep.fa)
+for pep in *.primary.pep.fa; do
+    base=$(basename $pep .primary.pep.fa)
     omamer search \
        --db ${database} \
        --query ${pep} \
@@ -139,8 +200,7 @@ for pep in *.pep.fa; do
        --file ${pep%.*}.omamer \
        --database ${database} \
        --outputFolder ${pep%.*} \
-       --og_fasta ${pep} \
-       --isoform_file ${pep%.*}.splice
+       --og_fasta ${pep} 
 done
 ```
 
