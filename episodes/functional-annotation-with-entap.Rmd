@@ -194,6 +194,26 @@ EnTAP -\
    --threads ${SLURM_CPUS_ON_NODE}
 ```
 
+## Interpreting Results
+
+EnTAP generates several output files, but the key results will be in the `entap_out/final_results` directory.
+
+
+# EnTAP Output Files Summary
+
+| **File/Directory**                           | **Description** |
+|:-----------|----------------|
+| **Final Results (`final_results/`)** |
+| `annotated.fnn`                             | FASTA file of **annotated** transcripts. |
+| `annotated.tsv`                             | Tab-separated file with **functional annotations**. |
+| `annotated_gene_ontology_terms.tsv`         | GO terms assigned to annotated transcripts. |
+| `entap_results.tsv`                         | **Master summary** of all results, including annotations. |
+| `unannotated.fnn`                           | FASTA file of **unannotated** transcripts. |
+| `unannotated.tsv`                           | List of transcripts that **failed** annotation. |
+| **`gene_family/`**             | Stores **eggNOG** gene family assignments, including orthologs and functional annotations. |
+| **`similarity_search/`**       | Contains results from **DIAMOND BLASTX** searches against selected databases. |
+| **`transcriptomes/`**          | Holds the **input transcriptome (CDS)** and the **processed** version after filtering. |
+
 
 
 
