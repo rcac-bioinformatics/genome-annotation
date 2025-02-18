@@ -108,11 +108,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 62%" class="percentage">
-    62%
+<aside class="col-md-12 lesson-progress"><div style="width: 65%" class="percentage">
+    65%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 62%" aria-valuenow="62" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 65%" aria-valuenow="65" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -251,9 +251,9 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#setup">01_Setup</a></li>
-<li><a href="#running-easel">02_Running Easel</a></li>
-<li><a href="#results-and-outputs">03_Results and Outputs</a></li>
+        <ul><li><a href="#setup">Setup</a></li>
+<li><a href="#running-easel">Running Easel</a></li>
+<li><a href="#results-and-outputs">Results and Outputs</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -336,7 +336,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Annotation using Easel</h1>
-        <p>Last updated on 2025-02-17 |
+        <p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-easel.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -355,9 +355,12 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<ul><li>What are the steps required to set up and run EASEL on an HPC
+system?</li>
+<li>How is Nextflow used to manage and execute the EASEL workflow?</li>
+<li>What configuration files need to be modified before running
+EASEL?</li>
+<li>How do you submit and monitor an EASEL job using Slurm?</li>
 </ul></div>
 </div>
 </div>
@@ -365,15 +368,24 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<ul><li>Set up and configure EASEL for execution on an HPC system.</li>
+<li>Install Nextflow and pull the EASEL workflow from the
+repository.</li>
+<li>Modify the necessary configuration files to match the HPC
+environment.</li>
+<li>Submit and run EASEL as a Slurm job and verify successful
+execution.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="setup">01_Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h2>
+<p>EASEL (Efficient, Accurate, Scalable Eukaryotic modeLs) is a genome
+annotation tool that integrates machine learning, RNA folding, and
+functional annotations to improve gene prediction accuracy, leveraging
+optimized AUGUSTUS parameters, transcriptome and protein evidence, and a
+Nextflow-based scalable pipeline for reproducible analysis.</p>
+<section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h2>
 <hr class="half-width"><p>We will do a custom installation of nextflow (we will not use
 <code>ml nextflow</code>):</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -393,9 +405,9 @@
 </div>
 <p>We can organize our folder structure as follows:</p>
 <figure><img src="https://github.com/user-attachments/assets/ce52353b-f0c9-4fae-977f-58b2efa26bd1" alt="Folder organization" class="figure mx-auto d-block"><div class="figcaption">Folder organization</div>
-</figure></section><section><h2 class="section-heading" id="running-easel">02_Running Easel<a class="anchor" aria-label="anchor" href="#running-easel"></a></h2>
-<hr class="half-width"><p>First, we will create a <code>rcac.config</code> file to run the jobs
-using <code>slurm</code> scheduler.</p>
+</figure></section><section><h2 class="section-heading" id="running-easel">Running Easel<a class="anchor" aria-label="anchor" href="#running-easel"></a></h2>
+<hr class="half-width"><p><strong>Step 1:</strong> create a <code>rcac.config</code> file to
+run the jobs using <code>slurm</code> scheduler.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -427,9 +439,9 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="ex">//</span> Executor-specific configurations</span>
 <span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.executor</span> == <span class="st">'slurm'</span><span class="kw">)</span> <span class="kw">{</span></span>
 <span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>    <span class="ex">process</span> {</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">1</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>   <span class="kw">)</span> <span class="kw">}</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>        <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">6.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>        <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>   <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>   <span class="kw">)</span> <span class="kw">}</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>        <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">32.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>        <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>   <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        <span class="ex">clusterOptions</span> = <span class="st">"-A </span><span class="va">${params</span><span class="er">.project</span><span class="va">}</span><span class="st"> -p </span><span class="va">${params</span><span class="er">.partition</span><span class="va">}</span><span class="st">"</span></span>
 <span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a></span>
 <span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>        <span class="ex">errorStrategy</span> = { task.exitStatus in <span class="pp">[</span><span class="ss">143,137,104,134,139</span><span class="pp">]</span> <span class="pp">?</span> <span class="st">'retry'</span> : <span class="st">'finish'</span> }</span>
@@ -437,30 +449,30 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="ex">maxErrors</span>     = <span class="st">'-1'</span></span>
 <span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a></span>
 <span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>        <span class="ex">withLabel:process_single</span> {</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">1</span>                  , <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">6.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>                  , <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">32.GB</span>  <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>    <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>        <span class="ex">withLabel:process_low</span> {</span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">2</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">12.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">32</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">64.GB</span>  <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>        <span class="ex">withLabel:process_medium</span> {</span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">8</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">36.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">64</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">128.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>        <span class="ex">withLabel:process_high</span> {</span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">100.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">16.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">128</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">256.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>        <span class="ex">withLabel:process_long</span> {</span>
-<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">20.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">48.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>        <span class="ex">withLabel:process_high_memory</span> {</span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">200.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">256.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>        <span class="ex">withLabel:error_ignore</span> {</span>
 <span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a>            <span class="ex">errorStrategy</span> = <span class="st">'ignore'</span></span>
@@ -472,7 +484,7 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a>    <span class="er">}</span></span>
 <span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a><span class="er">}</span></span></code></pre>
 </div>
-<p>Second, we will pull the Easel nextflow workflow:</p>
+<p><strong>Step 2:</strong> pull the Easel nextflow workflow:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -484,7 +496,7 @@ using <code>slurm</code> scheduler.</p>
 </div>
 <p>This will pull the latest version of the Easel workflow from the
 PlantGenomicsLab GitLab repository.</p>
-<p>Third, we will modify the
+<p><strong>Step 3:</strong> modify the
 <code>~/.nextflow/assets/PlantGenomicsLab/easel/nextflow.config</code>
 file to include the <code>rcac.config</code> file:</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -514,8 +526,8 @@ file to include the <code>rcac.config</code> file:</p>
 file. and all the lines between <code>debug</code> and <code>test</code>
 aren’t shown here.</p>
 <p>Now, we are ready to run the Easel workflow.</p>
-<p>Fourth, we will create <code>param.yaml</code> file to run the Easel
-workflow:</p>
+<p><strong>Step 4:</strong> create <code>param.yaml</code> file to run
+the Easel workflow:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -527,18 +539,18 @@ workflow:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir    </span><span class="kw">:</span><span class="at"> </span><span class="st">"easel"</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome    </span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam       </span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam"</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage   </span><span class="kw">:</span><span class="at"> </span><span class="st">"embryophyta"</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order </span><span class="kw">:</span><span class="at"> </span><span class="st">"Brassicales"</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix     </span><span class="kw">:</span><span class="at"> </span><span class="st">"arabidopsis"</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon </span><span class="kw">:</span><span class="at"> </span><span class="st">"arabidopsis"</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/singularity_cache"</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set </span><span class="kw">:</span><span class="at"> </span><span class="st">'plant'</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor </span><span class="kw">:</span><span class="at"> </span><span class="st">'slurm'</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> </span><span class="st">'testpbs'</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> </span><span class="st">'normal'</span></span>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir</span><span class="kw">:</span><span class="at"> easel</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage</span><span class="kw">:</span><span class="at"> embryophyta</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order</span><span class="kw">:</span><span class="at"> Brassicales</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/singularity_cache</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set</span><span class="kw">:</span><span class="at"> plant</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> testpbs</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> normal</span></span>
 <span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span><span class="at"> testpbs</span></span></code></pre>
 </div>
 <p>Now we are ready to run the Easel workflow:</p>
@@ -564,18 +576,22 @@ workflow:</p>
 <span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>   <span class="at">--project</span> testpbs</span></code></pre>
 </div>
 <p>This will run the Easel workflow on the RCAC HPC.</p>
-</section><section><h2 class="section-heading" id="results-and-outputs">03_Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a></h2>
-<hr class="half-width"><p>Interpreting Gene Predictions Assessing Annotation Quality</p>
-<div id="keypoints1" class="callout keypoints">
+</section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a></h2>
+<hr class="half-width"><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<ul><li>EASEL is executed using Nextflow, which simplifies workflow
+management and ensures reproducibility.</li>
+<li>Proper configuration of resource settings and HPC parameters is
+essential for successful job execution.</li>
+<li>Running EASEL requires setting up input files, modifying
+configuration files, and submitting jobs via Slurm.</li>
+<li>Understanding how to monitor and troubleshoot jobs helps ensure
+efficient pipeline execution.</li>
 </ul></div>
 </div>
 </div>
@@ -641,7 +657,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/gene-annotation-with-easel.html",
   "identifier": "https://genome-annotation.github.io/NA/gene-annotation-with-easel.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-02-17",
+  "dateModified": "2025-02-18",
   "datePublished": "2025-02-18"
 }
 

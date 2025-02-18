@@ -108,11 +108,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 75%" class="percentage">
-    75%
+<aside class="col-md-12 lesson-progress"><div style="width: 77%" class="percentage">
+    77%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 75%" aria-valuenow="75" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 77%" aria-valuenow="77" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -260,9 +260,11 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#setup">01_Setup</a></li>
-<li><a href="#running-entap">02_Running EnTAP</a></li>
-<li><a href="#results-and-outputs">03_Results and Outputs</a></li>
+        <ul><li><a href="#entap-overview">EnTAP Overview</a></li>
+<li><a href="#how-entap-works">How EnTAP Works</a></li>
+<li><a href="#running-entap">Running EnTAP</a></li>
+<li><a href="#step-1-prepare-files"><strong>Step 1:</strong> Prepare files</a></li>
+<li><a href="#step-2-run-entap"><strong>Step 2:</strong> Run EnTAP</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -336,7 +338,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Functional annotation using EnTAP</h1>
-        <p>Last updated on 2025-02-17 |
+        <p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/functional-annotation-with-entap.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -357,9 +359,14 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<ul><li>What is EnTAP, and how does it improve functional annotation for
+non-model transcriptomes?</li>
+<li>How does EnTAP filter, annotate, and assign functional roles to
+predicted transcripts?</li>
+<li>What databases and evidence sources does EnTAP integrate for
+annotation?</li>
+<li>What are the key steps required to set up and execute EnTAP on an
+HPC system?</li>
 </ul></div>
 </div>
 </div>
@@ -367,42 +374,267 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<ul><li>Understand how EnTAP improves functional annotation for non-model
+eukaryotes.</li>
+<li>Learn how EnTAP processes transcript data through filtering,
+alignment, and functional assignment.</li>
+<li>Set up and modify EnTAP configuration files for correct
+execution.</li>
+<li>Run EnTAP on an HPC system and interpret the generated
+annotations.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="setup">01_Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h2>
-<hr class="half-width"><p>Installing EnTAP and Dependencies Preparing Reference Databases
-(UniProt, KEGG, GO, etc.) Configuring EnTAP for Functional
-Annotation</p>
-</section><section><h2 class="section-heading" id="running-entap">02_Running EnTAP<a class="anchor" aria-label="anchor" href="#running-entap"></a></h2>
-<hr class="half-width"><p>Preparing Input Data (GFF, FASTA, Transcript Files) Running EnTAP
-Pipeline Running EnTAP with Custom Databases (if applicable)</p>
-</section><section><h2 class="section-heading" id="results-and-outputs">03_Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a></h2>
-<hr class="half-width"><div class="section level3">
-<h3 id="interpreting-functional-annotations">Interpreting Functional Annotations<a class="anchor" aria-label="anchor" href="#interpreting-functional-annotations"></a></h3>
-<ul><li>Gene Ontology (GO Terms)</li>
-<li>KEGG Pathways</li>
-<li>InterPro Domains</li>
+<section><h2 class="section-heading" id="entap-overview">EnTAP Overview<a class="anchor" aria-label="anchor" href="#entap-overview"></a></h2>
+<hr class="half-width"><p>EnTAP is a bioinformatics pipeline designed to enhance the accuracy,
+speed, and flexibility of functional annotation for de novo assembled
+transcriptomes in non-model eukaryotic organisms. It mitigates assembly
+fragmentation, improves annotation rates, and provides extensive
+functional insights into transcriptomes. You can provide predicted
+transcripts in FASTA format and a GFF file containing gene models to run
+EnTAP.</p>
+<div id="key-features" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="key-features" class="callout-inner">
+<h3 class="callout-title">Key Features</h3>
+<div class="callout-content">
+<ul><li>
+<strong>Optimized for non-model eukaryotes</strong> – Overcomes
+challenges of fragmented transcriptome assemblies.</li>
+<li>
+<strong>Fast &amp; efficient</strong> – Runs significantly faster
+than comparable annotation tools.</li>
+<li>
+<strong>Customizable</strong> – Supports optional filtering and
+analysis steps for user-specific needs.</li>
+<li>
+<strong>Comprehensive functional insights</strong> – Integrates
+multiple annotation sources for high-confidence gene assignments.</li>
+<li>
+<strong>Contaminant detection</strong> – Helps remove misleading
+sequences for cleaner datasets.</li>
 </ul></div>
-<div class="section level3">
-<h3 id="assessing-annotation-completeness">Assessing Annotation Completeness<a class="anchor" aria-label="anchor" href="#assessing-annotation-completeness"></a></h3>
-<ul><li><p>Comparison with Reference Annotations</p></li>
-<li><p>Functional Assignment Statistics
-::::::::::::::::::::::::::::::::::::: keypoints</p></li>
-<li><p>to do1</p></li>
-<li><p>to do2</p></li>
-<li><p>to do3</p></li>
-</ul><p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="how-entap-works">How EnTAP Works<a class="anchor" aria-label="anchor" href="#how-entap-works"></a></h2>
+<hr class="half-width"><ol style="list-style-type: decimal"><li>
+<strong>Transcriptome Filtering</strong> – Identifies true coding
+sequences (CDS) and removes assembly artifacts:
+<ul><li>
+<strong>Expression Filtering (optional)</strong> – Filters
+transcripts based on gene expression levels using RSEM.</li>
+<li>
+<strong>Frame Selection (optional)</strong> – Further refines CDS
+predictions using TransDecoder.</li>
+</ul></li>
+<li>
+<strong>Transcriptome Annotation</strong> – Assigns functional
+information to sequences:
+<ul><li>
+<strong>Similarity Search</strong> – Rapid alignment against
+user-selected databases using DIAMOND.</li>
+<li>
+<strong>Contaminant Filtering &amp; Best Hit Selection</strong> –
+Identifies optimal annotations and flags potential contaminants.</li>
+<li>
+<strong>Orthologous Group Assignment</strong> – Assigns translated
+proteins to gene families using <strong>eggNOG/eggnog-mapper</strong>,
+including:
+<ul><li>
+<strong>Protein Domains</strong> (SMART/Pfam)</li>
+<li><strong>Gene Ontology (GO) Terms</strong></li>
+<li><strong>KEGG Pathway Annotation</strong></li>
+</ul></li>
+<li>
+<strong>InterProScan (optional)</strong> – Searches InterPro
+databases for additional domain, GO, and pathway annotations.</li>
+<li>
+<strong>Horizontal Gene Transfer Analysis (optional)</strong> –
+Detects potential horizontal gene transfer (HGT) events via
+DIAMOND.</li>
+</ul></li>
+</ol></section><section><h2 class="section-heading" id="running-entap">Running EnTAP<a class="anchor" aria-label="anchor" href="#running-entap"></a></h2>
+<hr class="half-width"><p>EnTAP is available as a module on the HPC cluster. You can load the
+module using the following commands:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">ml</span> entap</span></code></pre>
+</div>
+<div id="first-time-setup" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="first-time-setup" class="callout-inner">
+<h3 class="callout-title">First-Time Setup</h3>
+<div class="callout-content">
+<p>When running for the first time, you will have to set up the
+databases for EnTAP. This includes downloading files from various
+databases, and can be time consuming. This section is already performed
+so you can skip this step and is included for reference.</p>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  Setting up databases (optional)
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p><code>entap_run.params</code> file should be setup as follows (be
+sure to select the correct <code>databases</code> for your
+organism):</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_dbfiles</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="dt">overwrite</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="dt">resume</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dt">database</span><span class="ot">=</span><span class="st">uniprot_sprot,refseq_plant</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dt">no-trim</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="dt">threads</span><span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="dt">output-format</span><span class="ot">=</span><span class="st">1,3,4,7,</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dt">fpkm</span><span class="ot">=</span><span class="fl">0.5</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="dt">align</span><span class="ot">=</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="dt">single-end</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="dt">frame-selection</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="dt">transdecoder-m</span><span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="dt">transdecoder-no-refine-starts</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="dt">taxon</span><span class="ot">=</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="dt">qcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="dt">tcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="dt">contam</span><span class="ot">=</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="dt">e-value</span><span class="ot">=</span><span class="st">1e-05</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="dt">uninformative</span><span class="ot">=</span><span class="st">conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="dt">diamond-sensitivity</span><span class="ot">=</span><span class="st">very-sensitive</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="dt">ontology_source</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="dt">eggnog-contaminant</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="dt">eggnog-dbmem</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="dt">eggnog-sensitivity</span><span class="ot">=</span><span class="st">more-sensitive</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="dt">interproscan-db</span><span class="ot">=</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="dt">hgt-donor</span><span class="ot">=</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="dt">hgt-recipient</span><span class="ot">=</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="dt">hgt-gff</span><span class="ot">=</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="dt">ncbi-api-key</span><span class="ot">=</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="dt">ncbi-api-enable</span><span class="ot">=</span><span class="kw">true</span></span></code></pre>
+</div>
+<p><code>entap_config.ini</code> file should be setup as follows (be
+sure to modify the paths <code>&lt;custom_location&gt;</code> to your
+desired location):</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">data-generate</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">data-type</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dt">entap-db-bin</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/entap_database.bin</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dt">entap-db-sql</span><span class="ot">=</span><span class="st">entap_database.db</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dt">entap-graph</span><span class="ot">=</span><span class="st">entap_graphing.py</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dt">rsem-calculate-expression</span><span class="ot">=</span><span class="st">rsem-calculate-expression</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dt">rsem-sam-validator</span><span class="ot">=</span><span class="st">rsem-sam-validator</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dt">rsem-prepare-reference</span><span class="ot">=</span><span class="st">rsem-prepare-reference</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dt">convert-sam-for-rsem</span><span class="ot">=</span><span class="st">convert-sam-for-rsem</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="dt">transdecoder-long-exe</span><span class="ot">=</span><span class="st">TransDecoder.LongOrfs</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dt">transdecoder-predict-exe</span><span class="ot">=</span><span class="st">TransDecoder.Predict</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="dt">diamond-exe</span><span class="ot">=</span><span class="st">diamond</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="dt">eggnog-map-exe</span><span class="ot">=</span><span class="st">emapper.py</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dt">eggnog-map-data</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/databases</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dt">eggnog-map-dmnd</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/eggnog_proteins.dmnd</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dt">interproscan-exe</span><span class="ot">=</span><span class="st">interproscan.sh</span></span></code></pre>
+</div>
+<p>Once done, for the first time setup, you can run the following
+command:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>   <span class="at">--config</span> <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+</div>
+<p>This will download the databases and set up the configuration files
+for EnTAP.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="step-1-prepare-files">
+<strong>Step 1:</strong> Prepare files<a class="anchor" aria-label="anchor" href="#step-1-prepare-files"></a></h2>
+<hr class="half-width"><p>Your input files should be in the following format:</p>
+<ul><li>
+<strong>Transcript FASTA file</strong> – Contains predicted
+transcripts in FASTA format.</li>
+<li>
+<strong>Configuration file</strong> – Specifies parameters for EnTAP
+execution.
+<ul><li>
+<code>entap_run.params</code> – Contains runtime parameters for
+EnTAP.</li>
+<li>
+<code>entap_config.ini</code> – Specifies paths to EnTAP binaries
+and databases. (you can copy the files from
+<code>/depot/itap/datasets/entap_db/entap_{config.ini,run.params}</code>)</li>
+</ul></li>
+</ul><p>Edit the <code>entap_run.params</code> file to specify the output
+directory for EnTAP results and the correct input file</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_out</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span><span class="st">input_cds.fasta</span></span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="step-2-run-entap">
+<strong>Step 2:</strong> Run EnTAP<a class="anchor" aria-label="anchor" href="#step-2-run-entap"></a></h2>
+<hr class="half-width"><p>Run EnTAP using the following command:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="at">-</span><span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="at">-run</span> <span class="dt">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul><li>EnTAP enhances functional annotation by integrating multiple
+evidence sources, including homology, protein domains, and gene
+ontology.</li>
+<li>Proper setup of configuration files and databases is essential for
+accurate and efficient EnTAP execution.</li>
+<li>Running EnTAP involves transcript filtering, similarity searches,
+and functional annotation through automated workflows.</li>
+<li>The pipeline provides extensive insights into transcript function,
+improving downstream biological interpretations.</li>
+</ul></div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/gene-annotation-with-easel.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -461,7 +693,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/instructor/functional-annotation-with-entap.html",
   "identifier": "https://genome-annotation.github.io/NA/instructor/functional-annotation-with-entap.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-02-17",
+  "dateModified": "2025-02-18",
   "datePublished": "2025-02-18"
 }
 

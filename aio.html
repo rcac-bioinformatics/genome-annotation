@@ -383,7 +383,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction to Genome Annotation</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/introduction.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -452,9 +452,17 @@ associations.<br>
 <li>Accurate annotation is essential for understanding genome function,
 evolutionary relationships, and applications in research and
 biotechnology.</li>
-</ul></section><section><h2 class="section-heading" id="why-is-annotation-important">Why Is Annotation Important?<a class="anchor" aria-label="anchor" href="#why-is-annotation-important"></a>
-</h2>
-<hr class="half-width">
+</ul>
+<figure><img src="https://github.com/user-attachments/assets/fd2746d7-077a-404d-b690-a4ac7bcb45a8" alt="The structure of a eukaryotic protein-coding gene" class="figure mx-auto d-block"><div class="figcaption">The structure of a eukaryotic protein-coding
+gene</div>
+</figure><p><a href="https://en.wikipedia.org/wiki/Gene_structure" class="external-link">source</a></p>
+<div id="why-is-annotation-important" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="why-is-annotation-important" class="callout-inner">
+<h3 class="callout-title">Why Is Annotation Important?</h3>
+<div class="callout-content">
 <ul>
 <li>Annotation provides a functional map of the genome, helping
 researchers identify genes and regulatory elements.<br>
@@ -468,7 +476,11 @@ improvement.<br>
 </li>
 <li>Functional annotations link genes to biological processes, aiding in
 pathway analysis and experimental validation.</li>
-</ul></section><section><h2 class="section-heading" id="types-of-genome-annotation">Types of Genome Annotation<a class="anchor" aria-label="anchor" href="#types-of-genome-annotation"></a>
+</ul>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="types-of-genome-annotation">Types of Genome Annotation<a class="anchor" aria-label="anchor" href="#types-of-genome-annotation"></a>
 </h2>
 <hr class="half-width">
 <ul>
@@ -561,17 +573,16 @@ splicing events.</p>
 Homology)</strong><br>
 - Uses known gene models from related species to guide annotation.<br>
 - Helps predict conserved genes and validate gene structures.</p>
-<p><strong>Additional Data Sources</strong><br>
+<p><strong>7. Additional Data Sources</strong><br>
 - <strong>Poly(A) site sequencing (PAS-Seq)</strong>: Defines transcript
 end sites for more precise UTR annotation.<br>
 - <strong>Chromatin accessibility data (ATAC-Seq, DNase-Seq)</strong>:
 Identifies regulatory regions like enhancers and promoters.<br>
 - <strong>Epigenomic data (ChIP-Seq, DNA methylation)</strong>: Provides
 evidence for active and repressed genes.</p>
-<p>Integrating these diverse datasets improves the accuracy of gene
-predictions, ensuring that both structural and functional annotations
-reflect real biological features.</p>
-<figure><img src="https://github.com/user-attachments/assets/656dc410-af25-461e-bac2-36ccd92c9b28" alt="Image" class="figure mx-auto d-block"><div class="figcaption">Image</div>
+<figure><img src="https://github.com/user-attachments/assets/656dc410-af25-461e-bac2-36ccd92c9b28" alt="Integrating diverse datasets improves the accuracy of gene predictions, ensuring that both structural and functional annotations reflect real biological features." class="figure mx-auto d-block"><div class="figcaption">Integrating diverse datasets improves the
+accuracy of gene predictions, ensuring that both structural and
+functional annotations reflect real biological features.</div>
 </figure></section><section><h2 class="section-heading" id="scope-of-this-workshop">Scope of This Workshop<a class="anchor" aria-label="anchor" href="#scope-of-this-workshop"></a>
 </h2>
 <hr class="half-width">
@@ -611,7 +622,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-annotation-strategies"><p>Content from <a href="annotation-strategies.html">Annotation Strategies</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-strategies.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -807,11 +818,8 @@ genes</strong> and their annotation.</p>
 </section><section><h2 class="section-heading" id="annotation-workflows-used">Annotation Workflows Used<a class="anchor" aria-label="anchor" href="#annotation-workflows-used"></a>
 </h2>
 <hr class="half-width">
-<div class="section level4">
-<h4 id="braker3-combines-genemark-et-and-augustus-to-predict-genes-in-eukaryotic-genomes-">
-<strong>BRAKER3</strong>: Combines GeneMark-ET and AUGUSTUS to
-predict genes in eukaryotic genomes.<a class="anchor" aria-label="anchor" href="#braker3-combines-genemark-et-and-augustus-to-predict-genes-in-eukaryotic-genomes-"></a>
-</h4>
+<p><strong>1. BRAKER3</strong>: Combines GeneMark-ET and AUGUSTUS to
+predict genes in eukaryotic genomes.</p>
 <ul>
 <li>Integrates GeneMark and AUGUSTUS with RNA-Seq and/or protein
 evidence.</li>
@@ -850,31 +858,27 @@ it.</li>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-1">
 <figure><img src="https://github.com/user-attachments/assets/201d283e-83cc-4d2a-bb2b-68104dc72cc3" alt="with RNA-Seq" height="500" class="figure mx-auto d-block"></figure>
 </div>
-<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
+<div id="nav-tabpanel-1-2" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-2">
 <figure><img src="https://github.com/user-attachments/assets/6a0cc45f-12f4-4363-81de-93c929166334" alt="with Proteins" height="550" class="figure mx-auto d-block"></figure>
 </div>
-<div id="nav-tabpanel-1-3" class="tab-pane" aria-labelledby="nav-tab-1-3" role="tabpanel">
+<div id="nav-tabpanel-1-3" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-3">
 <figure><img src="https://github.com/user-attachments/assets/b48adfaa-c357-411d-a252-8450cf720e5f" alt="with RNAseq and proteins" class="figure mx-auto d-block"><div class="figcaption">with RNAseq and proteins</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-4" class="tab-pane" aria-labelledby="nav-tab-1-4" role="tabpanel">
+<div id="nav-tabpanel-1-4" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-4">
 <figure><img src="https://github.com/user-attachments/assets/5049a336-398a-42b6-834c-3adf75d8be07" alt="_ab initio_" height="500" class="figure mx-auto d-block"></figure>
 </div>
-<div id="nav-tabpanel-1-5" class="tab-pane" aria-labelledby="nav-tab-1-5" role="tabpanel">
+<div id="nav-tabpanel-1-5" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-5">
 <figure><img src="https://github.com/user-attachments/assets/81dcb3b6-25a1-4c22-a550-f6906a44af4e" alt="_ab initio_" height="500" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
-</div>
-<div class="section level4">
-<h4 id="helixer-a-deep-learning-based-gene-prediction-tool-that-uses-a-convolutional-neural-network-cnn-to-predict-genes-in-eukaryotic-genomes-">
-<strong>Helixer</strong>: A deep learning-based gene prediction tool
-that uses a convolutional neural network (CNN) to predict genes in
-eukaryotic genomes.<a class="anchor" aria-label="anchor" href="#helixer-a-deep-learning-based-gene-prediction-tool-that-uses-a-convolutional-neural-network-cnn-to-predict-genes-in-eukaryotic-genomes-"></a>
-</h4>
+<p><strong>2. Helixer</strong>: A deep learning-based gene prediction
+tool that uses a convolutional neural network (CNN) to predict genes in
+eukaryotic genomes.</p>
 <ul>
 <li>Utilizes a deep learning model trained on diverse animal and plant
 genomes, reducing the need for retraining on closely related
@@ -890,13 +894,8 @@ species with longer genes.</li>
 codons.</li>
 </ul>
 <figure><img src="https://github.com/user-attachments/assets/fd826e9d-30f9-48fe-9e82-e93cc8d779ce" alt="Helixer" class="figure mx-auto d-block"><div class="figcaption">Helixer</div>
-</figure>
-</div>
-<div class="section level4">
-<h4 id="easel-efficient-accurate-scalable-eukaryotic-models-eukaryotic-genome-annotation-tool">
-<strong>EASEL</strong>: Efficient, Accurate, Scalable Eukaryotic
-modeLs: eukaryotic genome annotation tool<a class="anchor" aria-label="anchor" href="#easel-efficient-accurate-scalable-eukaryotic-models-eukaryotic-genome-annotation-tool"></a>
-</h4>
+</figure><p><strong>3. EASEL</strong>: Efficient, Accurate, Scalable Eukaryotic
+modeLs: eukaryotic genome annotation tool</p>
 <ul>
 <li>Combines machine learning, RNA folding, and functional annotations
 to enhance prediction accuracy.</li>
@@ -912,13 +911,8 @@ downstream analysis.</li>
 optimization.</li>
 </ul>
 <figure><img src="https://github.com/user-attachments/assets/12e320eb-5ea6-43a9-bedb-2ae64097e44b" alt="EASEL" class="figure mx-auto d-block"><div class="figcaption">EASEL</div>
-</figure>
-</div>
-<div class="section level4">
-<h4 id="entap-eukaryotic-non-model-annotation-pipeline-functional-annotation">
-<strong>EnTAP</strong>: eukaryotic non-model annotation pipeline
-(functional annotation)<a class="anchor" aria-label="anchor" href="#entap-eukaryotic-non-model-annotation-pipeline-functional-annotation"></a>
-</h4>
+</figure><p><strong>4. EnTAP</strong>: eukaryotic non-model annotation pipeline
+(functional annotation)</p>
 <ul>
 <li>Optimized for functional annotation of transcriptomes without
 reference genomes, addressing challenges like fragmentation and assembly
@@ -1010,10 +1004,9 @@ metrics.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></section><section id="aio-annotation-setup"><p>Content from <a href="annotation-setup.html">Annotation Setup</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1102,7 +1095,14 @@ data.</p>
 </figure></section><section><h2 class="section-heading" id="rna-seq-mapping">RNA-Seq mapping<a class="anchor" aria-label="anchor" href="#rna-seq-mapping"></a>
 </h2>
 <hr class="half-width">
-<p>We will organize our mapping folder as follows:</p>
+<p>The RNA-seq dataset used for gene prediction comes from the accession
+<a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-6422" class="external-link">E-MTAB-6422</a>,
+that provides a gene expression atlas of Arabidopsis thaliana (Columbia
+accession), capturing transcriptional programs across 36 libraries
+representing different tissues (seedling, root, inflorescence, flower,
+silique, seed) and developmental stages (2-leaf, 6-leaf, 12-leaf,
+senescence, dry mature, and imbibed seed), with three biological
+replicates per condition.</p>
 <p><strong>Step 1: Download the reference genome and annotation
 files</strong></p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -1942,7 +1942,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-gene-annotation-with-easel"><p>Content from <a href="gene-annotation-with-easel.html">Annotation using Easel</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-easel.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1956,9 +1956,12 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<li>What are the steps required to set up and run EASEL on an HPC
+system?</li>
+<li>How is Nextflow used to manage and execute the EASEL workflow?</li>
+<li>What configuration files need to be modified before running
+EASEL?</li>
+<li>How do you submit and monitor an EASEL job using Slurm?</li>
 </ul>
 </div>
 </div>
@@ -1968,16 +1971,25 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<li>Set up and configure EASEL for execution on an HPC system.</li>
+<li>Install Nextflow and pull the EASEL workflow from the
+repository.</li>
+<li>Modify the necessary configuration files to match the HPC
+environment.</li>
+<li>Submit and run EASEL as a Slurm job and verify successful
+execution.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="setup">01_Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+<p>EASEL (Efficient, Accurate, Scalable Eukaryotic modeLs) is a genome
+annotation tool that integrates machine learning, RNA folding, and
+functional annotations to improve gene prediction accuracy, leveraging
+optimized AUGUSTUS parameters, transcriptome and protein evidence, and a
+Nextflow-based scalable pipeline for reproducible analysis.</p>
+<section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <hr class="half-width">
 <p>We will do a custom installation of nextflow (we will not use
@@ -1999,11 +2011,11 @@ any links that you are not going to use.
 </div>
 <p>We can organize our folder structure as follows:</p>
 <figure><img src="https://github.com/user-attachments/assets/ce52353b-f0c9-4fae-977f-58b2efa26bd1" alt="Folder organization" class="figure mx-auto d-block"><div class="figcaption">Folder organization</div>
-</figure></section><section><h2 class="section-heading" id="running-easel">02_Running Easel<a class="anchor" aria-label="anchor" href="#running-easel"></a>
+</figure></section><section><h2 class="section-heading" id="running-easel">Running Easel<a class="anchor" aria-label="anchor" href="#running-easel"></a>
 </h2>
 <hr class="half-width">
-<p>First, we will create a <code>rcac.config</code> file to run the jobs
-using <code>slurm</code> scheduler.</p>
+<p><strong>Step 1:</strong> create a <code>rcac.config</code> file to
+run the jobs using <code>slurm</code> scheduler.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2035,9 +2047,9 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="ex">//</span> Executor-specific configurations</span>
 <span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="cf">if</span> <span class="kw">(</span><span class="ex">params.executor</span> == <span class="st">'slurm'</span><span class="kw">)</span> <span class="kw">{</span></span>
 <span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>    <span class="ex">process</span> {</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">1</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>   <span class="kw">)</span> <span class="kw">}</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>        <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">6.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>        <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>   <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>   <span class="kw">)</span> <span class="kw">}</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>        <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">32.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>        <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>   <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        <span class="ex">clusterOptions</span> = <span class="st">"-A </span><span class="va">${params</span><span class="er">.project</span><span class="va">}</span><span class="st"> -p </span><span class="va">${params</span><span class="er">.partition</span><span class="va">}</span><span class="st">"</span></span>
 <span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a></span>
 <span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>        <span class="ex">errorStrategy</span> = { task.exitStatus in <span class="pp">[</span><span class="ss">143,137,104,134,139</span><span class="pp">]</span> <span class="pp">?</span> <span class="st">'retry'</span> : <span class="st">'finish'</span> }</span>
@@ -2045,30 +2057,30 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="ex">maxErrors</span>     = <span class="st">'-1'</span></span>
 <span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a></span>
 <span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>        <span class="ex">withLabel:process_single</span> {</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">1</span>                  , <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">6.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>                  , <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">32.GB</span>  <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>    <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>        <span class="ex">withLabel:process_low</span> {</span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">2</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">12.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">4.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">32</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">64.GB</span>  <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>        <span class="ex">withLabel:process_medium</span> {</span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">8</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">36.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">8.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">64</span>     <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">128.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>        <span class="ex">withLabel:process_high</span> {</span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">16</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">100.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">16.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>            <span class="ex">cpus</span>   = { check_max<span class="er">(</span> <span class="ex">128</span>    <span class="pp">*</span> task.attempt, <span class="st">'cpus'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">256.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span>  <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">24.h</span>   <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>        <span class="ex">withLabel:process_long</span> {</span>
-<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">20.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>            <span class="bu">time</span>   = { check_max<span class="er">(</span> <span class="ex">48.h</span>  <span class="pp">*</span> task.attempt, <span class="st">'time'</span>    <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>        <span class="ex">withLabel:process_high_memory</span> {</span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">200.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>            <span class="ex">memory</span> = { check_max<span class="er">(</span> <span class="ex">256.GB</span> <span class="pp">*</span> task.attempt, <span class="st">'memory'</span> <span class="kw">)</span> <span class="er">}</span></span>
 <span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>        <span class="er">}</span></span>
 <span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>        <span class="ex">withLabel:error_ignore</span> {</span>
 <span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a>            <span class="ex">errorStrategy</span> = <span class="st">'ignore'</span></span>
@@ -2080,7 +2092,7 @@ using <code>slurm</code> scheduler.</p>
 <span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a>    <span class="er">}</span></span>
 <span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a><span class="er">}</span></span></code></pre>
 </div>
-<p>Second, we will pull the Easel nextflow workflow:</p>
+<p><strong>Step 2:</strong> pull the Easel nextflow workflow:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2092,7 +2104,7 @@ using <code>slurm</code> scheduler.</p>
 </div>
 <p>This will pull the latest version of the Easel workflow from the
 PlantGenomicsLab GitLab repository.</p>
-<p>Third, we will modify the
+<p><strong>Step 3:</strong> modify the
 <code>~/.nextflow/assets/PlantGenomicsLab/easel/nextflow.config</code>
 file to include the <code>rcac.config</code> file:</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -2122,8 +2134,8 @@ file to include the <code>rcac.config</code> file:</p>
 file. and all the lines between <code>debug</code> and <code>test</code>
 aren’t shown here.</p>
 <p>Now, we are ready to run the Easel workflow.</p>
-<p>Fourth, we will create <code>param.yaml</code> file to run the Easel
-workflow:</p>
+<p><strong>Step 4:</strong> create <code>param.yaml</code> file to run
+the Easel workflow:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2135,18 +2147,18 @@ workflow:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir    </span><span class="kw">:</span><span class="at"> </span><span class="st">"easel"</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome    </span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam       </span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam"</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage   </span><span class="kw">:</span><span class="at"> </span><span class="st">"embryophyta"</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order </span><span class="kw">:</span><span class="at"> </span><span class="st">"Brassicales"</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix     </span><span class="kw">:</span><span class="at"> </span><span class="st">"arabidopsis"</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon </span><span class="kw">:</span><span class="at"> </span><span class="st">"arabidopsis"</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"/scratch/negishi/aseethar/singularity_cache"</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set </span><span class="kw">:</span><span class="at"> </span><span class="st">'plant'</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor </span><span class="kw">:</span><span class="at"> </span><span class="st">'slurm'</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> </span><span class="st">'testpbs'</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> </span><span class="st">'normal'</span></span>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir</span><span class="kw">:</span><span class="at"> easel</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage</span><span class="kw">:</span><span class="at"> embryophyta</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order</span><span class="kw">:</span><span class="at"> Brassicales</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/singularity_cache</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set</span><span class="kw">:</span><span class="at"> plant</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> testpbs</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> normal</span></span>
 <span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span><span class="at"> testpbs</span></span></code></pre>
 </div>
 <p>Now we are ready to run the Easel workflow:</p>
@@ -2172,10 +2184,9 @@ workflow:</p>
 <span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>   <span class="at">--project</span> testpbs</span></code></pre>
 </div>
 <p>This will run the Easel workflow on the RCAC HPC.</p>
-</section><section><h2 class="section-heading" id="results-and-outputs">03_Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a>
+</section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a>
 </h2>
 <hr class="half-width">
-<p>Interpreting Gene Predictions Assessing Annotation Quality</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2184,9 +2195,14 @@ workflow:</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<li>EASEL is executed using Nextflow, which simplifies workflow
+management and ensures reproducibility.</li>
+<li>Proper configuration of resource settings and HPC parameters is
+essential for successful job execution.</li>
+<li>Running EASEL requires setting up input files, modifying
+configuration files, and submitting jobs via Slurm.</li>
+<li>Understanding how to monitor and troubleshoot jobs helps ensure
+efficient pipeline execution.</li>
 </ul>
 </div>
 </div>
@@ -2197,7 +2213,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-functional-annotation-with-entap"><p>Content from <a href="functional-annotation-with-entap.html">Functional annotation using EnTAP</a></p>
 <hr>
-<p>Last updated on 2025-02-17 |
+<p>Last updated on 2025-02-18 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/functional-annotation-with-entap.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2211,9 +2227,14 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<li>What is EnTAP, and how does it improve functional annotation for
+non-model transcriptomes?</li>
+<li>How does EnTAP filter, annotate, and assign functional roles to
+predicted transcripts?</li>
+<li>What databases and evidence sources does EnTAP integrate for
+annotation?</li>
+<li>What are the key steps required to set up and execute EnTAP on an
+HPC system?</li>
 </ul>
 </div>
 </div>
@@ -2223,55 +2244,293 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>to do1</li>
-<li>to do2</li>
-<li>to do3</li>
+<li>Understand how EnTAP improves functional annotation for non-model
+eukaryotes.</li>
+<li>Learn how EnTAP processes transcript data through filtering,
+alignment, and functional assignment.</li>
+<li>Set up and modify EnTAP configuration files for correct
+execution.</li>
+<li>Run EnTAP on an HPC system and interpret the generated
+annotations.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="setup">01_Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+<section><h2 class="section-heading" id="entap-overview">EnTAP Overview<a class="anchor" aria-label="anchor" href="#entap-overview"></a>
 </h2>
 <hr class="half-width">
-<p>Installing EnTAP and Dependencies Preparing Reference Databases
-(UniProt, KEGG, GO, etc.) Configuring EnTAP for Functional
-Annotation</p>
-</section><section><h2 class="section-heading" id="running-entap">02_Running EnTAP<a class="anchor" aria-label="anchor" href="#running-entap"></a>
-</h2>
-<hr class="half-width">
-<p>Preparing Input Data (GFF, FASTA, Transcript Files) Running EnTAP
-Pipeline Running EnTAP with Custom Databases (if applicable)</p>
-</section><section><h2 class="section-heading" id="results-and-outputs">03_Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a>
-</h2>
-<hr class="half-width">
-<div class="section level3">
-<h3 id="interpreting-functional-annotations">Interpreting Functional Annotations<a class="anchor" aria-label="anchor" href="#interpreting-functional-annotations"></a>
-</h3>
+<p>EnTAP is a bioinformatics pipeline designed to enhance the accuracy,
+speed, and flexibility of functional annotation for de novo assembled
+transcriptomes in non-model eukaryotic organisms. It mitigates assembly
+fragmentation, improves annotation rates, and provides extensive
+functional insights into transcriptomes. You can provide predicted
+transcripts in FASTA format and a GFF file containing gene models to run
+EnTAP.</p>
+<div id="key-features" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="key-features" class="callout-inner">
+<h3 class="callout-title">Key Features</h3>
+<div class="callout-content">
 <ul>
-<li>Gene Ontology (GO Terms)</li>
-<li>KEGG Pathways</li>
-<li>InterPro Domains</li>
+<li>
+<strong>Optimized for non-model eukaryotes</strong> – Overcomes
+challenges of fragmented transcriptome assemblies.</li>
+<li>
+<strong>Fast &amp; efficient</strong> – Runs significantly faster
+than comparable annotation tools.</li>
+<li>
+<strong>Customizable</strong> – Supports optional filtering and
+analysis steps for user-specific needs.</li>
+<li>
+<strong>Comprehensive functional insights</strong> – Integrates
+multiple annotation sources for high-confidence gene assignments.</li>
+<li>
+<strong>Contaminant detection</strong> – Helps remove misleading
+sequences for cleaner datasets.</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="assessing-annotation-completeness">Assessing Annotation Completeness<a class="anchor" aria-label="anchor" href="#assessing-annotation-completeness"></a>
-</h3>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="how-entap-works">How EnTAP Works<a class="anchor" aria-label="anchor" href="#how-entap-works"></a>
+</h2>
+<hr class="half-width">
+<ol style="list-style-type: decimal">
+<li>
+<strong>Transcriptome Filtering</strong> – Identifies true coding
+sequences (CDS) and removes assembly artifacts:
 <ul>
-<li><p>Comparison with Reference Annotations</p></li>
-<li><p>Functional Assignment Statistics
-::::::::::::::::::::::::::::::::::::: keypoints</p></li>
-<li><p>to do1</p></li>
-<li><p>to do2</p></li>
-<li><p>to do3</p></li>
+<li>
+<strong>Expression Filtering (optional)</strong> – Filters
+transcripts based on gene expression levels using RSEM.</li>
+<li>
+<strong>Frame Selection (optional)</strong> – Further refines CDS
+predictions using TransDecoder.</li>
 </ul>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</li>
+<li>
+<strong>Transcriptome Annotation</strong> – Assigns functional
+information to sequences:
+<ul>
+<li>
+<strong>Similarity Search</strong> – Rapid alignment against
+user-selected databases using DIAMOND.</li>
+<li>
+<strong>Contaminant Filtering &amp; Best Hit Selection</strong> –
+Identifies optimal annotations and flags potential contaminants.</li>
+<li>
+<strong>Orthologous Group Assignment</strong> – Assigns translated
+proteins to gene families using <strong>eggNOG/eggnog-mapper</strong>,
+including:
+<ul>
+<li>
+<strong>Protein Domains</strong> (SMART/Pfam)</li>
+<li><strong>Gene Ontology (GO) Terms</strong></li>
+<li><strong>KEGG Pathway Annotation</strong></li>
+</ul>
+</li>
+<li>
+<strong>InterProScan (optional)</strong> – Searches InterPro
+databases for additional domain, GO, and pathway annotations.</li>
+<li>
+<strong>Horizontal Gene Transfer Analysis (optional)</strong> –
+Detects potential horizontal gene transfer (HGT) events via
+DIAMOND.</li>
+</ul>
+</li>
+</ol></section><section><h2 class="section-heading" id="running-entap">Running EnTAP<a class="anchor" aria-label="anchor" href="#running-entap"></a>
+</h2>
+<hr class="half-width">
+<p>EnTAP is available as a module on the HPC cluster. You can load the
+module using the following commands:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">ml</span> entap</span></code></pre>
+</div>
+<div id="first-time-setup" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="first-time-setup" class="callout-inner">
+<h3 class="callout-title">First-Time Setup</h3>
+<div class="callout-content">
+<p>When running for the first time, you will have to set up the
+databases for EnTAP. This includes downloading files from various
+databases, and can be time consuming. This section is already performed
+so you can skip this step and is included for reference.</p>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  Setting up databases (optional)
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p><code>entap_run.params</code> file should be setup as follows (be
+sure to select the correct <code>databases</code> for your
+organism):</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_dbfiles</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="dt">overwrite</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="dt">resume</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dt">database</span><span class="ot">=</span><span class="st">uniprot_sprot,refseq_plant</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dt">no-trim</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="dt">threads</span><span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="dt">output-format</span><span class="ot">=</span><span class="st">1,3,4,7,</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dt">fpkm</span><span class="ot">=</span><span class="fl">0.5</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="dt">align</span><span class="ot">=</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="dt">single-end</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="dt">frame-selection</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="dt">transdecoder-m</span><span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="dt">transdecoder-no-refine-starts</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="dt">taxon</span><span class="ot">=</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="dt">qcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="dt">tcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="dt">contam</span><span class="ot">=</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="dt">e-value</span><span class="ot">=</span><span class="st">1e-05</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="dt">uninformative</span><span class="ot">=</span><span class="st">conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="dt">diamond-sensitivity</span><span class="ot">=</span><span class="st">very-sensitive</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="dt">ontology_source</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="dt">eggnog-contaminant</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="dt">eggnog-dbmem</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="dt">eggnog-sensitivity</span><span class="ot">=</span><span class="st">more-sensitive</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="dt">interproscan-db</span><span class="ot">=</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="dt">hgt-donor</span><span class="ot">=</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="dt">hgt-recipient</span><span class="ot">=</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="dt">hgt-gff</span><span class="ot">=</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="dt">ncbi-api-key</span><span class="ot">=</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="dt">ncbi-api-enable</span><span class="ot">=</span><span class="kw">true</span></span></code></pre>
+</div>
+<p><code>entap_config.ini</code> file should be setup as follows (be
+sure to modify the paths <code>&lt;custom_location&gt;</code> to your
+desired location):</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">data-generate</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">data-type</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dt">entap-db-bin</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/entap_database.bin</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dt">entap-db-sql</span><span class="ot">=</span><span class="st">entap_database.db</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dt">entap-graph</span><span class="ot">=</span><span class="st">entap_graphing.py</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dt">rsem-calculate-expression</span><span class="ot">=</span><span class="st">rsem-calculate-expression</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dt">rsem-sam-validator</span><span class="ot">=</span><span class="st">rsem-sam-validator</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dt">rsem-prepare-reference</span><span class="ot">=</span><span class="st">rsem-prepare-reference</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dt">convert-sam-for-rsem</span><span class="ot">=</span><span class="st">convert-sam-for-rsem</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="dt">transdecoder-long-exe</span><span class="ot">=</span><span class="st">TransDecoder.LongOrfs</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dt">transdecoder-predict-exe</span><span class="ot">=</span><span class="st">TransDecoder.Predict</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="dt">diamond-exe</span><span class="ot">=</span><span class="st">diamond</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="dt">eggnog-map-exe</span><span class="ot">=</span><span class="st">emapper.py</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dt">eggnog-map-data</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/databases</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dt">eggnog-map-dmnd</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/eggnog_proteins.dmnd</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dt">interproscan-exe</span><span class="ot">=</span><span class="st">interproscan.sh</span></span></code></pre>
+</div>
+<p>Once done, for the first time setup, you can run the following
+command:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>   <span class="at">--config</span> <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+</div>
+<p>This will download the databases and set up the configuration files
+for EnTAP.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="step-1-prepare-files">
+<strong>Step 1:</strong> Prepare files<a class="anchor" aria-label="anchor" href="#step-1-prepare-files"></a>
+</h2>
+<hr class="half-width">
+<p>Your input files should be in the following format:</p>
+<ul>
+<li>
+<strong>Transcript FASTA file</strong> – Contains predicted
+transcripts in FASTA format.</li>
+<li>
+<strong>Configuration file</strong> – Specifies parameters for EnTAP
+execution.
+<ul>
+<li>
+<code>entap_run.params</code> – Contains runtime parameters for
+EnTAP.</li>
+<li>
+<code>entap_config.ini</code> – Specifies paths to EnTAP binaries
+and databases. (you can copy the files from
+<code>/depot/itap/datasets/entap_db/entap_{config.ini,run.params}</code>)</li>
+</ul>
+</li>
+</ul>
+<p>Edit the <code>entap_run.params</code> file to specify the output
+directory for EnTAP results and the correct input file</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_out</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span><span class="st">input_cds.fasta</span></span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="step-2-run-entap">
+<strong>Step 2:</strong> Run EnTAP<a class="anchor" aria-label="anchor" href="#step-2-run-entap"></a>
+</h2>
+<hr class="half-width">
+<p>Run EnTAP using the following command:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="at">-</span><span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="at">-run</span> <span class="dt">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>EnTAP enhances functional annotation by integrating multiple
+evidence sources, including homology, protein domains, and gene
+ontology.</li>
+<li>Proper setup of configuration files and databases is essential for
+accurate and efficient EnTAP execution.</li>
+<li>Running EnTAP involves transcript filtering, similarity searches,
+and functional annotation through automated workflows.</li>
+<li>The pipeline provides extensive insights into transcript function,
+improving downstream biological interpretations.</li>
+</ul>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></section><section id="aio-annotation-assesment"><p>Content from <a href="annotation-assesment.html">Annotation Assesment</a></p>
 <hr>
 <p>Last updated on 2025-02-17 |
