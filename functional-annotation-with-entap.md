@@ -199,7 +199,7 @@ EnTAP -\
 EnTAP generates several output files, but the key results will be in the `entap_out/final_results` directory.
 
 
-# EnTAP Output Files Summary
+**EnTAP Output Files Summary**
 
 | **File/Directory**                           | **Description** |
 |:-----------|----------------|
