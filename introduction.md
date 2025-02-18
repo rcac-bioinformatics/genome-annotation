@@ -1,7 +1,7 @@
 ---
 title: 'Introduction to Genome Annotation'
-teaching: 10
-exercises: 2
+teaching: 20
+exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -33,6 +33,15 @@ exercises: 2
 - Functional annotation assigns biological roles to predicted genes based on sequence similarity, protein domains, and pathway associations.  
 - Accurate annotation is essential for understanding genome function, evolutionary relationships, and applications in research and biotechnology.
 
+
+![The structure of a eukaryotic protein-coding gene](https://github.com/user-attachments/assets/fd2746d7-077a-404d-b690-a4ac7bcb45a8)
+
+
+[source](https://en.wikipedia.org/wiki/Gene_structure)
+
+
+::: callout
+
 ## Why Is Annotation Important?
 
 - Annotation provides a functional map of the genome, helping researchers identify genes and regulatory elements.  
@@ -40,6 +49,7 @@ exercises: 2
 - Accurate gene annotation is essential for biomedical and agricultural research, including disease studies and crop improvement.  
 - Functional annotations link genes to biological processes, aiding in pathway analysis and experimental validation.
 
+:::
 
 
 ## Types of Genome Annotation
@@ -89,19 +99,21 @@ Accurate genome annotation relies on multiple data sources to refine gene predic
 - Uses known gene models from related species to guide annotation.  
 - Helps predict conserved genes and validate gene structures.  
 
-**Additional Data Sources**  
+**7. Additional Data Sources**  
 - **Poly(A) site sequencing (PAS-Seq)**: Defines transcript end sites for more precise UTR annotation.  
 - **Chromatin accessibility data (ATAC-Seq, DNase-Seq)**: Identifies regulatory regions like enhancers and promoters.  
 - **Epigenomic data (ChIP-Seq, DNA methylation)**: Provides evidence for active and repressed genes.  
 
-Integrating these diverse datasets improves the accuracy of gene predictions, ensuring that both structural and functional annotations reflect real biological features.
 
-![Image](https://github.com/user-attachments/assets/656dc410-af25-461e-bac2-36ccd92c9b28)
+
+![Integrating diverse datasets improves the accuracy of gene predictions, ensuring that both structural and functional annotations reflect real biological features.](https://github.com/user-attachments/assets/656dc410-af25-461e-bac2-36ccd92c9b28)
 
 
 ## Scope of This Workshop
 
 In this workshop, we will focus on protein-coding gene annotation in eukaryotic genomes using computational tools and available datasets. We will annotate genes in a Arabidopsis genome using a combination of ab initio gene prediction, homology-based methods, and RNA-seq evidence methods, can compare the results to a reference annotation. The workflow will cover data preparation, gene prediction, functional annotation, and quality assessment steps to provide a comprehensive overview of the annotation process.
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
