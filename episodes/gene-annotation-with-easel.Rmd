@@ -6,22 +6,27 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- to do1
-- to do2
-- to do3
+- What are the steps required to set up and run EASEL on an HPC system?
+- How is Nextflow used to manage and execute the EASEL workflow?
+- What configuration files need to be modified before running EASEL?
+- How do you submit and monitor an EASEL job using Slurm?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- to do1
-- to do2
-- to do3
+- Set up and configure EASEL for execution on an HPC system.
+- Install Nextflow and pull the EASEL workflow from the repository.
+- Modify the necessary configuration files to match the HPC environment.
+- Submit and run EASEL as a Slurm job and verify successful execution.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## 01_Setup
+EASEL (Efficient, Accurate, Scalable Eukaryotic modeLs) is a genome annotation tool that integrates machine learning, RNA folding, and functional annotations to improve gene prediction accuracy, leveraging optimized AUGUSTUS parameters, transcriptome and protein evidence, and a Nextflow-based scalable pipeline for reproducible analysis.
+
+
+## Setup
 
 We will do a custom installation of nextflow (we will not use `ml nextflow`):
 
@@ -46,9 +51,9 @@ We can organize our folder structure as follows:
 
 
 
-## 02_Running Easel
+## Running Easel
  
-First, we will create a `rcac.config` file to run the jobs using `slurm` scheduler.
+**Step 1:** create a `rcac.config` file to run the jobs using `slurm` scheduler.
 
 ```bash
 params {
@@ -79,9 +84,9 @@ process {
 // Executor-specific configurations
 if (params.executor == 'slurm') {
     process {
-        cpus   = { check_max( 1    * task.attempt, 'cpus'   ) }
-        memory = { check_max( 6.GB * task.attempt, 'memory' ) }
-        time   = { check_max( 4.h  * task.attempt, 'time'   ) }
+        cpus   = { check_max( 16    * task.attempt, 'cpus'   ) }
+        memory = { check_max( 32.GB * task.attempt, 'memory' ) }
+        time   = { check_max( 8.h  * task.attempt, 'time'   ) }
         clusterOptions = "-A ${params.project} -p ${params.partition}"
 
         errorStrategy = { task.exitStatus in [143,137,104,134,139] ? 'retry' : 'finish' }
@@ -89,30 +94,30 @@ if (params.executor == 'slurm') {
         maxErrors     = '-1'
 
         withLabel:process_single {
-            cpus   = { check_max( 1                  , 'cpus'    ) }
-            memory = { check_max( 6.GB * task.attempt, 'memory'  ) }
-            time   = { check_max( 4.h  * task.attempt, 'time'    ) }
+            cpus   = { check_max( 16                  , 'cpus'    ) }
+            memory = { check_max( 32.GB  * task.attempt, 'memory'  ) }
+            time   = { check_max( 8.h    * task.attempt, 'time'    ) }
         }
         withLabel:process_low {
-            cpus   = { check_max( 2     * task.attempt, 'cpus'    ) }
-            memory = { check_max( 12.GB * task.attempt, 'memory'  ) }
-            time   = { check_max( 4.h   * task.attempt, 'time'    ) }
+            cpus   = { check_max( 32     * task.attempt, 'cpus'    ) }
+            memory = { check_max( 64.GB  * task.attempt, 'memory'  ) }
+            time   = { check_max( 24.h   * task.attempt, 'time'    ) }
         }
         withLabel:process_medium {
-            cpus   = { check_max( 8     * task.attempt, 'cpus'    ) }
-            memory = { check_max( 36.GB * task.attempt, 'memory'  ) }
-            time   = { check_max( 8.h   * task.attempt, 'time'    ) }
+            cpus   = { check_max( 64     * task.attempt, 'cpus'    ) }
+            memory = { check_max( 128.GB * task.attempt, 'memory'  ) }
+            time   = { check_max( 24.h   * task.attempt, 'time'    ) }
         }
         withLabel:process_high {
-            cpus   = { check_max( 16    * task.attempt, 'cpus'    ) }
-            memory = { check_max( 100.GB * task.attempt, 'memory'  ) }
-            time   = { check_max( 16.h  * task.attempt, 'time'    ) }
+            cpus   = { check_max( 128    * task.attempt, 'cpus'    ) }
+            memory = { check_max( 256.GB * task.attempt, 'memory'  ) }
+            time   = { check_max( 24.h   * task.attempt, 'time'    ) }
         }
         withLabel:process_long {
-            time   = { check_max( 20.h  * task.attempt, 'time'    ) }
+            time   = { check_max( 48.h  * task.attempt, 'time'    ) }
         }
         withLabel:process_high_memory {
-            memory = { check_max( 200.GB * task.attempt, 'memory' ) }
+            memory = { check_max( 256.GB * task.attempt, 'memory' ) }
         }
         withLabel:error_ignore {
             errorStrategy = 'ignore'
@@ -126,7 +131,7 @@ if (params.executor == 'slurm') {
 ```
 
 
-Second, we will pull the Easel nextflow workflow:
+**Step 2:**  pull the Easel nextflow workflow:
 
 ```bash
 ml --force purge
@@ -138,7 +143,7 @@ nextflow pull -hub gitlab PlantGenomicsLab/easel
 
 This will pull the latest version of the Easel workflow from the PlantGenomicsLab GitLab repository.
 
-Third, we will modify the `~/.nextflow/assets/PlantGenomicsLab/easel/nextflow.config` file to include the `rcac.config` file:
+**Step 3:**  modify the `~/.nextflow/assets/PlantGenomicsLab/easel/nextflow.config` file to include the `rcac.config` file:
 
 ```bash
 vim ~/.nextflow/assets/PlantGenomicsLab/easel/nextflow.config
@@ -165,7 +170,7 @@ Note that this is in line # 235 in the `nextflow.config` file. and all the lines
 Now, we are ready to run the Easel workflow.
 
 
-Fourth, we will create `param.yaml` file to run the Easel workflow:
+**Step 4:**  create `param.yaml` file to run the Easel workflow:
 
 
 ```bash
@@ -177,18 +182,18 @@ cd ${WORKSHOP_DIR}/06_easel
 for the `param.yaml` file:
 
 ```yaml
-outdir    : "easel"
-genome    : "/scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta"
-bam       : "/scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam"
-busco_lineage   : "embryophyta"
-order : "Brassicales"
-prefix     : "arabidopsis"
-taxon : "arabidopsis"
-singularity_cache_dir: "/scratch/negishi/aseethar/singularity_cache"
-training_set : 'plant'
-executor : 'slurm'
-account: 'testpbs'
-qos: 'normal'
+outdir: easel
+genome: /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta
+bam: /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam
+busco_lineage: embryophyta
+order: Brassicales
+prefix: arabidopsis
+taxon: arabidopsis
+singularity_cache_dir: /scratch/negishi/aseethar/singularity_cache
+training_set: plant
+executor: slurm
+account: testpbs
+qos: normal
 project: testpbs
 ```
 
@@ -219,18 +224,18 @@ nextflow run \
 
 This will run the Easel workflow on the RCAC HPC.
  
-## 03_Results and Outputs
+## Results and Outputs
 
-Interpreting Gene Predictions
-Assessing Annotation Quality
+
 
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- to do1
-- to do2
-- to do3
+- EASEL is executed using Nextflow, which simplifies workflow management and ensures reproducibility.
+- Proper configuration of resource settings and HPC parameters is essential for successful job execution.
+- Running EASEL requires setting up input files, modifying configuration files, and submitting jobs via Slurm.
+- Understanding how to monitor and troubleshoot jobs helps ensure efficient pipeline execution.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -56,7 +56,7 @@ rsync -avP SOURCE/00_datasets/ 00_datasets/
 
 ## RNA-Seq mapping 
 
-We will organize our mapping folder as follows:
+The RNA-seq dataset used for gene prediction comes from the accession [E-MTAB-6422](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-6422), that provides a gene expression atlas of Arabidopsis thaliana (Columbia accession), capturing transcriptional programs across 36 libraries representing different tissues (seedling, root, inflorescence, flower, silique, seed) and developmental stages (2-leaf, 6-leaf, 12-leaf, senescence, dry mature, and imbibed seed), with three biological replicates per condition.
 
 
 **Step 1: Download the reference genome and annotation files**

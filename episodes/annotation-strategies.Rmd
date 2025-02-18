@@ -90,7 +90,8 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 
 ## Annotation Workflows Used
 
-#### **BRAKER3**: Combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes.
+
+**1. BRAKER3**: Combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes.
 
 - Integrates GeneMark and AUGUSTUS with RNA-Seq and/or protein evidence.
 - Supports various data types or runs without them.
@@ -131,7 +132,9 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 
 :::
 
-#### **Helixer**: A deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes.
+
+
+**2. Helixer**: A deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes.
 
 - Utilizes a deep learning model trained on diverse animal and plant genomes, reducing the need for retraining on closely related species.
 - Provides probabilities for every base, enabling detailed predictions for intergenic, untranslated, coding, and intronic regions.
@@ -145,7 +148,7 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 ![Helixer](https://github.com/user-attachments/assets/fd826e9d-30f9-48fe-9e82-e93cc8d779ce)
 
 
-#### **EASEL**: Efficient, Accurate, Scalable Eukaryotic modeLs: eukaryotic genome annotation tool
+**3. EASEL**: Efficient, Accurate, Scalable Eukaryotic modeLs: eukaryotic genome annotation tool
 
 - Combines machine learning, RNA folding, and functional annotations to enhance prediction accuracy.
 - Leverages RNA-Seq, protein alignments, and additional evidence for gene prediction.
@@ -158,7 +161,7 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 ![EASEL](https://github.com/user-attachments/assets/12e320eb-5ea6-43a9-bedb-2ae64097e44b)
 
 
-#### **EnTAP**: eukaryotic non-model annotation pipeline (functional annotation)
+**4. EnTAP**: eukaryotic non-model annotation pipeline (functional annotation)
 
 - Optimized for functional annotation of transcriptomes without reference genomes, addressing challenges like fragmentation and assembly artifacts.
 - Much faster than traditional annotation pipelines.
