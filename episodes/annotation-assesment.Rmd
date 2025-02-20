@@ -47,11 +47,11 @@ WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 workdir=${WORKSHOP_DIR}/08_assessment
 cd ${workdir}
 for i in *.gff3; do
-    base=$(basename $i .gff3)
+    base=$(basename ${i%.*})
     gffread \
        -g ${WORKSHOP_DIR}/00_datasets/genome/athaliana.fa \
-       -x ${base}.cds.fa \
-       -y ${base}.pep.fa $i
+       -x ${base}_cds.fa \
+       -y ${base}_pep.fa $i
 done
 ```
 
@@ -71,9 +71,10 @@ mkdir -p gff3_stats
 for gff3 in *.gff3; do
     base=$(basename $gff3 .gff3)
     agat_sp_statistics.pl \
-       -g ${gff3} \
+       --gff ${gff3} \
        -o gff3_stats/${base}_stats.txt
 done
+
 ```
 
 
@@ -83,22 +84,24 @@ done
 We will use BUSCO to asses the quality of the annotation.
 
 ```bash
+#!/bin/bash
 ml --force purge
 ml biocontainers
 ml busco
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 workdir=${WORKSHOP_DIR}/08_assessment
 cd ${workdir}
-for pep in *.pep.fa; do
-    base=$(basename $pep .pep.fa)
+for pep in *_pep.fa; do
+    base=$(basename ${pep%.*})
      busco \
-        -i ${pep} \
-        -c ${SLURM_CPUS_ON_NODE} \
-        -o ${base}_busco \
-        -m prot \
-        -l brassicales_odb10 \
-        -f
+        --in ${pep} \
+        --cpu ${SLURM_CPUS_ON_NODE} \
+        --out ${base}_busco \
+        --mode prot \
+        --lineage_dataset brassicales_odb10 \
+        --force
 done
+
 ```
 
 Once the BUSCO assesment is complete, we can view the results using the following command:
@@ -130,13 +133,41 @@ ml seqkit
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 workdir=${WORKSHOP_DIR}/08_assessment
 cd ${workdir}
-for pep in *.pep.fa; do
-    base=$(basename $pep .pep.fa)
-    grep "\.t1$" $pep > ${base}.primary.ids
+for pep in braker*_pep.fa; do
+    base=$(basename ${pep%.*})
+    grep "\.t1$" $pep | sed 's/>//g' > ${base}.primary.ids
     seqkit grep -f ${base}.primary.ids $pep > ${base}.primary.pep.fa
+    rm ${base}.primary.ids
 done
+cp helixer_pep.fa helixer.primary.pep.fa
 ```
 
+Running OMark:
+
+```bash
+#!/bin/bash
+ml --force purge
+ml biocontainers
+ml omark
+WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
+workdir=${WORKSHOP_DIR}/08_assessment
+database="/depot/itap/datasets/omark/LUCA.h5"
+cd ${workdir}
+for pep in *.primary.pep.fa; do
+    base=$(basename ${pep%.*})
+    omamer search \
+       --db ${database} \
+       --query ${pep} \
+       --out ${pep%.*}.omamer \
+       --nthreads ${SLURM_CPUS_ON_NODE}
+    omark \
+       --file ${pep%.*}.omamer \
+       --database ${database} \
+       --outputFolder ${pep%.*} \
+       --og_fasta ${pep}
+done
+
+```
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 
 ## **OMark Results Summary**
@@ -181,28 +212,7 @@ done
 
 
 
-```bash
-ml --force purge
-ml biocontainers
-ml omark
-WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
-workdir=${WORKSHOP_DIR}/08_assessment
-database="/depot/itap/datasets/omark/LUCA.h5"
-cd ${workdir}
-for pep in *.primary.pep.fa; do
-    base=$(basename $pep .primary.pep.fa)
-    omamer search \
-       --db ${database} \
-       --query ${pep} \
-       --out ${pep%.*}.omamer \
-       --nthreads ${SLURM_CPUS_ON_NODE}
-    omark \
-       --file ${pep%.*}.omamer \
-       --database ${database} \
-       --outputFolder ${pep%.*} \
-       --og_fasta ${pep} 
-done
-```
+
 
 ## Feature assignment
 
@@ -210,6 +220,7 @@ To measure the number of raw reads assigned to the features predicted by the ann
 
 
 ```bash
+#!/bin/bash
 ml --force purge
 ml biocontainers
 ml subread
@@ -218,16 +229,16 @@ workdir=${WORKSHOP_DIR}/08_assessment
 cd ${workdir}
 mkdir -p featureCounts
 for gff3 in *.gff3; do
-    base=$(basename $f .gff3)
+    base=$(basename ${gff3%.*})
     featureCounts \
-        -T ${SLURM_CPUS_ON_NODE} \
-        -a ${gff3} \
-        -o featureCounts/${base}_featureCounts.txt \
-        -s 2 \
-        -p --countReadPairs \
-        -t gene -g ID \
-        --tmpDir /dev/shm \
-        ${WORKSHOP_DIR}/00_datasets/bamfiles/*.bam
+      -T ${SLURM_CPUS_ON_NODE} \
+      -a ${gff3} \
+      -t exon \
+      -g ID \
+      -p \
+      -B \
+      -o ${base}_merged_counts.txt \
+      --tmpDir /tmp ${RCAC_SCRATCH}/annotation_workshop/00_datasets/bamfiles/*.bam
 done
 
 ```
@@ -236,22 +247,24 @@ done
 ## Reference annotation comparison
 
 
-We will use `gffcompare` to compare the reference annotation with the predicted annotation.
+We will use `mikado compare` the reference annotation with the predicted annotation.
 
 ```bash
+#!/bin/bash
 ml --force purge
 ml biocontainers
-ml cufflinks
+ml mikado
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 workdir=${WORKSHOP_DIR}/08_assessment
 cd ${workdir}
-mkdir -p gffcompare
 for gff3 in *.gff3; do
-    base=$(basename $gff3 .gff3)
-    gffcompare \
-       -r ${WORKSHOP_DIR}/00_datasets/annotation/athaliana.gff3 \
-       -o gffcompare/${base} \
-       ${gff3}
+    base=$(basename ${gff3%.*})
+    mikado compare \
+      --protein-coding \
+      -r ${RCAC_SCRATCH}/annotation_workshop/00_datasets/genome/athaliana_TAIR10.gff3 \
+      -p ${gff3} \
+      -o ref-TAIR10_vs_prediction_${base}_compared \
+      --log ${base}_compare.log
 done
 ```
 

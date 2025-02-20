@@ -146,6 +146,19 @@ grep -v "^#" athaliana_helixer.gff |\
    uniq -c
 ```
 
+To get `cds` and `pep` files, you can use the following command:
+
+```bash
+ml --force purge
+ml biocontainers
+ml cufflinks
+gffread Arabidopsis_thaliana.gff3 \
+   -g athaliana.fasta \
+   -y helixer_pep.fa \
+   -x helixer_cds.fa
+```
+
+
 As you may have noticed, the number of mRNA and gene features are the same. 
 This is because isoforms aren’t predicted by Helixer and you only have one transcript per gene.
 Exons are indetified with high confidence and alternative isoforms are usually collapsed into a single gene model. 

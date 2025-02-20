@@ -2,28 +2,85 @@
 title: Setup
 ---
 
-FIXME: Setup instructions live in this document. Please specify the tools and
-the data sets the Learner needs to have installed.
+## Instructors
+
+1. **Arun Seetharam, Ph.D.**: Arun is a lead bioinformatics scientist at Purdue University’s Rosen Center for Advanced Computing. With extensive expertise in comparative genomics, genome assembly, annotation, single-cell genomics,  NGS data analysis, metagenomics, proteomics, and metabolomics. Arun supports a diverse range of bioinformatics projects across various organisms, including human model systems.
+
+2. **Charles Christoffer, Ph.D.**: Charles is a Senior Computational Scientist at Purdue University’s Rosen Center for Advanced Computing. He has a Ph.D. in Computer Science in the area of structural bioinformatics and has extensive experience in protein structure prediction. 
+
+
+## Schedule
+
+| **Time**  | **Session**  |
+|:---|-------------|
+| **8:30 AM** | Arrival & Setup  |
+| **9:00 AM** | **Introduction & Annotation Strategies** – Overview of genome annotation, structural vs. functional annotation, key challenges, and selecting the right pipeline |
+| **10:30 AM** | **Break** |
+| **10:40 AM** | **Gene Annotation with BRAKER** – Running BRAKER for ab initio and RNA-seq-supported annotation, gene model evaluation |
+| **12:00 PM** | **Lunch Break** |
+| **1:00 PM** | **Interpreting BRAKER Results & Gene Annotation with Helixer** – Reviewing BRAKER outputs, refining predictions, and using Helixer for deep-learning-based annotation |
+| **2:50 PM** | **Break** |
+| **3:10 PM** | **Functional Annotation with EnTAP & Annotation Quality Assessment** – Assigning gene functions, GO term mapping, evaluating completeness with BUSCO, and benchmarking gene models |
+| **4:30 PM** | **Wrap-Up & Discussion** – Troubleshooting, Q&A, and next steps |
+
+
+
+
+## What is not covered
+
+1. Gene prediction using MAKER
+2. Evidence based gene prediction (EviAnn, EVidenceModeler)
+3. Genome assembly
+4. Comparative analyses
+
+## Pre-requisites
+
+1. Basic knowledge of genomics
+2. Basic knowledge of command line interface
+3. Basic knowledge of bioinformatics tools
+
+
 
 ## Data Sets
 
-<!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
--->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+To copy only data:
+
+```bash
+rsync -avP /depot/workshop/data/annotation_workshop ${RCAC_SCRATCH}/
+```
+
+The worked out folder is available at `/depot/workshop/data/annotation_workshop-results` on the training cluster. You can copy the data to your scratch space using the following command:
+
+```bash
+rsync -avP /depot/workshop/data/annotation_workshop-results ${RCAC_SCRATCH}/
+```
+
+Only use this if you are unable to finish the exercises in the workshop.
+
+You only need one directory on Gilbreth cluster. See below for details.
+
+::::::::::::::::::::::::::::::::::::::: spoiler
+
+## For Gilbreth Cluster only
+
+
+```bash
+rsync -avP /depot/workshop/data/annotation_workshop/05_helixer ${RCAC_SCRATCH}/
+```
+
+::::::::::::::::::::::::::::::::::::::::
+
+
+
 
 ## Software Setup
+
 
 ::::::::::::::::::::::::::::::::::::::: discussion
 
 ### Details
 
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
+SSH key setup for different systems is detailed in the expandable sections below.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -31,7 +88,12 @@ systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
 ### Windows
 
-Use PuTTY
+Open a terminal and run:
+
+```sh
+ssh-keygen -b 4096 -t rsa
+type .ssh\id_rsa.pub | ssh trainXX@negishi.rcac.purdue.edu "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
+```
 
 :::::::::::::::::::::::::
 
@@ -39,7 +101,11 @@ Use PuTTY
 
 ### MacOS
 
-Use Terminal.app
+Open Terminal and run
+```sh
+ssh-keygen -b 4096 -t rsa
+cat .ssh/id_rsa.pub | ssh trainXX@negishi.rcac.purdue.edu "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
+```
 
 :::::::::::::::::::::::::
 
@@ -48,7 +114,13 @@ Use Terminal.app
 
 ### Linux
 
-Use Terminal
+Open a terminal and run:
+```sh
+ssh-keygen -b 4096 -t rsa
+cat .ssh/id_rsa.pub | ssh trainXX@negishi.rcac.purdue.edu "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
+```
 
 :::::::::::::::::::::::::
+
+
 
