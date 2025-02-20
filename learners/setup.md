@@ -2,6 +2,15 @@
 title: Setup
 ---
 
+## Welcome to the Genome Annotation Workshop
+
+This workshop provides a hands-on introduction to genome annotation, covering structural and functional annotation techniques optimized for the RCAC cluster. You’ll learn best practices for gene prediction using BRAKER3, Helixer, and Easel, as well as functional annotation with EnTAP.
+
+Designed for researchers and bioinformaticians, this workshop will equip you with the skills to generate high-quality, reproducible genome annotations, leveraging transcriptomic, proteomic, and homology-based evidence. You’ll also explore strategies for quality assessment and troubleshooting common challenges in annotation workflows.
+
+Let’s get started!
+
+
 ## Instructors
 
 1. **Arun Seetharam, Ph.D.**: Arun is a lead bioinformatics scientist at Purdue University’s Rosen Center for Advanced Computing. With extensive expertise in comparative genomics, genome assembly, annotation, single-cell genomics,  NGS data analysis, metagenomics, proteomics, and metabolomics. Arun supports a diverse range of bioinformatics projects across various organisms, including human model systems.
