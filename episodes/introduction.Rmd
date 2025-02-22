@@ -1,111 +1,127 @@
 ---
-title: 'introduction'
-teaching: 10
-exercises: 2
+title: 'Introduction to Genome Annotation'
+teaching: 20
+exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a lesson using R Markdown and `{sandpaper}`?
+- What is genome annotation, and why is it important?  
+- What are the different types of genome annotation?  
+- What challenges make genome annotation difficult?  
+- What data sources are used to improve annotation accuracy?  
+- How does the annotation process fit into genomics research?  
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to use markdown with the new lesson template
-- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+- Define genome annotation and its role in genomics research  
+- Differentiate between structural and functional annotation  
+- Identify key challenges in genome annotation and how they impact accuracy  
+- Understand the types of data used in annotation and their significance  
+- Provide an overview of the annotation workflow used in this workshop  
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Introduction
+## What Is Genome Annotation?
 
-This is a lesson created via The Carpentries Workbench. It is written in
-[Pandoc-flavored Markdown][pandoc] for static files (with extension `.md`) and
-[R Markdown][r-markdown] for dynamic files that can render code into output
-(with extension `.Rmd`). Please refer to the [Introduction to The Carpentries
-Workbench][carpentries-workbench] for full documentation.
-
-What you need to know is that there are three sections required for a valid
-Carpentries lesson template:
-
- 1. `questions` are displayed at the beginning of the episode to prime the
-    learner for the content.
- 2. `objectives` are the learning objectives for an episode displayed with
-    the questions.
- 3. `keypoints` are displayed at the end of the episode to reinforce the
-    objectives.
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
-What is the output of this command?
-
-```r
-paste("This", "new", "lesson", "looks", "good")
-```
-
-:::::::::::::::::::::::: solution 
-
-## Output
- 
-```output
-[1] "This new lesson looks good"
-```
-
-:::::::::::::::::::::::::::::::::
+- Genome annotation is the process of identifying and labeling functional elements in a genome, such as genes, regulatory regions, and non-coding RNAs.  
+- It involves predicting gene structures, including exons, introns, and untranslated regions, using computational and experimental data.  
+- Functional annotation assigns biological roles to predicted genes based on sequence similarity, protein domains, and pathway associations.  
+- Accurate annotation is essential for understanding genome function, evolutionary relationships, and applications in research and biotechnology.
 
 
-## Challenge 2: how do you nest solutions within challenge blocks?
+![The structure of a eukaryotic protein-coding gene](https://github.com/user-attachments/assets/fd2746d7-077a-404d-b690-a4ac7bcb45a8)
 
-:::::::::::::::::::::::: solution 
 
-You can add a line with at least three colons and a `solution` tag.
+[source](https://en.wikipedia.org/wiki/Gene_structure)
 
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Figures
+::: callout
 
-You can include figures generated from R Markdown:
+## Why Is Annotation Important?
 
-```{r pyramid, fig.alt = "pie chart illusion of a pyramid", fig.cap = "Sun arise each and every morning"}
-pie(
-  c(Sky = 78, "Sunny side of pyramid" = 17, "Shady side of pyramid" = 5), 
-  init.angle = 315, 
-  col = c("deepskyblue", "yellow", "yellow3"), 
-  border = FALSE
-)
-```
-Or you can use pandoc markdown for static figures with the following syntax:
+- Annotation provides a functional map of the genome, helping researchers identify genes and regulatory elements.  
+- It enables comparative genomics, allowing insights into evolution, gene conservation, and species-specific adaptations.  
+- Accurate gene annotation is essential for biomedical and agricultural research, including disease studies and crop improvement.  
+- Functional annotations link genes to biological processes, aiding in pathway analysis and experimental validation.
 
-`![optional caption that appears below the figure](figure url){alt='alt text for
-accessibility purposes'}`
+:::
 
-![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
 
-## Math
+## Types of Genome Annotation
 
-One of our episodes contains $\LaTeX$ equations when describing how to create
-dynamic reports with {knitr}, so we now use mathjax to describe this:
+- **Structural annotation** identifies genes, exon-intron boundaries, untranslated regions (UTRs), and regulatory elements such as promoters and enhancers.  
+- **Functional annotation** assigns biological roles to genes based on sequence similarity, protein domains, gene ontology (GO), and pathway associations.  
+- **Repeat annotation** detects transposable elements/centromere repeats/knob sequences and other repetitive sequences that prevent misannotation of genes.  
+- **Epigenomic annotation** integrates chromatin accessibility, DNA methylation, and histone modifications to understand gene regulation.
+- **Non-coding RNA annotation** includes small RNAs (miRNAs, siRNAs, piRNAs), long non-coding RNAs (lncRNAs), ribosomal RNAs (rRNAs), and transfer RNAs (tRNAs).
 
-`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
 
-Cool, right?
+## Key Challenges in Genome Annotation
+
+- **Incomplete or fragmented assemblies**: Gaps and misassemblies can lead to missing or incorrect gene predictions.  
+- **Alternative splicing and isoforms**: Complex gene structures make it difficult to define a single gene model.  
+- **Pseudogenes and transposable elements**: Distinguishing functional genes from non-functional sequences is challenging.  
+- **Low-quality or missing evidence**: Incomplete RNA-seq, proteomics, or evolutionary data can reduce annotation accuracy.  
+- **Annotation discrepancies across tools**: Different prediction methods may produce conflicting gene models.  
+- **Evolutionary divergence**: Gene structures and functional elements can vary widely across species, complicating homology-based annotation.  
+
+
+## Data Sources for Annotation
+
+Accurate genome annotation relies on multiple data sources to refine gene predictions and validate functional elements. Different types of experimental and computational evidence contribute to identifying gene structures, transcript isoforms, coding potential, and functional assignments.  
+
+**1. Long-read transcript sequencing (Iso-Seq)**  
+- Captures full-length transcripts, helping define complete exon-intron structures.  
+- Useful for identifying alternative splicing events and novel isoforms.  
+
+**2. Ribosome profiling (Ribo-Seq)**  
+- Detects ribosome-protected mRNA fragments to identify actively translated regions.  
+- Helps differentiate coding from non-coding RNAs and refine start/stop codons.  
+
+**3. Cap analysis gene expression (CAGE) and RAMPAGE**  
+- Maps transcription start sites by detecting 5' capped mRNAs.  
+- Provides precise information on promoter locations and alternative start sites.  
+
+**4. Proteomics (Mass Spectrometry Data)**  
+- Confirms protein-coding genes by detecting peptide fragments in expressed proteins.  
+- Helps validate translation and refine gene models.  
+
+**5. RNA sequencing (Short-read RNA-Seq)**  
+- Provides gene expression levels and transcript coverage across different conditions.  
+- Essential for identifying intron-exon boundaries and alternative splicing events.  
+
+**6. Comparative genomics (Synteny & Homology)**  
+- Uses known gene models from related species to guide annotation.  
+- Helps predict conserved genes and validate gene structures.  
+
+**7. Additional Data Sources**  
+- **Poly(A) site sequencing (PAS-Seq)**: Defines transcript end sites for more precise UTR annotation.  
+- **Chromatin accessibility data (ATAC-Seq, DNase-Seq)**: Identifies regulatory regions like enhancers and promoters.  
+- **Epigenomic data (ChIP-Seq, DNA methylation)**: Provides evidence for active and repressed genes.  
+
+
+
+![Integrating diverse datasets improves the accuracy of gene predictions, ensuring that both structural and functional annotations reflect real biological features.](https://github.com/user-attachments/assets/656dc410-af25-461e-bac2-36ccd92c9b28)
+
+
+## Scope of This Workshop
+
+In this workshop, we will focus on protein-coding gene annotation in eukaryotic genomes using computational tools and available datasets. We will annotate genes in a Arabidopsis genome using a combination of ab initio gene prediction, homology-based methods, and RNA-seq evidence methods, can compare the results to a reference annotation. The workflow will cover data preparation, gene prediction, functional annotation, and quality assessment steps to provide a comprehensive overview of the annotation process.
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `.md` files for episodes when you want static content
-- Use `.Rmd` files for episodes when you need to generate output
-- Run `sandpaper::check_lesson()` to identify any issues with your lesson
-- Run `sandpaper::build_lesson()` to preview your lesson locally
+- Genome annotation identifies functional elements in a genome, including genes, regulatory regions, and non-coding RNAs.
+- Structural annotation predicts gene structures, while functional annotation assigns biological roles to genes.
+- Challenges in annotation include incomplete assemblies, alternative splicing, pseudogenes, and data quality issues.
+- Data sources like RNA-seq, proteomics, comparative genomics, and epigenomics improve annotation accuracy.
+- This workshop focuses on eukaryotic gene annotation using computational tools and diverse datasets.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
