@@ -18,7 +18,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"></div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -109,11 +119,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 31%" class="percentage">
-    31%
+<aside class="col-md-12 lesson-progress"><div style="width: 21%" class="percentage">
+    21%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 31%" aria-valuenow="31" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 21%" aria-valuenow="21" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -274,7 +284,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -338,7 +348,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Annotation Setup</h1>
-        <p>Last updated on 2025-11-11 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -408,13 +418,12 @@ data.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 00_datasets/<span class="dt">{fastq</span><span class="op">,</span><span class="dt">genome</span><span class="op">,</span><span class="dt">bamfiles}</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 03_setup</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 04_braker</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 05_helixer</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 06_easel</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 07_entap</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 08_assessment</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avP</span> SOURCE/00_datasets/ 00_datasets/</span></code></pre>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 04_braker</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 05_helixer</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 06_easel</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 07_entap</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 08_assessment</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avP</span> /depot/workshop/data/annotation_workshop/00_datasets/ 00_datasets/</span></code></pre>
 </div>
 <figure><img src="https://github.com/user-attachments/assets/6184ce77-1cf7-49da-86d8-e56a80b29a6e" alt="Organization" class="figure mx-auto d-block"><div class="figcaption">Organization</div>
 </figure></section><section><h2 class="section-heading" id="rna-seq-mapping">RNA-Seq mapping<a class="anchor" aria-label="anchor" href="#rna-seq-mapping"></a></h2>
@@ -440,7 +449,7 @@ files</strong></p>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="ex">ml</span> bioawk</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">bioaw</span> <span class="at">-c</span> fastx <span class="st">'{print "&gt;"$name; print $seq}'</span> <span class="dt">\</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">bioawk</span> <span class="at">-c</span> fastx <span class="st">'{print "&gt;"$name; print $seq}'</span> <span class="dt">\</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>   Arabidopsis_thaliana.TAIR10.dna.toplevel.fa <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>   <span class="fu">fold</span> <span class="op">&gt;</span> athaliana.fasta</span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">rm</span> Arabidopsis_thaliana.TAIR10.dna.toplevel.fa</span></code></pre>
@@ -456,7 +465,7 @@ files</strong></p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana.fasta"</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="va">index</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/star_index"</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> <span class="va">${SLURM_JOB_CPUS_PER_NODE}</span> <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>   <span class="at">--runMode</span> genomeGenerate <span class="dt">\</span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>   <span class="at">--genomeDir</span> <span class="va">${index}</span>  <span class="dt">\</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>   <span class="at">--genomeSAindexNbases</span> 12 <span class="dt">\</span></span>
@@ -472,10 +481,10 @@ files</strong></p>
 <div class="callout-content">
 <table class="table"><colgroup><col width="27%"><col width="72%"></colgroup><thead><tr class="header"><th align="left">Option</th>
 <th>Description</th>
-</tr></thead><tbody><tr class="odd"><td align="left"><code>--runThreadN $SLURM_JOB_CPUS_PER_NODE</code></td>
+</tr></thead><tbody><tr class="odd"><td align="left"><code>--runThreadN $SLURM_CPUS_ON_NODE</code></td>
 <td>Specifies the number of CPU threads to use. In an HPC environment,
-<code>$SLURM_JOB_CPUS_PER_NODE</code> dynamically assigns available CPUs
-per node.</td>
+<code>$SLURM_CPUS_ON_NODE</code> dynamically assigns available CPUs per
+node.</td>
 </tr><tr class="even"><td align="left"><code>--runMode genomeGenerate</code></td>
 <td>Runs STAR in genome index generation mode, required before
 alignment.</td>
@@ -507,7 +516,7 @@ RNA-Seq reads to the reference genome.</p>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="va">index</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/star_index"</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span><span class="va">$1</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span><span class="va">$2</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="va">cpus</span><span class="op">=</span><span class="va">${SLURM_JOB_CPUS_PER_NODE}</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="va">cpus</span><span class="op">=</span><span class="va">${SLURM_CPUS_ON_NODE}</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="va">outname</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${read1}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">"_"</span><span class="va">)</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\</span></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>--runThreadN <span class="va">${cpus}</span> <span class="dt">\</span></span>
@@ -571,7 +580,7 @@ visualization.</td>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Define the directory containing FASTQ files</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">FASTQ_DIR</span><span class="op">=</span><span class="st">"WORKSHOP_DIR/00_datasets/fastq"</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">FASTQ_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/fastq"</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Loop through all R1 files and find corresponding R2 files</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="va">${FASTQ_DIR}</span>/<span class="pp">*</span>_R1.fq.gz<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="va">R2</span><span class="op">=</span><span class="st">"</span><span class="va">${R1</span><span class="op">/</span><span class="ss">_R1.fq.gz</span><span class="op">/</span>_R2.fq.gz<span class="va">}</span><span class="st">"</span>  <span class="co"># Replace R1 with R2</span></span>
@@ -588,7 +597,7 @@ visualization.</td>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Define the directory containing BAM files</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"WORKSHOP_DIR/00_datasets/bamfiles"</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Move all BAM files to the BAM directory</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>_Aligned.sortedByCoord.out.bam <span class="va">${BAM_DIR}</span>/</span></code></pre>
 </div>
@@ -615,8 +624,8 @@ download the RepeatMasker database.</p>
 <span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>   <span class="at">-pa</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
 <span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>   <span class="at">-q</span> <span class="dt">\</span></span>
 <span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>   <span class="at">-xsmall</span> <span class="dt">\</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>   <span class="at">-lib</span> <span class="va">${replib}</span> <span class="dt">\ </span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>   <span class="ex">-nocut</span> <span class="dt">\</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>   <span class="at">-lib</span> <span class="va">${replib}</span> <span class="dt">\</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>   <span class="at">-nocut</span> <span class="dt">\</span></span>
 <span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>   <span class="at">-gff</span> <span class="dt">\</span></span>
 <span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>   <span class="va">${genome}</span></span></code></pre>
 </div>
@@ -626,6 +635,99 @@ download the RepeatMasker database.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">mv</span> athaliana.fasta.masked athaliana_softmasked.fasta</span></code></pre>
+</div>
+<div id="exercise-1-calculating-star---genomesaindexnbases" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-calculating-star---genomesaindexnbases" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Calculating STAR
+<code>--genomeSAindexNbases</code>
+</h3>
+<div class="callout-content">
+<p>The STAR aligner requires the <code>--genomeSAindexNbases</code>
+parameter to be tuned based on genome size. The recommended formula is
+<code>min(14, log2(GenomeLength)/2 - 1)</code>.</p>
+<p>The Arabidopsis thaliana genome is approximately 119 Mb (119,000,000
+bp). What value should you use for
+<code>--genomeSAindexNbases</code>?</p>
+<p>What about for a larger genome, such as <em>Zea mays</em> (~2,300
+Mb)?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>For <strong>Arabidopsis thaliana</strong> (~119 Mb):</p>
+<pre><code><span><span class="fu">log2</span><span class="op">(</span><span class="fl">119000000</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">26.83</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">12.4</span></span>
+<span><span class="fu">min</span><span class="op">(</span><span class="fl">14</span>, <span class="fl">12.4</span><span class="op">)</span> <span class="op">=</span> <span class="fl">12</span></span></code></pre>
+<p>So <code>--genomeSAindexNbases 12</code> is the correct value (as
+used in this lesson).</p>
+<p>For <strong>Zea mays</strong> (~2,300 Mb):</p>
+<pre><code><span><span class="fu">log2</span><span class="op">(</span><span class="fl">2300000000</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">31.1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">14.55</span></span>
+<span><span class="fu">min</span><span class="op">(</span><span class="fl">14</span>, <span class="fl">14.55</span><span class="op">)</span> <span class="op">=</span> <span class="fl">14</span></span></code></pre>
+<p>So <code>--genomeSAindexNbases 14</code> (the default) would be
+appropriate for maize.</p>
+<p>As a rule of thumb: for genomes smaller than ~500 Mb, you should
+calculate and lower this value; for large genomes (over 1 Gb), the
+default of 14 is usually fine.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-choosing-the-right-genome-file" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-choosing-the-right-genome-file" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Choosing the Right Genome
+File</h3>
+<div class="callout-content">
+<p>Different annotation tools have different requirements for repeat
+masking. Given the genome files produced in this episode:</p>
+<ul><li>
+<code>athaliana.fasta</code> (unmasked)</li>
+<li>
+<code>athaliana_softmasked.fasta</code> (soft-masked with
+RepeatMasker)</li>
+</ul><p>Which genome file should you use for each of the following tools, and
+why?</p>
+<ol style="list-style-type: decimal"><li>BRAKER3</li>
+<li>Helixer</li>
+<li>EASEL</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li><p><strong>BRAKER3</strong> – Use
+<code>athaliana_softmasked.fasta</code>. BRAKER3 benefits from
+soft-masked genomes because its underlying gene finder
+(Augustus/GeneMark) can recognize repeat regions (in lowercase) and
+avoid predicting genes within transposable elements.</p></li>
+<li><p><strong>Helixer</strong> – Use <code>athaliana.fasta</code>
+(unmasked). Helixer is a deep-learning-based tool that has been trained
+on both genic and repetitive sequences. It does not require or benefit
+from repeat masking.</p></li>
+<li><p><strong>EASEL</strong> – Use
+<code>athaliana_softmasked.fasta</code>. EASEL’s internal pipeline
+expects a soft-masked genome to improve the accuracy of gene predictions
+by de-prioritizing repetitive regions.</p></li>
+</ol></div>
+</div>
+</div>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -649,6 +751,11 @@ annotation</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="annotation-strategies.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -709,7 +816,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/annotation-setup.html",
   "identifier": "https://genome-annotation.github.io/NA/annotation-setup.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-11-11",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 

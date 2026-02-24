@@ -34,8 +34,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg">
-</div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -319,7 +328,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -383,14 +392,185 @@
         <h1>Instructor Notes</h1>
         
 
-<p>This is a placeholder file. Please add content here.</p>
+<section><h2 class="section-heading" id="general-setup">General Setup<a class="anchor" aria-label="anchor" href="#general-setup"></a>
+</h2>
+<hr class="half-width">
+<p>Before the workshop:</p>
+<ol style="list-style-type: decimal">
+<li>Verify all training accounts (<code>trainXX</code>) can access both
+Negishi and Gilbreth clusters</li>
+<li>Confirm the shared data is available at
+<code>/depot/workshop/data/annotation_workshop/</code>
+</li>
+<li>Ensure <code>biocontainers</code> module loads correctly and all
+tool modules are accessible</li>
+<li>Pre-stage the GeneMark license key for learners or provide download
+instructions</li>
+<li>Test that GPU allocation works on Gilbreth for the Helixer
+episode</li>
+</ol></section><section><h2 class="section-heading" id="timing-guide">Timing Guide<a class="anchor" aria-label="anchor" href="#timing-guide"></a>
+</h2>
+<hr class="half-width">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="24%">
+<col width="27%">
+<col width="29%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Episode</th>
+<th align="center">Teaching</th>
+<th align="center">Exercises</th>
+<th align="left">Notes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Introduction</td>
+<td align="center">20 min</td>
+<td align="center">0 min</td>
+<td align="left">Conceptual, no hands-on</td>
+</tr>
+<tr class="even">
+<td align="left">Annotation Strategies</td>
+<td align="center">20 min</td>
+<td align="center">5 min</td>
+<td align="left">Conceptual with exercises</td>
+</tr>
+<tr class="odd">
+<td align="left">Annotation Setup</td>
+<td align="center">15 min</td>
+<td align="center">5 min</td>
+<td align="left">Walk through only; steps are pre-computed</td>
+</tr>
+<tr class="even">
+<td align="left">Gene Annotation with BRAKER</td>
+<td align="center">40 min</td>
+<td align="center">10 min</td>
+<td align="left">Submit jobs early; review results while waiting</td>
+</tr>
+<tr class="odd">
+<td align="left">Gene Annotation with Helixer</td>
+<td align="center">20 min</td>
+<td align="center">5 min</td>
+<td align="left">Requires Gilbreth cluster; switch clusters during
+break</td>
+</tr>
+<tr class="even">
+<td align="left">Gene Annotation with EASEL</td>
+<td align="center">25 min</td>
+<td align="center">5 min</td>
+<td align="left">Optional/self-guided if time is short</td>
+</tr>
+<tr class="odd">
+<td align="left">Functional Annotation with EnTAP</td>
+<td align="center">20 min</td>
+<td align="center">5 min</td>
+<td align="left">Databases are pre-staged</td>
+</tr>
+<tr class="even">
+<td align="left">Annotation Assessment</td>
+<td align="center">30 min</td>
+<td align="center">10 min</td>
+<td align="left">Compare all methods together</td>
+</tr>
+</tbody>
+</table></section><section><h2 class="section-heading" id="common-learner-issues">Common Learner Issues<a class="anchor" aria-label="anchor" href="#common-learner-issues"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="cluster-access">Cluster Access<a class="anchor" aria-label="anchor" href="#cluster-access"></a>
+</h3>
+<ul>
+<li>Learners may forget to switch to Gilbreth for the Helixer episode.
+Remind them during the break before that session.</li>
+<li>SSH key setup can be tricky on Windows. Have learners test access
+during the Arrival &amp; Setup period.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="module-loading">Module Loading<a class="anchor" aria-label="anchor" href="#module-loading"></a>
+</h3>
+<ul>
+<li>Always use <code>ml --force purge</code> before loading new modules.
+Without <code>--force</code>, sticky modules may cause conflicts.</li>
+<li>If <code>biocontainers</code> fails to load, check that the user’s
+<code>.bashrc</code> does not have conflicting module commands.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="braker3">BRAKER3<a class="anchor" aria-label="anchor" href="#braker3"></a>
+</h3>
+<ul>
+<li>The GeneMark license key must be in <code>~/.gm_key</code>. If
+learners get a “license key not found” error, have them re-copy the
+key.</li>
+<li>AUGUSTUS config must be writable. Ensure the
+<code>copy_augustus_config</code> step completed successfully.</li>
+<li>Jobs take 7-170 minutes depending on the case. Submit all 5 cases at
+the start and check results later.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="helixer">Helixer<a class="anchor" aria-label="anchor" href="#helixer"></a>
+</h3>
+<ul>
+<li>GPU availability on Gilbreth may be limited. Use
+<code>--account=standby</code> for opportunistic scheduling.</li>
+<li>Model download to <code>~/.local/share/Helixer</code> can be slow.
+Consider pre-staging models.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="easel">EASEL<a class="anchor" aria-label="anchor" href="#easel"></a>
+</h3>
+<ul>
+<li>Nextflow version matters. The custom installation step avoids
+conflicts with the system module.</li>
+<li>The <code>rcac.config</code> must be correctly placed and referenced
+in <code>nextflow.config</code>.</li>
+<li>If the pipeline fails, check <code>.nextflow.log</code> and the
+<code>work/</code> directory for process-level logs.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="entap">EnTAP<a class="anchor" aria-label="anchor" href="#entap"></a>
+</h3>
+<ul>
+<li>Databases are large and pre-staged at
+<code>/depot/itap/datasets/entap_db/</code>. Learners should not
+re-download them.</li>
+<li>The <code>entap_config.ini</code> paths must point to the correct
+database locations.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="assessment">Assessment<a class="anchor" aria-label="anchor" href="#assessment"></a>
+</h3>
+<ul>
+<li>BUSCO lineage dataset for Arabidopsis is
+<code>brassicales_odb10</code>. Double-check learners use the correct
+lineage.</li>
+<li>The OMArk database (<code>LUCA.h5</code>) is pre-staged at
+<code>/depot/itap/datasets/omark/</code>.</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="challenge-exercise-answers">Challenge Exercise Answers<a class="anchor" aria-label="anchor" href="#challenge-exercise-answers"></a>
+</h2>
+<hr class="half-width">
+<p>Answers to all challenge exercises are included in the
+<code>:::::: solution</code> blocks within each episode. Review these
+before the workshop to anticipate follow-up questions.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-      <section id="aggregate-instructor-notes"></section>
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
+</section><section id="aggregate-instructor-notes"></section>
 </div>
     </main>
 </div>

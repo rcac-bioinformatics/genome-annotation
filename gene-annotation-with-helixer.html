@@ -18,7 +18,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"></div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -109,11 +119,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 54%" class="percentage">
-    54%
+<aside class="col-md-12 lesson-progress"><div style="width: 50%" class="percentage">
+    50%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 54%" aria-valuenow="54" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 50%" aria-valuenow="50" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -273,7 +283,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -337,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Annotation using Helixer</h1>
-        <p>Last updated on 2025-11-11 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-helixer.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -378,8 +388,8 @@
 convolutional neural network (CNN) to predict genes in eukaryotic
 genomes. Helixer is trained on a wide range of eukaryotic genomes and
 can predict genes in both plant and animal genomes. Helixer can predict
-genes wihtout any extrinisic information such as RNA-seq data or
-homology information, purely based on the sequence of the genome.</p>
+genes without any extrinsic information such as RNA-seq data or homology
+information, purely based on the sequence of the genome.</p>
 <div id="this-section-should-be-run-on-gilbreth-hpc-cluster." class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -401,7 +411,7 @@ but only need <code>athaliana.fasta</code> file in the
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${WORKSHOP_DIR}</span>/05_helixer</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">cp</span> <span class="op">&lt;</span>depot_location<span class="op">&gt;</span>/genome/athaliana.fasta <span class="va">${WORKSHOP_DIR}</span>/05_helixer/athaliana.fasta</span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">cp</span> /depot/workshop/data/annotation_workshop/00_datasets/genome/athaliana.fasta <span class="va">${WORKSHOP_DIR}</span>/05_helixer/athaliana.fasta</span></code></pre>
 </div>
 <figure><img src="https://github.com/user-attachments/assets/a1767236-304b-4912-8200-e2ea97ec63b8" alt="Folder organization" class="figure mx-auto d-block"><div class="figcaption">Folder organization</div>
 </figure><section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h2>
@@ -441,7 +451,7 @@ can also download models for specific lineages using the
 <code>--lineage</code> option as shown above.</p>
 <p>By default, files will be downloaded to
 <code>~/.local/share/Helixer</code> directory. You should see the
-follwing files:</p>
+following files:</p>
 <pre><code>.
 └── models
     └── land_plant
@@ -460,8 +470,8 @@ models are more accurate but require more memory and time to run.</p>
 </section><section><h2 class="section-heading" id="running-helixer">Running Helixer<a class="anchor" aria-label="anchor" href="#running-helixer"></a></h2>
 <hr class="half-width"><p>Helixer requires GPU for prediction. For running Helixer, you need to
 request a GPU node. You will also need the genome sequence in fasta
-format. For this tutorial, we will use Maize genome (Zea mays subsp.
-mays), and use the <code>land_plant</code> model to predict genes.</p>
+format. For this tutorial, we will use the Arabidopsis thaliana genome,
+and use the <code>land_plant</code> model to predict genes.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -486,9 +496,9 @@ mays), and use the <code>land_plant</code> model to predict genes.</p>
 <span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="at">--species</span> <span class="va">${species}</span> <span class="dt">\</span></span>
 <span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    <span class="at">--gff-output-path</span> <span class="va">${output}</span></span></code></pre>
 </div>
-<p>A typical job will take ~40 mins to finish depedning on the GPU the
+<p>A typical job will take ~40 mins to finish depending on the GPU the
 job gets allocated.</p>
-<p>You can count the nubmer of predictions in your gff3 file using the
+<p>You can count the number of predictions in your gff3 file using the
 following command:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -514,16 +524,83 @@ following command:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">gffread</span> Arabidopsis_thaliana.gff3 <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">gffread</span> athaliana_helixer.gff <span class="dt">\</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>   <span class="at">-g</span> athaliana.fasta <span class="dt">\</span></span>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>   <span class="at">-y</span> helixer_pep.fa <span class="dt">\</span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   <span class="at">-x</span> helixer_cds.fa</span></code></pre>
 </div>
 <p>As you may have noticed, the number of mRNA and gene features are the
 same. This is because isoforms aren’t predicted by Helixer and you only
-have one transcript per gene. Exons are indetified with high confidence
+have one transcript per gene. Exons are identified with high confidence
 and alternative isoforms are usually collapsed into a single gene model.
 This is one of the known limitations of Helixer.</p>
+<div id="exercise-1-understanding-helixer-gff-output" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-understanding-helixer-gff-output" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Understanding Helixer GFF
+Output</h3>
+<div class="callout-content">
+<p>Look at the feature counts from the Helixer GFF output. Why is the
+number of mRNA features the same as the number of gene features?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>The number of mRNA and gene features are the same because Helixer
+does not predict alternative isoforms. Each gene has exactly one
+transcript (mRNA) associated with it. Unlike tools that incorporate
+RNA-seq evidence, Helixer’s deep learning model produces a single gene
+model per locus, collapsing any potential alternative splicing into one
+representative transcript.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-helixer-vs.-braker3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-helixer-vs.-braker3" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Helixer vs. BRAKER3</h3>
+<div class="callout-content">
+<p>What are the advantages and disadvantages of using Helixer compared
+to BRAKER3 for gene annotation?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p><strong>Advantages of Helixer:</strong></p>
+<ul><li>Does not require any extrinsic evidence data (RNA-seq or protein
+data), making it useful when such data is unavailable.</li>
+<li>Runs faster when GPU hardware is available.</li>
+<li>Simpler setup with fewer input requirements.</li>
+</ul><p><strong>Disadvantages of Helixer:</strong></p>
+<ul><li>Cannot predict alternative isoforms (only one transcript per
+gene).</li>
+<li>Requires GPU hardware, which may not be available on all HPC
+clusters.</li>
+<li>May be less accurate for species that are poorly represented in the
+training data.</li>
+</ul></div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -534,7 +611,7 @@ This is one of the known limitations of Helixer.</p>
 <ul><li>Helixer is a deep learning-based gene prediction tool that uses a
 convolutional neural network (CNN) to predict genes in eukaryotic
 genomes.</li>
-<li>Helixer can predict genes wihtout any extrinisic information such as
+<li>Helixer can predict genes without any extrinsic information such as
 RNA-seq data or homology information, purely based on the sequence of
 the genome.</li>
 <li>Helixer requires a trained model and GPU for prediction.</li>
@@ -547,6 +624,11 @@ isoforms.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="gene-annotation-with-braker.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -607,7 +689,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/gene-annotation-with-helixer.html",
   "identifier": "https://genome-annotation.github.io/NA/gene-annotation-with-helixer.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-11-11",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 

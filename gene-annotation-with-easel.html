@@ -18,7 +18,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"></div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -109,11 +119,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 65%" class="percentage">
-    65%
+<aside class="col-md-12 lesson-progress"><div style="width: 60%" class="percentage">
+    60%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 65%" aria-valuenow="65" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 60%" aria-valuenow="60" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -273,7 +283,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -337,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Annotation using Easel</h1>
-        <p>Last updated on 2025-11-11 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-easel.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -541,18 +551,34 @@ the Easel workflow:</p>
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir</span><span class="kw">:</span><span class="at"> easel</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage</span><span class="kw">:</span><span class="at"> embryophyta</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order</span><span class="kw">:</span><span class="at"> Brassicales</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/singularity_cache</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/singularity_cache</span></span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set</span><span class="kw">:</span><span class="at"> plant</span></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> testpbs</span></span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> normal</span></span>
 <span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span><span class="at"> testpbs</span></span></code></pre>
+</div>
+<div id="update-paths-in-params.yaml" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="update-paths-in-params.yaml" class="callout-inner">
+<h3 class="callout-title">Update Paths in params.yaml</h3>
+<div class="callout-content">
+<p>Replace <code>YOUR_USERNAME</code> with your actual username in the
+<code>params.yaml</code> file. You can find your username by running
+<code>whoami</code> on the cluster. For example, if your username is
+<code>train01</code>, the genome path would be:
+<code>/scratch/negishi/train01/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</code></p>
+</div>
+</div>
 </div>
 <p>Now we are ready to run the Easel workflow:</p>
 <p>Our <code>slurm</code> file to run the Easel workflow:</p>
@@ -567,7 +593,7 @@ the Easel workflow:</p>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="ex">ml</span> purge</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="ex">ml</span> openjdk</span>
 <span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="dt">\</span></span>
@@ -578,7 +604,156 @@ the Easel workflow:</p>
 </div>
 <p>This will run the Easel workflow on the RCAC HPC.</p>
 </section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a></h2>
-<hr class="half-width"><div id="keypoints1" class="callout keypoints">
+<hr class="half-width"><p>EASEL produces output in the <code>easel/</code> directory (as
+specified by <code>outdir</code> in <code>params.yaml</code>). The key
+output files are:</p>
+<table class="table"><thead><tr class="header"><th align="left"><strong>File/Directory</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr></thead><tbody><tr class="odd"><td align="left"><code>easel/annotation/*.gff3</code></td>
+<td align="left">Final gene predictions in GFF3 format</td>
+</tr><tr class="even"><td align="left"><code>easel/annotation/*.cds.fa</code></td>
+<td align="left">Predicted coding sequences</td>
+</tr><tr class="odd"><td align="left"><code>easel/annotation/*.pep.fa</code></td>
+<td align="left">Predicted protein sequences</td>
+</tr><tr class="even"><td align="left"><code>easel/busco/</code></td>
+<td align="left">BUSCO completeness assessment results</td>
+</tr><tr class="odd"><td align="left"><code>easel/entap/</code></td>
+<td align="left">Functional annotation results from EnTAP</td>
+</tr><tr class="even"><td align="left"><code>easel/pipeline_info/</code></td>
+<td align="left">Nextflow execution reports and timelines</td>
+</tr></tbody></table><p>You can check the gene count in the EASEL output:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> easel/annotation/<span class="pp">*</span>.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Expected Output </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>For Arabidopsis thaliana, EASEL should predict approximately
+25,000-30,000 genes. The pipeline also generates a BUSCO report
+automatically, which you can find in the <code>easel/busco/</code>
+directory.</p>
+<p>Check the Nextflow execution report in
+<code>easel/pipeline_info/</code> to review runtime, resource usage, and
+any failed processes.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-1-adapting-easel-for-a-different-organism" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-adapting-easel-for-a-different-organism" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Adapting EASEL for a Different
+Organism</h3>
+<div class="callout-content">
+<p>If you were annotating a vertebrate genome (e.g., zebrafish) instead
+of a plant genome, which parameters in the <code>params.yaml</code> file
+would you need to change? List all the parameters and explain why each
+would need updating.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>You would need to change the following parameters in
+<code>params.yaml</code>:</p>
+<ul><li>
+<strong><code>busco_lineage</code></strong>: Change from
+<code>embryophyta</code> (plants) to the appropriate vertebrate lineage
+(e.g., <code>actinopterygii</code> for ray-finned fish, or
+<code>vertebrata</code> for a broader assessment).</li>
+<li>
+<strong><code>order</code></strong>: Change from
+<code>Brassicales</code> to the correct taxonomic order for your
+organism (e.g., <code>Cypriniformes</code> for zebrafish).</li>
+<li>
+<strong><code>prefix</code></strong>: Change from
+<code>arabidopsis</code> to an appropriate prefix for your organism
+(e.g., <code>zebrafish</code> or <code>drerio</code>).</li>
+<li>
+<strong><code>taxon</code></strong>: Change from
+<code>arabidopsis</code> to your target organism name (e.g.,
+<code>zebrafish</code>).</li>
+<li>
+<strong><code>training_set</code></strong>: Change from
+<code>plant</code> to the appropriate AUGUSTUS training set for your
+organism (e.g., <code>vertebrate</code> or a closely related species
+like <code>zebrafish</code>).</li>
+</ul><p>The genome, bam, and other path-related parameters would also change,
+but those are specific to your data rather than to the organism
+type.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-resuming-a-failed-easel-run" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-resuming-a-failed-easel-run" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Resuming a Failed EASEL Run</h3>
+<div class="callout-content">
+<p>Your EASEL Nextflow pipeline failed partway through execution. How
+would you resume the run without recomputing already completed steps?
+Where would you look for error logs to diagnose the issue?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>To resume a failed Nextflow run, add the <code>-resume</code> flag to
+your <code>nextflow run</code> command:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="dt">\</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>   <span class="at">-hub</span> gitlab PlantGenomicsLab/easel <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>   <span class="at">-params-file</span> params.yaml <span class="dt">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>   <span class="at">-profile</span> rcac <span class="dt">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>   <span class="at">--project</span> testpbs <span class="dt">\</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>   <span class="at">-resume</span></span></code></pre>
+</div>
+<p>Nextflow caches completed tasks, so only failed or pending steps will
+be re-executed.</p>
+<p>To diagnose the failure, check these locations:</p>
+<ol style="list-style-type: decimal"><li>
+<strong><code>.nextflow.log</code></strong> in the working
+directory: Contains detailed Nextflow execution logs, including error
+messages and stack traces.</li>
+<li>
+<strong><code>work/</code> directory</strong>: Each task runs in a
+subdirectory under <code>work/</code>. Navigate to the failed task’s
+directory (shown in the error output) and check the
+<code>.command.log</code>, <code>.command.err</code>, and
+<code>.command.out</code> files for the specific error.</li>
+<li>
+<strong>SLURM output files</strong>: Check the <code>easel.o*</code>
+and <code>easel.e*</code> files for SLURM-level errors (e.g., memory
+limits, time limits).</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -600,6 +775,11 @@ efficient pipeline execution.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="gene-annotation-with-helixer.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -660,7 +840,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/gene-annotation-with-easel.html",
   "identifier": "https://genome-annotation.github.io/NA/gene-annotation-with-easel.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-11-11",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 

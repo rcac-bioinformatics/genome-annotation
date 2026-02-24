@@ -34,8 +34,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg">
-</div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -319,7 +328,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -384,7 +393,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction to Genome Annotation</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/introduction.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -622,9 +631,14 @@ computational tools and diverse datasets.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-annotation-strategies"><p>Content from <a href="annotation-strategies.html">Annotation Strategies</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-strategies.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -931,13 +945,13 @@ enriched annotation.</li>
 combining simplicity with high throughput.</li>
 </ul>
 <figure><img src="https://github.com/user-attachments/assets/11c2a5e7-2545-45a8-9d59-0b8d233f4de9" alt="EnTAP" class="figure mx-auto d-block"><div class="figcaption">EnTAP</div>
-</figure><div id="how-to-we-access-gene-predictions" class="callout">
+</figure><div id="how-do-we-assess-gene-predictions" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <span class="callout-header">Callout</span>
-<div id="how-to-we-access-gene-predictions" class="callout-inner">
-<h3 class="callout-title">How to we access gene predictions?</h3>
+<div id="how-do-we-assess-gene-predictions" class="callout-inner">
+<h3 class="callout-title">How do we assess gene predictions?</h3>
 <div class="callout-content">
 <ul>
 <li>
@@ -965,6 +979,81 @@ missed, or falsely annotated genes<br>
 functional, and comparative assessments to improve confidence in gene
 predictions and refine annotation quality</li>
 </ul>
+</div>
+</div>
+</div>
+<div id="exercise-1-matching-tools-to-data" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-matching-tools-to-data" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Matching Tools to Data</h3>
+<div class="callout-content">
+<p>You are annotating a newly sequenced fungal genome. You have
+short-read RNA-seq data from three tissue types but no protein sequences
+from closely related species. Which annotation strategy (ab initio,
+evidence-based, hybrid) and which tool from this workshop would you
+choose? Why?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>A <strong>hybrid approach</strong> using <strong>BRAKER3 Case
+1</strong> (RNA-seq mode) would be the best choice. BRAKER3 can use the
+RNA-seq BAM files as evidence to train GeneMark-ET and AUGUSTUS,
+combining ab initio gene prediction with transcript evidence. This
+approach leverages your available data without requiring protein
+homology. If you later obtain protein sequences, you could re-run with
+Case 3 (combined mode) for improved accuracy.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-evaluating-trade-offs" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-evaluating-trade-offs" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Evaluating Trade-offs</h3>
+<div class="callout-content">
+<p>Consider two annotation scenarios: 1. A well-studied crop species
+with extensive RNA-seq, protein databases, and a closely related
+reference annotation 2. A non-model organism with no transcriptomic data
+and few related species in databases</p>
+<p>For each scenario, which annotation method(s) would you prioritize
+and why?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p><strong>Scenario 1</strong> (well-studied crop): Use a
+<strong>multi-evidence hybrid approach</strong> like BRAKER3 Case 3
+(RNA-seq + proteins). The rich evidence data will produce highly
+accurate gene models. Follow up with EnTAP for functional annotation
+using the available databases. You could also run Helixer for
+comparison.</p>
+<p><strong>Scenario 2</strong> (non-model organism): Start with
+<strong>Helixer</strong> since it requires no external evidence and can
+predict genes using only the genome sequence. Also run <strong>BRAKER3
+Case 4</strong> (ab initio mode) as a complement. If you can obtain
+protein sequences from the nearest available clade via OrthoDB, run
+BRAKER3 Case 2 as well. Compare all results using BUSCO to identify the
+best prediction.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1008,9 +1097,14 @@ metrics.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-annotation-setup"><p>Content from <a href="annotation-setup.html">Annotation Setup</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1088,13 +1182,12 @@ data.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 00_datasets/<span class="dt">{fastq</span><span class="op">,</span><span class="dt">genome</span><span class="op">,</span><span class="dt">bamfiles}</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 03_setup</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 04_braker</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 05_helixer</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 06_easel</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 07_entap</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 08_assessment</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avP</span> SOURCE/00_datasets/ 00_datasets/</span></code></pre>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 04_braker</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 05_helixer</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 06_easel</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 07_entap</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> 08_assessment</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avP</span> /depot/workshop/data/annotation_workshop/00_datasets/ 00_datasets/</span></code></pre>
 </div>
 <figure><img src="https://github.com/user-attachments/assets/6184ce77-1cf7-49da-86d8-e56a80b29a6e" alt="Organization" class="figure mx-auto d-block"><div class="figcaption">Organization</div>
 </figure></section><section><h2 class="section-heading" id="rna-seq-mapping">RNA-Seq mapping<a class="anchor" aria-label="anchor" href="#rna-seq-mapping"></a>
@@ -1122,7 +1215,7 @@ files</strong></p>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="ex">ml</span> bioawk</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">bioaw</span> <span class="at">-c</span> fastx <span class="st">'{print "&gt;"$name; print $seq}'</span> <span class="dt">\</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="ex">bioawk</span> <span class="at">-c</span> fastx <span class="st">'{print "&gt;"$name; print $seq}'</span> <span class="dt">\</span></span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>   Arabidopsis_thaliana.TAIR10.dna.toplevel.fa <span class="kw">|</span><span class="dt">\</span></span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>   <span class="fu">fold</span> <span class="op">&gt;</span> athaliana.fasta</span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">rm</span> Arabidopsis_thaliana.TAIR10.dna.toplevel.fa</span></code></pre>
@@ -1138,7 +1231,7 @@ files</strong></p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana.fasta"</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="va">index</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/star_index"</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> <span class="va">${SLURM_JOB_CPUS_PER_NODE}</span> <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>   <span class="at">--runMode</span> genomeGenerate <span class="dt">\</span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>   <span class="at">--genomeDir</span> <span class="va">${index}</span>  <span class="dt">\</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>   <span class="at">--genomeSAindexNbases</span> 12 <span class="dt">\</span></span>
@@ -1163,10 +1256,10 @@ files</strong></p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>--runThreadN $SLURM_JOB_CPUS_PER_NODE</code></td>
+<td align="left"><code>--runThreadN $SLURM_CPUS_ON_NODE</code></td>
 <td>Specifies the number of CPU threads to use. In an HPC environment,
-<code>$SLURM_JOB_CPUS_PER_NODE</code> dynamically assigns available CPUs
-per node.</td>
+<code>$SLURM_CPUS_ON_NODE</code> dynamically assigns available CPUs per
+node.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>--runMode genomeGenerate</code></td>
@@ -1209,7 +1302,7 @@ RNA-Seq reads to the reference genome.</p>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="va">index</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/star_index"</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="va">read1</span><span class="op">=</span><span class="va">$1</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="va">read2</span><span class="op">=</span><span class="va">$2</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="va">cpus</span><span class="op">=</span><span class="va">${SLURM_JOB_CPUS_PER_NODE}</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="va">cpus</span><span class="op">=</span><span class="va">${SLURM_CPUS_ON_NODE}</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="va">outname</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${read1}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">"_"</span><span class="va">)</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="ex">STAR</span> <span class="dt">\</span></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>--runThreadN <span class="va">${cpus}</span> <span class="dt">\</span></span>
@@ -1305,7 +1398,7 @@ visualization.</td>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Define the directory containing FASTQ files</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">FASTQ_DIR</span><span class="op">=</span><span class="st">"WORKSHOP_DIR/00_datasets/fastq"</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">FASTQ_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/fastq"</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Loop through all R1 files and find corresponding R2 files</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="cf">for</span> R1 <span class="kw">in</span> <span class="va">${FASTQ_DIR}</span>/<span class="pp">*</span>_R1.fq.gz<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="va">R2</span><span class="op">=</span><span class="st">"</span><span class="va">${R1</span><span class="op">/</span><span class="ss">_R1.fq.gz</span><span class="op">/</span>_R2.fq.gz<span class="va">}</span><span class="st">"</span>  <span class="co"># Replace R1 with R2</span></span>
@@ -1322,7 +1415,7 @@ visualization.</td>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Define the directory containing BAM files</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"WORKSHOP_DIR/00_datasets/bamfiles"</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Move all BAM files to the BAM directory</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>_Aligned.sortedByCoord.out.bam <span class="va">${BAM_DIR}</span>/</span></code></pre>
 </div>
@@ -1351,8 +1444,8 @@ download the RepeatMasker database.</p>
 <span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>   <span class="at">-pa</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
 <span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>   <span class="at">-q</span> <span class="dt">\</span></span>
 <span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>   <span class="at">-xsmall</span> <span class="dt">\</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>   <span class="at">-lib</span> <span class="va">${replib}</span> <span class="dt">\ </span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>   <span class="ex">-nocut</span> <span class="dt">\</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>   <span class="at">-lib</span> <span class="va">${replib}</span> <span class="dt">\</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>   <span class="at">-nocut</span> <span class="dt">\</span></span>
 <span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>   <span class="at">-gff</span> <span class="dt">\</span></span>
 <span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>   <span class="va">${genome}</span></span></code></pre>
 </div>
@@ -1362,6 +1455,105 @@ download the RepeatMasker database.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">mv</span> athaliana.fasta.masked athaliana_softmasked.fasta</span></code></pre>
+</div>
+<div id="exercise-1-calculating-star---genomesaindexnbases" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-calculating-star---genomesaindexnbases" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Calculating STAR
+<code>--genomeSAindexNbases</code>
+</h3>
+<div class="callout-content">
+<p>The STAR aligner requires the <code>--genomeSAindexNbases</code>
+parameter to be tuned based on genome size. The recommended formula is
+<code>min(14, log2(GenomeLength)/2 - 1)</code>.</p>
+<p>The Arabidopsis thaliana genome is approximately 119 Mb (119,000,000
+bp). What value should you use for
+<code>--genomeSAindexNbases</code>?</p>
+<p>What about for a larger genome, such as <em>Zea mays</em> (~2,300
+Mb)?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>For <strong>Arabidopsis thaliana</strong> (~119 Mb):</p>
+<pre><code><span><span class="fu">log2</span><span class="op">(</span><span class="fl">119000000</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">26.83</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">12.4</span></span>
+<span><span class="fu">min</span><span class="op">(</span><span class="fl">14</span>, <span class="fl">12.4</span><span class="op">)</span> <span class="op">=</span> <span class="fl">12</span></span></code></pre>
+<p>So <code>--genomeSAindexNbases 12</code> is the correct value (as
+used in this lesson).</p>
+<p>For <strong>Zea mays</strong> (~2,300 Mb):</p>
+<pre><code><span><span class="fu">log2</span><span class="op">(</span><span class="fl">2300000000</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">31.1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">=</span> <span class="fl">14.55</span></span>
+<span><span class="fu">min</span><span class="op">(</span><span class="fl">14</span>, <span class="fl">14.55</span><span class="op">)</span> <span class="op">=</span> <span class="fl">14</span></span></code></pre>
+<p>So <code>--genomeSAindexNbases 14</code> (the default) would be
+appropriate for maize.</p>
+<p>As a rule of thumb: for genomes smaller than ~500 Mb, you should
+calculate and lower this value; for large genomes (over 1 Gb), the
+default of 14 is usually fine.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-choosing-the-right-genome-file" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-choosing-the-right-genome-file" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Choosing the Right Genome
+File</h3>
+<div class="callout-content">
+<p>Different annotation tools have different requirements for repeat
+masking. Given the genome files produced in this episode:</p>
+<ul>
+<li>
+<code>athaliana.fasta</code> (unmasked)</li>
+<li>
+<code>athaliana_softmasked.fasta</code> (soft-masked with
+RepeatMasker)</li>
+</ul>
+<p>Which genome file should you use for each of the following tools, and
+why?</p>
+<ol style="list-style-type: decimal">
+<li>BRAKER3</li>
+<li>Helixer</li>
+<li>EASEL</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li><p><strong>BRAKER3</strong> – Use
+<code>athaliana_softmasked.fasta</code>. BRAKER3 benefits from
+soft-masked genomes because its underlying gene finder
+(Augustus/GeneMark) can recognize repeat regions (in lowercase) and
+avoid predicting genes within transposable elements.</p></li>
+<li><p><strong>Helixer</strong> – Use <code>athaliana.fasta</code>
+(unmasked). Helixer is a deep-learning-based tool that has been trained
+on both genic and repetitive sequences. It does not require or benefit
+from repeat masking.</p></li>
+<li><p><strong>EASEL</strong> – Use
+<code>athaliana_softmasked.fasta</code>. EASEL’s internal pipeline
+expects a soft-masked genome to improve the accuracy of gene predictions
+by de-prioritizing repetitive regions.</p></li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1390,9 +1582,14 @@ annotation</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-gene-annotation-with-braker"><p>Content from <a href="gene-annotation-with-braker.html">Annotation using BRAKER</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-braker.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1433,8 +1630,8 @@ predict genes in eukaryotic genomes. This pipeline is particularly
 useful for annotating newly sequenced genomes. The flexibility of
 BRAKER3 allows users to provide various input datasets for improving
 gene prediction accuracy. In this example, we will use various scenarios
-to predict genes in a Maize genome using BRAKER3. Following are the
-scenarios we will cover</p>
+to predict genes in an Arabidopsis thaliana genome using BRAKER3.
+Following are the scenarios we will cover</p>
 <section><h2 class="section-heading" id="organizing-the-data">Organizing the Data<a class="anchor" aria-label="anchor" href="#organizing-the-data"></a>
 </h2>
 <hr class="half-width">
@@ -1548,7 +1745,7 @@ scenario, since we are using the Arabidopsis genome, we can download the
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="ex">ml</span> snakemake</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--cores</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> selectViridiplantae</span></code></pre>
 </div>
-<p>When this is done, you should see a folder named <code>clade</code>
+<p>When this is done, you should see a folder named <code>clades</code>
 with <code>Viridiplantae.fa</code> in the <code>orthodb-clades</code>
 directory. We will use this as one of the input datasets for
 BRAKER3.<br>
@@ -1560,34 +1757,35 @@ sequences:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case2</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case2</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c2 <span class="dt">\</span></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case2</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case2</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c2 <span class="dt">\</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case2</code> directory, as <code>braker.gff3</code> file.
@@ -1601,37 +1799,38 @@ The run time for this job is ~170 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case3</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="va">BAM_FILES</span><span class="op">=</span><span class="va">$(</span><span class="fu">find</span> <span class="st">"</span><span class="va">${BAM_DIR}</span><span class="st">"</span> <span class="at">-name</span> <span class="st">"*.bam"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'\n'</span> <span class="st">','</span><span class="va">)</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clade/Viridiplantae.fa"</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case3</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>   <span class="at">--bam</span><span class="op">=</span><span class="va">${BAM_FILES}</span> <span class="dt">\</span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c3 <span class="dt">\</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case3</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="va">BAM_FILES</span><span class="op">=</span><span class="va">$(</span><span class="fu">find</span> <span class="st">"</span><span class="va">${BAM_DIR}</span><span class="st">"</span> <span class="at">-name</span> <span class="st">"*.bam"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'\n'</span> <span class="st">','</span><span class="va">)</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case3</span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>   <span class="at">--bam</span><span class="op">=</span><span class="va">${BAM_FILES}</span> <span class="dt">\</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c3 <span class="dt">\</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case3</code> directory, as <code>braker.gff3</code> file.
@@ -1645,33 +1844,34 @@ The run time for this job is ~120 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case4</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case4</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>   <span class="at">--esmode</span> <span class="dt">\</span></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>Zm_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c4 <span class="dt">\</span></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case4</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case4</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>   <span class="at">--esmode</span> <span class="dt">\</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c4 <span class="dt">\</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case4</code> directory, as <code>braker.gff3</code> file.
@@ -1685,33 +1885,34 @@ The run time for this job is ~60 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case5</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case5</span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="at">--skipAllTraining</span> <span class="dt">\</span></span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>arabidopsis <span class="dt">\</span></span>
-<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case5</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case5</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>   <span class="at">--skipAllTraining</span> <span class="dt">\</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>arabidopsis <span class="dt">\</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case5/Augustus</code> directory. The main result file
@@ -1720,7 +1921,187 @@ analysis. Runtime for this job is ~7 mins.</p>
 </section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a>
 </h2>
 <hr class="half-width">
-<p>coming soon!</p>
+<p>Each BRAKER3 run produces several output files in the respective case
+directory. The most important files are:</p>
+<table class="table">
+<colgroup>
+<col width="37%">
+<col width="62%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"><strong>File</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>braker.gff3</code></td>
+<td align="left">Gene predictions in GFF3 format (Cases 1-4)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>braker.aa</code></td>
+<td align="left">Predicted protein sequences</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>braker.codingseq</code></td>
+<td align="left">Predicted coding sequences (CDS)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>hintsfile.gff</code></td>
+<td align="left">Evidence hints used for gene prediction</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>augustus.ab_initio.gff3</code></td>
+<td align="left">Gene predictions from Case 5 (pretrained model)</td>
+</tr>
+</tbody>
+</table>
+<p>You can count the number of predicted genes in each case using:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="cf">for</span> case <span class="kw">in</span> braker_case<span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">4</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">${case}</span><span class="st">: </span><span class="va">$(</span><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> <span class="va">${case}</span>/braker.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st"> genes"</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"braker_case5: </span><span class="va">$(</span><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> braker_case5/Augustus/augustus.ab_initio.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st"> genes"</span></span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Expected Gene Counts </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>The TAIR10 reference annotation for Arabidopsis contains
+approximately 27,600 protein-coding genes. Your results should be in a
+similar range:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Case</strong></th>
+<th align="left"><strong>Evidence Used</strong></th>
+<th align="center"><strong>Expected Gene Count</strong></th>
+<th align="center"><strong>Runtime</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Case 1</td>
+<td align="left">RNA-seq only</td>
+<td align="center">~25,000-28,000</td>
+<td align="center">~55 min</td>
+</tr>
+<tr class="even">
+<td align="left">Case 2</td>
+<td align="left">Proteins only</td>
+<td align="center">~26,000-30,000</td>
+<td align="center">~170 min</td>
+</tr>
+<tr class="odd">
+<td align="left">Case 3</td>
+<td align="left">RNA-seq + Proteins</td>
+<td align="center">~26,000-29,000</td>
+<td align="center">~120 min</td>
+</tr>
+<tr class="even">
+<td align="left">Case 4</td>
+<td align="left">Ab initio (no evidence)</td>
+<td align="center">~20,000-35,000</td>
+<td align="center">~60 min</td>
+</tr>
+<tr class="odd">
+<td align="left">Case 5</td>
+<td align="left">Pretrained model</td>
+<td align="center">~26,000-28,000</td>
+<td align="center">~7 min</td>
+</tr>
+</tbody>
+</table>
+<p>Cases that use evidence data (Cases 1-3) generally produce more
+accurate gene models. Case 3 (combined evidence) typically gives the
+best results. Case 4 (ab initio) tends to over-predict or under-predict
+genes depending on the genome. Case 5 uses a pretrained Arabidopsis
+model and produces results quickly, but may not generalize to other
+species.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-1-compare-braker3-cases" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-compare-braker3-cases" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Compare BRAKER3 Cases</h3>
+<div class="callout-content">
+<p>After running all five BRAKER3 cases, compare the gene counts from
+each case to the TAIR10 reference annotation (approximately 27,600
+protein-coding genes). Which case produces results closest to the
+reference? Why do you think that is?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Case 3 (RNA-seq + Proteins) typically produces results closest to the
+TAIR10 reference, because it leverages both transcriptomic and proteomic
+evidence to guide gene prediction. The RNA-seq data provides direct
+evidence of expressed genes and splice sites, while the protein data
+provides evolutionary conservation information. Combining both evidence
+types allows BRAKER3 to make more accurate gene models than using either
+source alone. Case 5 (pretrained model) also performs well for
+Arabidopsis specifically, since the pretrained AUGUSTUS model was
+trained on high-quality Arabidopsis annotations. However, this approach
+would not generalize to organisms without existing pretrained
+models.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-choosing-a-braker3-strategy" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-choosing-a-braker3-strategy" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Choosing a BRAKER3 Strategy</h3>
+<div class="callout-content">
+<p>Imagine you are annotating a newly sequenced genome for a non-model
+plant species. You have RNA-seq data from three tissue types but no
+closely related protein database. Which BRAKER3 case would you choose,
+and why? What if you had no RNA-seq data at all?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>With RNA-seq data from three tissue types but no protein database,
+you should use <strong>Case 1</strong> (RNA-seq only). The RNA-seq
+evidence from multiple tissues will help BRAKER3 identify expressed
+genes and accurately predict splice sites across a broad set of genes.
+You could also consider downloading OrthoDB protein sequences for the
+relevant clade (as shown in Case 2) and then running <strong>Case
+3</strong> (RNA-seq + Proteins) for potentially even better results.</p>
+<p>If you had no RNA-seq data at all, you could use <strong>Case
+2</strong> (proteins only) with OrthoDB proteins from the closest
+available clade, or <strong>Case 4</strong> (ab initio) as a last
+resort. Ab initio prediction does not require any external evidence but
+typically produces less accurate gene models. It is generally
+recommended to generate at least some RNA-seq data before attempting
+genome annotation, as this significantly improves prediction
+quality.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1743,9 +2124,14 @@ genome</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-gene-annotation-with-helixer"><p>Content from <a href="gene-annotation-with-helixer.html">Annotation using Helixer</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-helixer.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1784,8 +2170,8 @@ any links that you are not going to use.
 convolutional neural network (CNN) to predict genes in eukaryotic
 genomes. Helixer is trained on a wide range of eukaryotic genomes and
 can predict genes in both plant and animal genomes. Helixer can predict
-genes wihtout any extrinisic information such as RNA-seq data or
-homology information, purely based on the sequence of the genome.</p>
+genes without any extrinsic information such as RNA-seq data or homology
+information, purely based on the sequence of the genome.</p>
 <div id="this-section-should-be-run-on-gilbreth-hpc-cluster." class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -1807,7 +2193,7 @@ but only need <code>athaliana.fasta</code> file in the
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${WORKSHOP_DIR}</span>/05_helixer</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">cp</span> <span class="op">&lt;</span>depot_location<span class="op">&gt;</span>/genome/athaliana.fasta <span class="va">${WORKSHOP_DIR}</span>/05_helixer/athaliana.fasta</span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">cp</span> /depot/workshop/data/annotation_workshop/00_datasets/genome/athaliana.fasta <span class="va">${WORKSHOP_DIR}</span>/05_helixer/athaliana.fasta</span></code></pre>
 </div>
 <figure><img src="https://github.com/user-attachments/assets/a1767236-304b-4912-8200-e2ea97ec63b8" alt="Folder organization" class="figure mx-auto d-block"><div class="figcaption">Folder organization</div>
 </figure><section><h2 class="section-heading" id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
@@ -1853,7 +2239,7 @@ can also download models for specific lineages using the
 <code>--lineage</code> option as shown above.</p>
 <p>By default, files will be downloaded to
 <code>~/.local/share/Helixer</code> directory. You should see the
-follwing files:</p>
+following files:</p>
 <pre><code>.
 └── models
     └── land_plant
@@ -1874,8 +2260,8 @@ models are more accurate but require more memory and time to run.</p>
 <hr class="half-width">
 <p>Helixer requires GPU for prediction. For running Helixer, you need to
 request a GPU node. You will also need the genome sequence in fasta
-format. For this tutorial, we will use Maize genome (Zea mays subsp.
-mays), and use the <code>land_plant</code> model to predict genes.</p>
+format. For this tutorial, we will use the Arabidopsis thaliana genome,
+and use the <code>land_plant</code> model to predict genes.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1900,9 +2286,9 @@ mays), and use the <code>land_plant</code> model to predict genes.</p>
 <span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="at">--species</span> <span class="va">${species}</span> <span class="dt">\</span></span>
 <span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    <span class="at">--gff-output-path</span> <span class="va">${output}</span></span></code></pre>
 </div>
-<p>A typical job will take ~40 mins to finish depedning on the GPU the
+<p>A typical job will take ~40 mins to finish depending on the GPU the
 job gets allocated.</p>
-<p>You can count the nubmer of predictions in your gff3 file using the
+<p>You can count the number of predictions in your gff3 file using the
 following command:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1928,16 +2314,87 @@ following command:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">gffread</span> Arabidopsis_thaliana.gff3 <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">gffread</span> athaliana_helixer.gff <span class="dt">\</span></span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>   <span class="at">-g</span> athaliana.fasta <span class="dt">\</span></span>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>   <span class="at">-y</span> helixer_pep.fa <span class="dt">\</span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   <span class="at">-x</span> helixer_cds.fa</span></code></pre>
 </div>
 <p>As you may have noticed, the number of mRNA and gene features are the
 same. This is because isoforms aren’t predicted by Helixer and you only
-have one transcript per gene. Exons are indetified with high confidence
+have one transcript per gene. Exons are identified with high confidence
 and alternative isoforms are usually collapsed into a single gene model.
 This is one of the known limitations of Helixer.</p>
+<div id="exercise-1-understanding-helixer-gff-output" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-understanding-helixer-gff-output" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Understanding Helixer GFF
+Output</h3>
+<div class="callout-content">
+<p>Look at the feature counts from the Helixer GFF output. Why is the
+number of mRNA features the same as the number of gene features?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>The number of mRNA and gene features are the same because Helixer
+does not predict alternative isoforms. Each gene has exactly one
+transcript (mRNA) associated with it. Unlike tools that incorporate
+RNA-seq evidence, Helixer’s deep learning model produces a single gene
+model per locus, collapsing any potential alternative splicing into one
+representative transcript.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-helixer-vs.-braker3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-helixer-vs.-braker3" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Helixer vs. BRAKER3</h3>
+<div class="callout-content">
+<p>What are the advantages and disadvantages of using Helixer compared
+to BRAKER3 for gene annotation?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p><strong>Advantages of Helixer:</strong></p>
+<ul>
+<li>Does not require any extrinsic evidence data (RNA-seq or protein
+data), making it useful when such data is unavailable.</li>
+<li>Runs faster when GPU hardware is available.</li>
+<li>Simpler setup with fewer input requirements.</li>
+</ul>
+<p><strong>Disadvantages of Helixer:</strong></p>
+<ul>
+<li>Cannot predict alternative isoforms (only one transcript per
+gene).</li>
+<li>Requires GPU hardware, which may not be available on all HPC
+clusters.</li>
+<li>May be less accurate for species that are poorly represented in the
+training data.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1949,7 +2406,7 @@ This is one of the known limitations of Helixer.</p>
 <li>Helixer is a deep learning-based gene prediction tool that uses a
 convolutional neural network (CNN) to predict genes in eukaryotic
 genomes.</li>
-<li>Helixer can predict genes wihtout any extrinisic information such as
+<li>Helixer can predict genes without any extrinsic information such as
 RNA-seq data or homology information, purely based on the sequence of
 the genome.</li>
 <li>Helixer requires a trained model and GPU for prediction.</li>
@@ -1963,9 +2420,14 @@ isoforms.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-gene-annotation-with-easel"><p>Content from <a href="gene-annotation-with-easel.html">Annotation using Easel</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-easel.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2171,18 +2633,34 @@ the Easel workflow:</p>
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">outdir</span><span class="kw">:</span><span class="at"> easel</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">genome</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">bam</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/bamfiles/*.bam</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">busco_lineage</span><span class="kw">:</span><span class="at"> embryophyta</span></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">order</span><span class="kw">:</span><span class="at"> Brassicales</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="fu">taxon</span><span class="kw">:</span><span class="at"> arabidopsis</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/aseethar/singularity_cache</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">singularity_cache_dir</span><span class="kw">:</span><span class="at"> /scratch/negishi/YOUR_USERNAME/singularity_cache</span></span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">training_set</span><span class="kw">:</span><span class="at"> plant</span></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">account</span><span class="kw">:</span><span class="at"> testpbs</span></span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">qos</span><span class="kw">:</span><span class="at"> normal</span></span>
 <span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span><span class="at"> testpbs</span></span></code></pre>
+</div>
+<div id="update-paths-in-params.yaml" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="update-paths-in-params.yaml" class="callout-inner">
+<h3 class="callout-title">Update Paths in params.yaml</h3>
+<div class="callout-content">
+<p>Replace <code>YOUR_USERNAME</code> with your actual username in the
+<code>params.yaml</code> file. You can find your username by running
+<code>whoami</code> on the cluster. For example, if your username is
+<code>train01</code>, the genome path would be:
+<code>/scratch/negishi/train01/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta</code></p>
+</div>
+</div>
 </div>
 <p>Now we are ready to run the Easel workflow:</p>
 <p>Our <code>slurm</code> file to run the Easel workflow:</p>
@@ -2197,7 +2675,7 @@ the Easel workflow:</p>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="ex">ml</span> purge</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="ex">ml</span> openjdk</span>
 <span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="dt">\</span></span>
@@ -2210,6 +2688,177 @@ the Easel workflow:</p>
 </section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a>
 </h2>
 <hr class="half-width">
+<p>EASEL produces output in the <code>easel/</code> directory (as
+specified by <code>outdir</code> in <code>params.yaml</code>). The key
+output files are:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>File/Directory</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>easel/annotation/*.gff3</code></td>
+<td align="left">Final gene predictions in GFF3 format</td>
+</tr>
+<tr class="even">
+<td align="left"><code>easel/annotation/*.cds.fa</code></td>
+<td align="left">Predicted coding sequences</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>easel/annotation/*.pep.fa</code></td>
+<td align="left">Predicted protein sequences</td>
+</tr>
+<tr class="even">
+<td align="left"><code>easel/busco/</code></td>
+<td align="left">BUSCO completeness assessment results</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>easel/entap/</code></td>
+<td align="left">Functional annotation results from EnTAP</td>
+</tr>
+<tr class="even">
+<td align="left"><code>easel/pipeline_info/</code></td>
+<td align="left">Nextflow execution reports and timelines</td>
+</tr>
+</tbody>
+</table>
+<p>You can check the gene count in the EASEL output:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> easel/annotation/<span class="pp">*</span>.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Expected Output </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>For Arabidopsis thaliana, EASEL should predict approximately
+25,000-30,000 genes. The pipeline also generates a BUSCO report
+automatically, which you can find in the <code>easel/busco/</code>
+directory.</p>
+<p>Check the Nextflow execution report in
+<code>easel/pipeline_info/</code> to review runtime, resource usage, and
+any failed processes.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-1-adapting-easel-for-a-different-organism" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-adapting-easel-for-a-different-organism" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Adapting EASEL for a Different
+Organism</h3>
+<div class="callout-content">
+<p>If you were annotating a vertebrate genome (e.g., zebrafish) instead
+of a plant genome, which parameters in the <code>params.yaml</code> file
+would you need to change? List all the parameters and explain why each
+would need updating.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>You would need to change the following parameters in
+<code>params.yaml</code>:</p>
+<ul>
+<li>
+<strong><code>busco_lineage</code></strong>: Change from
+<code>embryophyta</code> (plants) to the appropriate vertebrate lineage
+(e.g., <code>actinopterygii</code> for ray-finned fish, or
+<code>vertebrata</code> for a broader assessment).</li>
+<li>
+<strong><code>order</code></strong>: Change from
+<code>Brassicales</code> to the correct taxonomic order for your
+organism (e.g., <code>Cypriniformes</code> for zebrafish).</li>
+<li>
+<strong><code>prefix</code></strong>: Change from
+<code>arabidopsis</code> to an appropriate prefix for your organism
+(e.g., <code>zebrafish</code> or <code>drerio</code>).</li>
+<li>
+<strong><code>taxon</code></strong>: Change from
+<code>arabidopsis</code> to your target organism name (e.g.,
+<code>zebrafish</code>).</li>
+<li>
+<strong><code>training_set</code></strong>: Change from
+<code>plant</code> to the appropriate AUGUSTUS training set for your
+organism (e.g., <code>vertebrate</code> or a closely related species
+like <code>zebrafish</code>).</li>
+</ul>
+<p>The genome, bam, and other path-related parameters would also change,
+but those are specific to your data rather than to the organism
+type.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-resuming-a-failed-easel-run" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-resuming-a-failed-easel-run" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Resuming a Failed EASEL Run</h3>
+<div class="callout-content">
+<p>Your EASEL Nextflow pipeline failed partway through execution. How
+would you resume the run without recomputing already completed steps?
+Where would you look for error logs to diagnose the issue?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>To resume a failed Nextflow run, add the <code>-resume</code> flag to
+your <code>nextflow run</code> command:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">nextflow</span> run <span class="dt">\</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>   <span class="at">-hub</span> gitlab PlantGenomicsLab/easel <span class="dt">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>   <span class="at">-params-file</span> params.yaml <span class="dt">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>   <span class="at">-profile</span> rcac <span class="dt">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>   <span class="at">--project</span> testpbs <span class="dt">\</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>   <span class="at">-resume</span></span></code></pre>
+</div>
+<p>Nextflow caches completed tasks, so only failed or pending steps will
+be re-executed.</p>
+<p>To diagnose the failure, check these locations:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong><code>.nextflow.log</code></strong> in the working
+directory: Contains detailed Nextflow execution logs, including error
+messages and stack traces.</li>
+<li>
+<strong><code>work/</code> directory</strong>: Each task runs in a
+subdirectory under <code>work/</code>. Navigate to the failed task’s
+directory (shown in the error output) and check the
+<code>.command.log</code>, <code>.command.err</code>, and
+<code>.command.out</code> files for the specific error.</li>
+<li>
+<strong>SLURM output files</strong>: Check the <code>easel.o*</code>
+and <code>easel.e*</code> files for SLURM-level errors (e.g., memory
+limits, time limits).</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2234,9 +2883,14 @@ efficient pipeline execution.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section><section id="aio-functional-annotation-with-entap"><p>Content from <a href="functional-annotation-with-entap.html">Functional annotation using EnTAP</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/functional-annotation-with-entap.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2392,90 +3046,109 @@ so you can skip this step and is included for reference.</p>
 </div>
 </div>
 </div>
+<div id="pre-staged-databases" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="pre-staged-databases" class="callout-inner">
+<h3 class="callout-title">Pre-staged Databases</h3>
+<div class="callout-content">
+<p>For this workshop, the EnTAP databases have been pre-configured and
+are available at <code>/depot/itap/datasets/entap_db/</code> on the
+training cluster. You can copy the configuration files from there:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">cp</span> /depot/itap/datasets/entap_db/entap_config.ini .</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">cp</span> /depot/itap/datasets/entap_db/entap_run.params .</span></code></pre>
+</div>
+<p>If you are running EnTAP on your own data outside this workshop,
+follow the database setup instructions in the spoiler section above.</p>
+</div>
+</div>
+</div>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
-  Setting up databases (optional)
-  </h3>
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Setting up databases (optional) </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p><code>entap_run.params</code> file should be setup as follows (be
 sure to select the correct <code>databases</code> for your
 organism):</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_dbfiles</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="dt">overwrite</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="dt">resume</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dt">database</span><span class="ot">=</span><span class="st">uniprot_sprot,refseq_plant</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dt">no-trim</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="dt">threads</span><span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="dt">output-format</span><span class="ot">=</span><span class="st">1,3,4,7,</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dt">fpkm</span><span class="ot">=</span><span class="fl">0.5</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="dt">align</span><span class="ot">=</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="dt">single-end</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="dt">frame-selection</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="dt">transdecoder-m</span><span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="dt">transdecoder-no-refine-starts</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="dt">taxon</span><span class="ot">=</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="dt">qcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="dt">tcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="dt">contam</span><span class="ot">=</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="dt">e-value</span><span class="ot">=</span><span class="st">1e-05</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="dt">uninformative</span><span class="ot">=</span><span class="st">conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="dt">diamond-sensitivity</span><span class="ot">=</span><span class="st">very-sensitive</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="dt">ontology_source</span><span class="ot">=</span><span class="st">0,</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="dt">eggnog-contaminant</span><span class="ot">=</span><span class="kw">true</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="dt">eggnog-dbmem</span><span class="ot">=</span><span class="kw">true</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="dt">eggnog-sensitivity</span><span class="ot">=</span><span class="st">more-sensitive</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="dt">interproscan-db</span><span class="ot">=</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="dt">hgt-donor</span><span class="ot">=</span></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="dt">hgt-recipient</span><span class="ot">=</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="dt">hgt-gff</span><span class="ot">=</span></span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="dt">ncbi-api-key</span><span class="ot">=</span></span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="dt">ncbi-api-enable</span><span class="ot">=</span><span class="kw">true</span></span></code></pre>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_dbfiles</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">overwrite</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dt">resume</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dt">database</span><span class="ot">=</span><span class="st">uniprot_sprot,refseq_plant</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dt">no-trim</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dt">threads</span><span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dt">output-format</span><span class="ot">=</span><span class="st">1,3,4,7,</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dt">fpkm</span><span class="ot">=</span><span class="fl">0.5</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="dt">align</span><span class="ot">=</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dt">single-end</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="dt">frame-selection</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="dt">transdecoder-m</span><span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dt">transdecoder-no-refine-starts</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dt">taxon</span><span class="ot">=</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dt">qcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="dt">tcoverage</span><span class="ot">=</span><span class="dv">50</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="dt">contam</span><span class="ot">=</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="dt">e-value</span><span class="ot">=</span><span class="st">1e-05</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="dt">uninformative</span><span class="ot">=</span><span class="st">conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="dt">diamond-sensitivity</span><span class="ot">=</span><span class="st">very-sensitive</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="dt">ontology_source</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="dt">eggnog-contaminant</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="dt">eggnog-dbmem</span><span class="ot">=</span><span class="kw">true</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="dt">eggnog-sensitivity</span><span class="ot">=</span><span class="st">more-sensitive</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="dt">interproscan-db</span><span class="ot">=</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="dt">hgt-donor</span><span class="ot">=</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="dt">hgt-recipient</span><span class="ot">=</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="dt">hgt-gff</span><span class="ot">=</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="dt">ncbi-api-key</span><span class="ot">=</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="dt">ncbi-api-enable</span><span class="ot">=</span><span class="kw">true</span></span></code></pre>
 </div>
 <p><code>entap_config.ini</code> file should be setup as follows (be
 sure to modify the paths <code>&lt;custom_location&gt;</code> to your
 desired location):</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">data-generate</span><span class="ot">=</span><span class="kw">false</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">data-type</span><span class="ot">=</span><span class="st">0,</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dt">entap-db-bin</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/entap_database.bin</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dt">entap-db-sql</span><span class="ot">=</span><span class="st">entap_database.db</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dt">entap-graph</span><span class="ot">=</span><span class="st">entap_graphing.py</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dt">rsem-calculate-expression</span><span class="ot">=</span><span class="st">rsem-calculate-expression</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dt">rsem-sam-validator</span><span class="ot">=</span><span class="st">rsem-sam-validator</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dt">rsem-prepare-reference</span><span class="ot">=</span><span class="st">rsem-prepare-reference</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dt">convert-sam-for-rsem</span><span class="ot">=</span><span class="st">convert-sam-for-rsem</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="dt">transdecoder-long-exe</span><span class="ot">=</span><span class="st">TransDecoder.LongOrfs</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dt">transdecoder-predict-exe</span><span class="ot">=</span><span class="st">TransDecoder.Predict</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="dt">diamond-exe</span><span class="ot">=</span><span class="st">diamond</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="dt">eggnog-map-exe</span><span class="ot">=</span><span class="st">emapper.py</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dt">eggnog-map-data</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/databases</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dt">eggnog-map-dmnd</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/eggnog_proteins.dmnd</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dt">interproscan-exe</span><span class="ot">=</span><span class="st">interproscan.sh</span></span></code></pre>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="dt">data-generate</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="dt">data-type</span><span class="ot">=</span><span class="st">0,</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="dt">entap-db-bin</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/entap_database.bin</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="dt">entap-db-sql</span><span class="ot">=</span><span class="st">entap_database.db</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="dt">entap-graph</span><span class="ot">=</span><span class="st">entap_graphing.py</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="dt">rsem-calculate-expression</span><span class="ot">=</span><span class="st">rsem-calculate-expression</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="dt">rsem-sam-validator</span><span class="ot">=</span><span class="st">rsem-sam-validator</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="dt">rsem-prepare-reference</span><span class="ot">=</span><span class="st">rsem-prepare-reference</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="dt">convert-sam-for-rsem</span><span class="ot">=</span><span class="st">convert-sam-for-rsem</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="dt">transdecoder-long-exe</span><span class="ot">=</span><span class="st">TransDecoder.LongOrfs</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="dt">transdecoder-predict-exe</span><span class="ot">=</span><span class="st">TransDecoder.Predict</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="dt">diamond-exe</span><span class="ot">=</span><span class="st">diamond</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="dt">eggnog-map-exe</span><span class="ot">=</span><span class="st">emapper.py</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="dt">eggnog-map-data</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/databases</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="dt">eggnog-map-dmnd</span><span class="ot">=</span><span class="st">&lt;custom_location&gt;/entap_db/bin/eggnog_proteins.dmnd</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="dt">interproscan-exe</span><span class="ot">=</span><span class="st">interproscan.sh</span></span></code></pre>
 </div>
 <p>Once done, for the first time setup, you can run the following
 command:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>   <span class="at">--config</span> <span class="dt">\</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="dt">\</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>   <span class="at">--config</span> <span class="dt">\</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>This will download the databases and set up the configuration files
 for EnTAP.</p>
@@ -2508,28 +3181,28 @@ and databases. (you can copy the files from
 </ul>
 <p>Edit the <code>entap_run.params</code> file to specify the output
 directory for EnTAP results and the correct input file</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">INI<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_out</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span><span class="st">input_cds.fasta</span></span></code></pre>
+<pre class="sourceCode ini" tabindex="0"><code class="sourceCode ini"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="dt">out-dir</span><span class="ot">=</span><span class="st">entap_out</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="dt">input</span><span class="ot">=</span><span class="st">input_cds.fasta</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="step-2-run-entap">
 <strong>Step 2:</strong> Run EnTAP<a class="anchor" aria-label="anchor" href="#step-2-run-entap"></a>
 </h2>
 <hr class="half-width">
 <p>Run EnTAP using the following command:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="at">-</span><span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="at">-run</span> <span class="dt">\</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">ml</span> entap</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="ex">EnTAP</span> <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>   <span class="at">--run</span> <span class="dt">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>   <span class="at">--run-ini</span> ./entap_run.params <span class="dt">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>   <span class="at">--entap-ini</span> ./entap_config.ini <span class="dt">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="interpreting-results">Interpreting Results<a class="anchor" aria-label="anchor" href="#interpreting-results"></a>
 </h2>
@@ -2596,6 +3269,85 @@ against selected databases.</td>
 </tr>
 </tbody>
 </table>
+<div id="exercise-1-annotation-coverage" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-annotation-coverage" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Annotation Coverage</h3>
+<div class="callout-content">
+<p>After running EnTAP, examine the output files in the
+<code>final_results/</code> directory. What percentage of your input
+transcripts received functional annotations?</p>
+<p><strong>Hint:</strong> Compare the number of entries in
+<code>annotated.tsv</code> and <code>unannotated.tsv</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>You can count the lines (excluding the header) in each file:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Count annotated transcripts</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +2 entap_out/final_results/annotated.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Count unannotated transcripts</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +2 entap_out/final_results/unannotated.tsv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre>
+</div>
+<p>The annotation rate is calculated as:</p>
+<pre><code><span><span class="va">annotated</span> <span class="op">/</span> <span class="op">(</span><span class="va">annotated</span> <span class="op">+</span> <span class="va">unannotated</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre>
+<p>This gives you the percentage of transcripts that received at least
+one functional annotation from the databases used by EnTAP.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-uninformative-annotations" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-uninformative-annotations" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Uninformative Annotations</h3>
+<div class="callout-content">
+<p>Look at the <code>uninformative</code> parameter in the
+<code>entap_run.params</code> file. What does this parameter do and why
+is it important for functional annotation quality?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>The <code>uninformative</code> parameter specifies a list of keywords
+used to filter out low-quality or non-descriptive annotations. In the
+default configuration, it includes terms like:</p>
+<pre><code>uninformative=conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,</code></pre>
+<p>When EnTAP encounters a DIAMOND hit whose description contains any of
+these keywords, it treats that hit as uninformative and attempts to find
+a better annotation from other database matches. This matters because
+many protein database entries carry vague descriptions such as
+“hypothetical protein” or “predicted protein” that provide no meaningful
+functional insight. By filtering these out, EnTAP ensures that only
+informative, descriptive functional assignments are kept in the final
+results, leading to higher-quality annotations for downstream
+analysis.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2621,11 +3373,16 @@ improving downstream biological interpretations.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-annotation-assesment"><p>Content from <a href="annotation-assesment.html">Annotation Assesment</a></p>
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
+</section></section><section id="aio-annotation-assessment"><p>Content from <a href="annotation-assessment.html">Annotation Assessment</a></p>
 <hr>
-<p>Last updated on 2025-11-11 |
+<p>Last updated on 2026-02-24 |
 
-        <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-assesment.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/annotation-assessment.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -2668,89 +3425,149 @@ by the annotation.</li>
 </h2>
 <hr class="half-width">
 <p>The folder organization is as follows:</p>
+<pre><code>08_assessment/
+├── braker_case1.gff3
+├── braker_case2.gff3
+├── braker_case3.gff3
+├── braker_case4.gff3
+├── braker_case5.gff3
+├── athaliana_helixer.gff3
+├── easel.gff3
+├── busco_results/
+├── gff3_stats/
+└── featureCounts/</code></pre>
+<div id="running-assessment-tools" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="running-assessment-tools" class="callout-inner">
+<h3 class="callout-title">Running Assessment Tools</h3>
+<div class="callout-content">
+<p>The commands in this episode can be run as SLURM batch jobs or
+interactively on a compute node. For interactive use, request a compute
+node with:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">salloc</span> <span class="at">-A</span> workshop <span class="at">-n</span> 16 <span class="at">-t</span> 2:00:00</span></code></pre>
+</div>
+<p>All <code>#!/bin/bash</code> headers in the scripts below can be
+extended with <code>#SBATCH</code> directives if you prefer batch
+submission (see the BRAKER episode for examples).</p>
+</div>
+</div>
+</div>
 <p>The annotation files (<code>gff3</code>) are from the previous steps.
 But are collected in this folder for convenience.</p>
 <p>We will extract CDS and Protein sequences from the <code>gff3</code>
 file before we begin the assesment.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${i</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="ex">gffread</span> <span class="dt">\</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>       <span class="at">-g</span> <span class="va">${WORKSHOP_DIR}</span>/00_datasets/genome/athaliana.fa <span class="dt">\</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>       <span class="at">-x</span> <span class="va">${base}</span>_cds.fa <span class="dt">\</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>       <span class="at">-y</span> <span class="va">${base}</span>_pep.fa <span class="va">$i</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">ml</span> cufflinks</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${i</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    <span class="ex">gffread</span> <span class="dt">\</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>       <span class="at">-g</span> <span class="va">${WORKSHOP_DIR}</span>/00_datasets/genome/athaliana.fasta <span class="dt">\</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>       <span class="at">-x</span> <span class="va">${base}</span>_cds.fa <span class="dt">\</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>       <span class="at">-y</span> <span class="va">${base}</span>_pep.fa <span class="va">$i</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="gff3-metrics">GFF3 metrics<a class="anchor" aria-label="anchor" href="#gff3-metrics"></a>
 </h2>
 <hr class="half-width">
 <p>We will use <code>agat_sp_statistics.pl</code> to calculate the
 statistics of the GFF3 file.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">ml</span> agat</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> gff3_stats</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$gff3</span> .gff3<span class="va">)</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    <span class="ex">agat_sp_statistics.pl</span> <span class="dt">\</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>       <span class="at">--gff</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>       <span class="at">-o</span> gff3_stats/<span class="va">${base}</span>_stats.txt</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
-</div>
-</section><section><h2 class="section-heading" id="busco-assesment">BUSCO assesment<a class="anchor" aria-label="anchor" href="#busco-assesment"></a>
-</h2>
-<hr class="half-width">
-<p>We will use BUSCO to asses the quality of the annotation.</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ex">ml</span> busco</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>_pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>     <span class="ex">busco</span> <span class="dt">\</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>        <span class="at">--in</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>        <span class="at">--cpu</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>        <span class="at">--out</span> <span class="va">${base}</span>_busco <span class="dt">\</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>        <span class="at">--mode</span> prot <span class="dt">\</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>        <span class="at">--lineage_dataset</span> brassicales_odb10 <span class="dt">\</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>        <span class="at">--force</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
-</div>
-<p>Once the BUSCO assesment is complete, we can view the results using
-the following command:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">ml</span> busco</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">ml</span> agat</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> busco_results</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="pp">*</span>/<span class="pp">*</span>_busco/short_summary<span class="pp">*</span>busco.txt<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>   <span class="fu">cp</span> <span class="va">$f</span> busco_results/<span class="kw">;</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="ex">generate_plot.py</span> –wd busco_results</span></code></pre>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> gff3_stats</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$gff3</span> .gff3<span class="va">)</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="ex">agat_sp_statistics.pl</span> <span class="dt">\</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>       <span class="at">--gff</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>       <span class="at">-o</span> gff3_stats/<span class="va">${base}</span>_stats.txt</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="busco-assesment">BUSCO assesment<a class="anchor" aria-label="anchor" href="#busco-assesment"></a>
+</h2>
+<hr class="half-width">
+<p>We will use BUSCO to asses the quality of the annotation.</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="ex">ml</span> busco</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>_pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>     <span class="ex">busco</span> <span class="dt">\</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>        <span class="at">--in</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>        <span class="at">--cpu</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>        <span class="at">--out</span> <span class="va">${base}</span>_busco <span class="dt">\</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>        <span class="at">--mode</span> prot <span class="dt">\</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>        <span class="at">--lineage_dataset</span> brassicales_odb10 <span class="dt">\</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>        <span class="at">--force</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+</div>
+<p>Once the BUSCO assesment is complete, we can view the results using
+the following command:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> busco</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> busco_results</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="pp">*</span>/<span class="pp">*</span>_busco/short_summary<span class="pp">*</span>busco.txt<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="fu">cp</span> <span class="va">$f</span> busco_results/<span class="kw">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="ex">generate_plot.py</span> <span class="at">--wd</span> busco_results</span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Interpreting BUSCO Results </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>BUSCO scores reflect how many conserved single-copy orthologs are
+found in your predicted proteome. A good annotation should have:</p>
+<ul>
+<li>
+<strong>Complete (C)</strong> &gt; 90% – most conserved genes are
+found as complete single-copy or duplicated</li>
+<li>
+<strong>Fragmented (F)</strong> &lt; 5% – few genes are only
+partially recovered</li>
+<li>
+<strong>Missing (M)</strong> &lt; 10% – few conserved genes are
+absent</li>
+</ul>
+<p>Compare scores across annotation methods to identify the most
+complete prediction. Ab initio methods (BRAKER Case 4) typically score
+lower than evidence-based methods.</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="omark-assesment">Omark assesment<a class="anchor" aria-label="anchor" href="#omark-assesment"></a>
 </h2>
@@ -2762,58 +3579,59 @@ their homologs, and identifies the presence of contamination from other
 species.</p>
 <p>The proteomes should be filtered to take only primary isoforms before
 running OMark.</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">ml</span> seqkit</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> braker<span class="pp">*</span>_pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"\.t1$"</span> <span class="va">$pep</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/&gt;//g'</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.ids</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="ex">seqkit</span> grep <span class="at">-f</span> <span class="va">${base}</span>.primary.ids <span class="va">$pep</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.pep.fa</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="fu">rm</span> <span class="va">${base}</span>.primary.ids</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="fu">cp</span> helixer_pep.fa helixer.primary.pep.fa</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">ml</span> seqkit</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> braker<span class="pp">*</span>_pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="fu">grep</span> <span class="st">"\.t1$"</span> <span class="va">$pep</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/&gt;//g'</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.ids</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="ex">seqkit</span> grep <span class="at">-f</span> <span class="va">${base}</span>.primary.ids <span class="va">$pep</span> <span class="op">&gt;</span> <span class="va">${base}</span>.primary.pep.fa</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    <span class="fu">rm</span> <span class="va">${base}</span>.primary.ids</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="fu">cp</span> helixer_pep.fa helixer.primary.pep.fa</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="fu">cp</span> easel_pep.fa easel.primary.pep.fa</span></code></pre>
 </div>
 <p>Running OMark:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="ex">ml</span> omark</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="va">database</span><span class="op">=</span><span class="st">"/depot/itap/datasets/omark/LUCA.h5"</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>.primary.pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    <span class="ex">omamer</span> search <span class="dt">\</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>       <span class="at">--db</span> <span class="va">${database}</span> <span class="dt">\</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>       <span class="at">--query</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>       <span class="at">--nthreads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    <span class="ex">omark</span> <span class="dt">\</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>       <span class="at">--file</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>       <span class="at">--database</span> <span class="va">${database}</span> <span class="dt">\</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>       <span class="at">--outputFolder</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span> <span class="dt">\</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>       <span class="at">--og_fasta</span> <span class="va">${pep}</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">ml</span> omark</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="va">database</span><span class="op">=</span><span class="st">"/depot/itap/datasets/omark/LUCA.h5"</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="cf">for</span> pep <span class="kw">in</span> <span class="pp">*</span>.primary.pep.fa<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    <span class="ex">omamer</span> search <span class="dt">\</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>       <span class="at">--db</span> <span class="va">${database}</span> <span class="dt">\</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>       <span class="at">--query</span> <span class="va">${pep}</span> <span class="dt">\</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>       <span class="at">--out</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>       <span class="at">--nthreads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>    <span class="ex">omark</span> <span class="dt">\</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>       <span class="at">--file</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span>.omamer <span class="dt">\</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>       <span class="at">--database</span> <span class="va">${database}</span> <span class="dt">\</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>       <span class="at">--outputFolder</span> <span class="va">${pep</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span> <span class="dt">\</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>       <span class="at">--og_fasta</span> <span class="va">${pep}</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
 </div>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<p>The following OMArk results are for the TAIR10 reference annotation,
+shown as a baseline for comparison. Run OMArk on your predicted
+annotations and compare against these values.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
-  OMark Results Summary
-  </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> OMark Results Summary </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p><strong>Conserved HOGs in Brassicaceae</strong></p>
 <table class="table">
@@ -2951,54 +3769,196 @@ running OMark.</p>
 <p>To measure the number of raw reads assigned to the features predicted
 by the annotation, we will use <code>featureCounts</code> from the
 <code>subread</code> package.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="ex">ml</span> subread</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> featureCounts</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${gff3</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    <span class="ex">featureCounts</span> <span class="dt">\</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>      <span class="at">-T</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>      <span class="at">-a</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>      <span class="at">-t</span> exon <span class="dt">\</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>      <span class="at">-g</span> ID <span class="dt">\</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>      <span class="at">-p</span> <span class="dt">\</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>      <span class="at">-B</span> <span class="dt">\</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>      <span class="at">-o</span> <span class="va">${base}</span>_merged_counts.txt <span class="dt">\</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>      <span class="at">--tmpDir</span> /tmp <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop/00_datasets/bamfiles/<span class="pp">*</span>.bam</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="ex">ml</span> subread</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> featureCounts</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${gff3</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="ex">featureCounts</span> <span class="dt">\</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>      <span class="at">-T</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> <span class="dt">\</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>      <span class="at">-a</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>      <span class="at">-t</span> exon <span class="dt">\</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>      <span class="at">-g</span> ID <span class="dt">\</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>      <span class="at">-p</span> <span class="dt">\</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>      <span class="at">-B</span> <span class="dt">\</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>      <span class="at">-o</span> <span class="va">${base}</span>_merged_counts.txt <span class="dt">\</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>      <span class="at">--tmpDir</span> /tmp <span class="va">${WORKSHOP_DIR}</span>/00_datasets/bamfiles/<span class="pp">*</span>.bam</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+</div>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Interpreting featureCounts Results </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div class="accordion-body">
+<p>featureCounts reports how many RNA-seq reads map to predicted gene
+features. Key metrics to check:</p>
+<ul>
+<li>
+<strong>Assigned reads</strong> – higher percentages indicate that
+more of the transcriptome is captured by the gene models</li>
+<li>
+<strong>Unassigned_NoFeatures</strong> – reads that do not overlap
+any predicted feature, suggesting missing genes</li>
+<li>
+<strong>Unassigned_Ambiguity</strong> – reads mapping to multiple
+overlapping features</li>
+</ul>
+<p>A good annotation should assign 60-80% of reads to predicted
+features. Annotations with low assignment rates may be missing genes in
+expressed regions.</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="reference-annotation-comparison">Reference annotation comparison<a class="anchor" aria-label="anchor" href="#reference-annotation-comparison"></a>
 </h2>
 <hr class="half-width">
 <p>We will use <code>mikado compare</code> the reference annotation with
 the predicted annotation.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">ml</span> mikado</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${gff3</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    <span class="ex">mikado</span> compare <span class="dt">\</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>      <span class="at">--protein-coding</span> <span class="dt">\</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>      <span class="at">-r</span> <span class="va">${RCAC_SCRATCH}</span>/annotation_workshop/00_datasets/genome/athaliana_TAIR10.gff3 <span class="dt">\</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>      <span class="at">-p</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>      <span class="at">-o</span> ref-TAIR10_vs_prediction_<span class="va">${base}</span>_compared <span class="dt">\</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>      <span class="at">--log</span> <span class="va">${base}</span>_compare.log</span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="ex">ml</span> mikado</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/08_assessment</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="cf">for</span> gff3 <span class="kw">in</span> <span class="pp">*</span>.gff3<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${gff3</span><span class="op">%</span>.<span class="pp">*</span><span class="va">})</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>    <span class="ex">mikado</span> compare <span class="dt">\</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>      <span class="at">--protein-coding</span> <span class="dt">\</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>      <span class="at">-r</span> <span class="va">${WORKSHOP_DIR}</span>/00_datasets/genome/athaliana_TAIR10.gff3 <span class="dt">\</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>      <span class="at">-p</span> <span class="va">${gff3}</span> <span class="dt">\</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>      <span class="at">-o</span> ref-TAIR10_vs_prediction_<span class="va">${base}</span>_compared <span class="dt">\</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>      <span class="at">--log</span> <span class="va">${base}</span>_compare.log</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="cf">done</span></span></code></pre>
+</div>
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Interpreting Mikado Compare Results </h3>
+</button>
+<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div class="accordion-body">
+<p>Mikado compare evaluates how closely your predicted gene models match
+the reference annotation. Key metrics:</p>
+<ul>
+<li>
+<strong>Sensitivity</strong> – proportion of reference genes that
+are correctly predicted (higher is better)</li>
+<li>
+<strong>Precision</strong> – proportion of predicted genes that
+match the reference (higher is better)</li>
+<li>
+<strong>F1 score</strong> – harmonic mean of sensitivity and
+precision</li>
+</ul>
+<p>At the transcript level: - Sensitivity &gt; 60% is reasonable for a
+first-pass annotation - Precision &gt; 70% indicates low false-positive
+rate</p>
+<p>Compare results across your annotation methods to determine which
+produces the best balance of sensitivity and precision.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-1-compare-busco-scores" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-compare-busco-scores" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Compare BUSCO Scores</h3>
+<div class="callout-content">
+<p>Review the BUSCO results across all annotation methods (BRAKER cases
+1-5, Helixer, and EASEL). Rank them from highest to lowest completeness.
+Which method produced the most complete annotation? Which performed the
+worst? Can you explain why?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Evidence-based methods (BRAKER Case 1 with RNA-seq, Case 2 with
+proteins, and Case 3 combining both) typically score highest, with
+completeness (C) values above 90%. Helixer and EASEL also tend to
+perform well since they leverage external evidence or pre-trained
+models. Ab initio prediction (BRAKER Case 4) usually scores the lowest
+because it relies solely on intrinsic sequence features without external
+evidence. BRAKER Case 5 (pretrained) should perform better than pure ab
+initio but may still lag behind evidence-informed runs. The ranking
+highlights the importance of incorporating experimental evidence into
+gene prediction.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-most-informative-assessment-metric" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-most-informative-assessment-metric" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Most Informative Assessment
+Metric</h3>
+<div class="callout-content">
+<p>Consider the three assessment approaches used in this episode: BUSCO,
+featureCounts, and mikado compare. Which metric do you think is the most
+informative for evaluating an annotation, and why? Are there situations
+where one metric might be misleading?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>There is no single “best” metric – each captures a different aspect
+of annotation quality:</p>
+<ul>
+<li>
+<strong>BUSCO</strong> measures gene completeness using conserved
+orthologs, but it only assesses a subset of genes (those that are
+universally conserved). Lineage-specific or novel genes are not
+evaluated.</li>
+<li>
+<strong>featureCounts</strong> measures how well the annotation
+captures expressed regions of the genome. However, high assignment rates
+can occur even with over-predicted gene models, and lowly expressed
+genes may not be well represented in the RNA-seq data.</li>
+<li>
+<strong>mikado compare</strong> directly evaluates structural
+accuracy against a reference, but it requires a high-quality reference
+annotation, which is not always available.</li>
+</ul>
+<p>A comprehensive assessment should use all three metrics together.
+BUSCO and OMArk evaluate gene content completeness, featureCounts checks
+consistency with expression data, and mikado compare validates
+structural accuracy. An annotation that scores well across all metrics
+is more reliable than one that excels in only one.</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
@@ -3036,6 +3996,11 @@ annotation quality</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section>
 </div>
     </main>

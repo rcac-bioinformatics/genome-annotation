@@ -18,7 +18,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="../assets/images/rcac-logo.svg"></div>
+        <img id="rcac-logo" alt="rcac" src="../assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -109,11 +119,11 @@
   Genome Annotation: Hands-on Training
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 42%" class="percentage">
-    42%
+<aside class="col-md-12 lesson-progress"><div style="width: 29%" class="percentage">
+    29%
   </div>
   <div class="progress rcac">
-    <div class="progress-bar rcac" role="progressbar" style="width: 42%" aria-valuenow="42" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar rcac" role="progressbar" style="width: 29%" aria-valuenow="29" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -278,7 +288,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -342,13 +352,13 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Annotation using BRAKER</h1>
-        <p>Last updated on 2025-11-11 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://rcac-bioinformatics.github.io/genome-annotation/edit/main/episodes/gene-annotation-with-braker.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
-        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 42 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -387,8 +397,8 @@ predict genes in eukaryotic genomes. This pipeline is particularly
 useful for annotating newly sequenced genomes. The flexibility of
 BRAKER3 allows users to provide various input datasets for improving
 gene prediction accuracy. In this example, we will use various scenarios
-to predict genes in a Maize genome using BRAKER3. Following are the
-scenarios we will cover</p>
+to predict genes in an Arabidopsis thaliana genome using BRAKER3.
+Following are the scenarios we will cover</p>
 <section><h2 class="section-heading" id="organizing-the-data">Organizing the Data<a class="anchor" aria-label="anchor" href="#organizing-the-data"></a></h2>
 <hr class="half-width"><p>Before running BRAKER3, we need to organize the data in the following
 format:</p>
@@ -492,7 +502,7 @@ scenario, since we are using the Arabidopsis genome, we can download the
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="ex">ml</span> snakemake</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--cores</span> <span class="va">${SLURM_CPUS_ON_NODE}</span> selectViridiplantae</span></code></pre>
 </div>
-<p>When this is done, you should see a folder named <code>clade</code>
+<p>When this is done, you should see a folder named <code>clades</code>
 with <code>Viridiplantae.fa</code> in the <code>orthodb-clades</code>
 directory. We will use this as one of the input datasets for
 BRAKER3.<br>
@@ -504,34 +514,35 @@ sequences:</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case2</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case2</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c2 <span class="dt">\</span></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case2</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case2</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c2 <span class="dt">\</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case2</code> directory, as <code>braker.gff3</code> file.
@@ -543,37 +554,38 @@ The run time for this job is ~170 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case3</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="va">BAM_FILES</span><span class="op">=</span><span class="va">$(</span><span class="fu">find</span> <span class="st">"</span><span class="va">${BAM_DIR}</span><span class="st">"</span> <span class="at">-name</span> <span class="st">"*.bam"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'\n'</span> <span class="st">','</span><span class="va">)</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clade/Viridiplantae.fa"</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case3</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>   <span class="at">--bam</span><span class="op">=</span><span class="va">${BAM_FILES}</span> <span class="dt">\</span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c3 <span class="dt">\</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case3</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="va">BAM_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/bamfiles"</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="va">BAM_FILES</span><span class="op">=</span><span class="va">$(</span><span class="fu">find</span> <span class="st">"</span><span class="va">${BAM_DIR}</span><span class="st">"</span> <span class="at">-name</span> <span class="st">"*.bam"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'\n'</span> <span class="st">','</span><span class="va">)</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="va">proteins</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case3</span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>   <span class="at">--prot_seq</span><span class="op">=</span><span class="va">${proteins}</span> <span class="dt">\</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>   <span class="at">--bam</span><span class="op">=</span><span class="va">${BAM_FILES}</span> <span class="dt">\</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c3 <span class="dt">\</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case3</code> directory, as <code>braker.gff3</code> file.
@@ -585,33 +597,34 @@ The run time for this job is ~120 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case4</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case4</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>   <span class="at">--esmode</span> <span class="dt">\</span></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>Zm_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c4 <span class="dt">\</span></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case4</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case4</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>   <span class="at">--esmode</span> <span class="dt">\</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>At_<span class="va">$(</span><span class="fu">date</span> +<span class="st">"%Y%m%d"</span><span class="va">)</span>.c4 <span class="dt">\</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case4</code> directory, as <code>braker.gff3</code> file.
@@ -623,40 +636,185 @@ The run time for this job is ~60 mins.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#SBATCH --ntasks=32</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case5</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case5</span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
-<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
-<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
-<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="at">--skipAllTraining</span> <span class="dt">\</span></span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
-<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>arabidopsis <span class="dt">\</span></span>
-<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
-<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
-<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#SBATCH --account=workshop</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#SBATCH --time=04-00:00:00</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#SBATCH --job-name=braker_case5</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#SBATCH --output=%x.o%j</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#SBATCH --error=%x.e%j</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># Load the required modules</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="ex">ml</span> <span class="at">--force</span> purge</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="ex">ml</span> biocontainers</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="ex">ml</span> braker3/v3.0.7.5</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co"># directory/file paths</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="va">WORKSHOP_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RCAC_SCRATCH}</span><span class="st">/annotation_workshop"</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="va">genome</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/00_datasets/genome/athaliana_softmasked.fasta"</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># runtime parameters</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="va">AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="st">"</span><span class="va">${WORKSHOP_DIR}</span><span class="st">/04_braker/augustus/config"</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="va">GENEMARK_PATH</span><span class="op">=</span><span class="st">"/opt/ETP/bin/gmes"</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co"># Run BRAKER3</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="va">workdir</span><span class="op">=</span><span class="va">${WORKSHOP_DIR}</span>/04_braker/braker_case5</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${workdir}</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${workdir}</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="ex">braker.pl</span> <span class="dt">\</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   <span class="at">--AUGUSTUS_CONFIG_PATH</span><span class="op">=</span><span class="va">${AUGUSTUS_CONFIG_PATH}</span> <span class="dt">\</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="at">--GENEMARK_PATH</span><span class="op">=</span><span class="va">${GENEMARK_PATH}</span> <span class="dt">\</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>   <span class="at">--skipAllTraining</span> <span class="dt">\</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>   <span class="at">--genome</span><span class="op">=</span><span class="va">${genome}</span> <span class="dt">\</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>   <span class="at">--species</span><span class="op">=</span>arabidopsis <span class="dt">\</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="at">--workingdir</span><span class="op">=</span><span class="va">${workdir}</span> <span class="dt">\</span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   <span class="at">--gff3</span> <span class="dt">\</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>   <span class="at">--threads</span> <span class="va">${SLURM_CPUS_ON_NODE}</span></span></code></pre>
 </div>
 <p>The results of the BRAKER3 run will be stored in the respective
 <code>braker_case5/Augustus</code> directory. The main result file
 <code>augustus.ab_initio.gff3</code> will be used for downstream
 analysis. Runtime for this job is ~7 mins.</p>
 </section><section><h2 class="section-heading" id="results-and-outputs">Results and Outputs<a class="anchor" aria-label="anchor" href="#results-and-outputs"></a></h2>
-<hr class="half-width"><p>coming soon!</p>
+<hr class="half-width"><p>Each BRAKER3 run produces several output files in the respective case
+directory. The most important files are:</p>
+<table class="table"><colgroup><col width="37%"><col width="62%"></colgroup><thead><tr class="header"><th align="left"><strong>File</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr></thead><tbody><tr class="odd"><td align="left"><code>braker.gff3</code></td>
+<td align="left">Gene predictions in GFF3 format (Cases 1-4)</td>
+</tr><tr class="even"><td align="left"><code>braker.aa</code></td>
+<td align="left">Predicted protein sequences</td>
+</tr><tr class="odd"><td align="left"><code>braker.codingseq</code></td>
+<td align="left">Predicted coding sequences (CDS)</td>
+</tr><tr class="even"><td align="left"><code>hintsfile.gff</code></td>
+<td align="left">Evidence hints used for gene prediction</td>
+</tr><tr class="odd"><td align="left"><code>augustus.ab_initio.gff3</code></td>
+<td align="left">Gene predictions from Case 5 (pretrained model)</td>
+</tr></tbody></table><p>You can count the number of predicted genes in each case using:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="cf">for</span> case <span class="kw">in</span> braker_case<span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">4</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">${case}</span><span class="st">: </span><span class="va">$(</span><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> <span class="va">${case}</span>/braker.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st"> genes"</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"braker_case5: </span><span class="va">$(</span><span class="fu">awk</span> <span class="st">'$3=="gene"'</span> braker_case5/Augustus/augustus.ab_initio.gff3 <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span><span class="st"> genes"</span></span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Expected Gene Counts </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>The TAIR10 reference annotation for Arabidopsis contains
+approximately 27,600 protein-coding genes. Your results should be in a
+similar range:</p>
+<table class="table"><thead><tr class="header"><th align="left"><strong>Case</strong></th>
+<th align="left"><strong>Evidence Used</strong></th>
+<th align="center"><strong>Expected Gene Count</strong></th>
+<th align="center"><strong>Runtime</strong></th>
+</tr></thead><tbody><tr class="odd"><td align="left">Case 1</td>
+<td align="left">RNA-seq only</td>
+<td align="center">~25,000-28,000</td>
+<td align="center">~55 min</td>
+</tr><tr class="even"><td align="left">Case 2</td>
+<td align="left">Proteins only</td>
+<td align="center">~26,000-30,000</td>
+<td align="center">~170 min</td>
+</tr><tr class="odd"><td align="left">Case 3</td>
+<td align="left">RNA-seq + Proteins</td>
+<td align="center">~26,000-29,000</td>
+<td align="center">~120 min</td>
+</tr><tr class="even"><td align="left">Case 4</td>
+<td align="left">Ab initio (no evidence)</td>
+<td align="center">~20,000-35,000</td>
+<td align="center">~60 min</td>
+</tr><tr class="odd"><td align="left">Case 5</td>
+<td align="left">Pretrained model</td>
+<td align="center">~26,000-28,000</td>
+<td align="center">~7 min</td>
+</tr></tbody></table><p>Cases that use evidence data (Cases 1-3) generally produce more
+accurate gene models. Case 3 (combined evidence) typically gives the
+best results. Case 4 (ab initio) tends to over-predict or under-predict
+genes depending on the genome. Case 5 uses a pretrained Arabidopsis
+model and produces results quickly, but may not generalize to other
+species.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-1-compare-braker3-cases" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-1-compare-braker3-cases" class="callout-inner">
+<h3 class="callout-title">Exercise 1: Compare BRAKER3 Cases</h3>
+<div class="callout-content">
+<p>After running all five BRAKER3 cases, compare the gene counts from
+each case to the TAIR10 reference annotation (approximately 27,600
+protein-coding genes). Which case produces results closest to the
+reference? Why do you think that is?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Case 3 (RNA-seq + Proteins) typically produces results closest to the
+TAIR10 reference, because it leverages both transcriptomic and proteomic
+evidence to guide gene prediction. The RNA-seq data provides direct
+evidence of expressed genes and splice sites, while the protein data
+provides evolutionary conservation information. Combining both evidence
+types allows BRAKER3 to make more accurate gene models than using either
+source alone. Case 5 (pretrained model) also performs well for
+Arabidopsis specifically, since the pretrained AUGUSTUS model was
+trained on high-quality Arabidopsis annotations. However, this approach
+would not generalize to organisms without existing pretrained
+models.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="exercise-2-choosing-a-braker3-strategy" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="exercise-2-choosing-a-braker3-strategy" class="callout-inner">
+<h3 class="callout-title">Exercise 2: Choosing a BRAKER3 Strategy</h3>
+<div class="callout-content">
+<p>Imagine you are annotating a newly sequenced genome for a non-model
+plant species. You have RNA-seq data from three tissue types but no
+closely related protein database. Which BRAKER3 case would you choose,
+and why? What if you had no RNA-seq data at all?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>With RNA-seq data from three tissue types but no protein database,
+you should use <strong>Case 1</strong> (RNA-seq only). The RNA-seq
+evidence from multiple tissues will help BRAKER3 identify expressed
+genes and accurately predict splice sites across a broad set of genes.
+You could also consider downloading OrthoDB protein sequences for the
+relevant clade (as shown in Case 2) and then running <strong>Case
+3</strong> (RNA-seq + Proteins) for potentially even better results.</p>
+<p>If you had no RNA-seq data at all, you could use <strong>Case
+2</strong> (proteins only) with OrthoDB proteins from the closest
+available clade, or <strong>Case 4</strong> (ab initio) as a last
+resort. Ab initio prediction does not require any external evidence but
+typically produces less accurate gene models. It is generally
+recommended to generate at least some RNA-seq data before attempting
+genome annotation, as this significantly improves prediction
+quality.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -677,6 +835,11 @@ genome</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/annotation-setup.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -737,7 +900,7 @@ any links that you are not going to use.
   "url": "https://genome-annotation.github.io/NA/instructor/gene-annotation-with-braker.html",
   "identifier": "https://genome-annotation.github.io/NA/instructor/gene-annotation-with-braker.html",
   "dateCreated": "2025-02-05",
-  "dateModified": "2025-11-11",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 

@@ -18,7 +18,17 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"></div>
+        <img id="rcac-logo" alt="rcac" src="assets/images/rcac-logo.svg"><span class="badge text-bg-info">
+          <abbr title="This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
+              <i aria-hidden="true" class="icon" data-feather="alert-circle" style="border-radius: 5px"></i>
+              Beta
+            </a>
+            <span class="visually-hidden">This lesson is in the beta phase, which means that it is ready for teaching by instructors outside of the original author team.</span>
+          </abbr>
+        </span>
+
+      </div>
     </div>
     <div class="selector-container">
       <div id="theme-selector">
@@ -276,7 +286,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="annotation-assesment.html">8. Annotation Assesment</a>
+        <a href="annotation-assessment.html">8. Annotation Assessment</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -332,6 +342,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
+
 <section><h2 class="section-heading" id="welcome-to-the-genome-annotation-workshop">Welcome to the Genome Annotation Workshop<a class="anchor" aria-label="anchor" href="#welcome-to-the-genome-annotation-workshop"></a></h2>
 <hr class="half-width"><p>This workshop provides a hands-on introduction to genome annotation,
 covering structural and functional annotation techniques optimized for
@@ -343,11 +354,32 @@ equip you with the skills to generate high-quality, reproducible genome
 annotations, leveraging transcriptomic, proteomic, and homology-based
 evidence. You’ll also explore strategies for quality assessment and
 troubleshooting common challenges in annotation workflows.</p>
-<p>Let’s get started!</p>
+</section><section><h2 class="section-heading" id="learning-objectives">Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a></h2>
+<hr class="half-width"><p>By the end of this workshop, you will be able to:</p>
+<ul><li>Set up and run multiple genome annotation pipelines (BRAKER3,
+Helixer, EASEL) on an HPC cluster</li>
+<li>Perform functional annotation using EnTAP to assign gene functions,
+GO terms, and pathway associations</li>
+<li>Assess annotation quality using BUSCO, OMArk, and structural
+metrics</li>
+<li>Compare gene predictions across tools and select the most
+appropriate approach for your organism</li>
+</ul></section><section><h2 class="section-heading" id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a></h2>
+<hr class="half-width"><ul><li>Basic command-line skills (navigating directories, editing files,
+running commands)</li>
+<li>An account on the Purdue RCAC cluster (Negishi and Gilbreth)</li>
+<li>Familiarity with basic genomics concepts</li>
+</ul><p>See the <a href="index.html#setup">Setup</a> page for detailed instructions
+on data access and software configuration.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section><section id="setup"><section><h2 class="section-heading" id="instructors">Instructors<a class="anchor" aria-label="anchor" href="#instructors"></a></h2>
 <hr class="half-width"><ol style="list-style-type: decimal"><li><p><strong>Arun Seetharam, Ph.D.</strong>: Arun is a lead
 bioinformatics scientist at Purdue University’s Rosen Center for
@@ -384,14 +416,18 @@ initio and RNA-seq-supported annotation, gene model evaluation</td>
 <strong>Interpreting BRAKER Results &amp; Gene Annotation with
 Helixer</strong> – Reviewing BRAKER outputs, refining predictions, and
 using Helixer for deep-learning-based annotation</td>
-</tr><tr class="odd"><td align="left"><strong>2:50 PM</strong></td>
+</tr><tr class="odd"><td align="left"><strong>2:30 PM</strong></td>
+<td>
+<strong>Gene Annotation with EASEL</strong> – Running the EASEL
+Nextflow pipeline for automated genome annotation</td>
+</tr><tr class="even"><td align="left"><strong>2:50 PM</strong></td>
 <td><strong>Break</strong></td>
-</tr><tr class="even"><td align="left"><strong>3:10 PM</strong></td>
+</tr><tr class="odd"><td align="left"><strong>3:10 PM</strong></td>
 <td>
 <strong>Functional Annotation with EnTAP &amp; Annotation Quality
 Assessment</strong> – Assigning gene functions, GO term mapping,
 evaluating completeness with BUSCO, and benchmarking gene models</td>
-</tr><tr class="odd"><td align="left"><strong>4:30 PM</strong></td>
+</tr><tr class="even"><td align="left"><strong>4:30 PM</strong></td>
 <td>
 <strong>Wrap-Up &amp; Discussion</strong> – Troubleshooting,
 Q&amp;A, and next steps</td>
@@ -432,7 +468,7 @@ details.</p>
   For Gilbreth Cluster only
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -464,7 +500,7 @@ sections below.</p>
   Windows
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Open a terminal and run:</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -484,7 +520,7 @@ sections below.</p>
   MacOS
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Open Terminal and run</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -504,7 +540,7 @@ sections below.</p>
   Linux
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Open a terminal and run:</p>
 <div class="codewrapper sourceCode" id="cb6">
@@ -521,6 +557,11 @@ sections below.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+<!-- Annotation tools -->
+<!-- Assessment tools -->
+<!-- Databases -->
+<!-- HPC -->
+<!-- Data -->
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
