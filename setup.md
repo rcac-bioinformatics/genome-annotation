@@ -19,6 +19,7 @@ title: Setup
 | **10:40 AM** | **Gene Annotation with BRAKER** – Running BRAKER for ab initio and RNA-seq-supported annotation, gene model evaluation |
 | **12:00 PM** | **Lunch Break** |
 | **1:00 PM** | **Interpreting BRAKER Results & Gene Annotation with Helixer** – Reviewing BRAKER outputs, refining predictions, and using Helixer for deep-learning-based annotation |
+| **2:30 PM** | **Gene Annotation with EASEL** – Running the EASEL Nextflow pipeline for automated genome annotation |
 | **2:50 PM** | **Break** |
 | **3:10 PM** | **Functional Annotation with EnTAP & Annotation Quality Assessment** – Assigning gene functions, GO term mapping, evaluating completeness with BUSCO, and benchmarking gene models |
 | **4:30 PM** | **Wrap-Up & Discussion** – Troubleshooting, Q&A, and next steps |

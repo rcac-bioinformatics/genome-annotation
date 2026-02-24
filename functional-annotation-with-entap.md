@@ -1,6 +1,6 @@
 ---
 title: 'Functional annotation using EnTAP'
-teaching: 10
+teaching: 20
 exercises: 2
 ---
 
@@ -73,8 +73,22 @@ ml entap
 
 When running for the first time, you will have to set up the databases for EnTAP. This includes downloading files from various databases, and can be time consuming. This section is already performed so you can skip this step and is included for reference.
 
-:::::::::::::::::::::::::::::::::::::::  
+:::::::::::::::::::::::::::::::::::::::
 
+::: callout
+
+## Pre-staged Databases
+
+For this workshop, the EnTAP databases have been pre-configured and are available at `/depot/itap/datasets/entap_db/` on the training cluster. You can copy the configuration files from there:
+
+```bash
+cp /depot/itap/datasets/entap_db/entap_config.ini .
+cp /depot/itap/datasets/entap_db/entap_run.params .
+```
+
+If you are running EnTAP on your own data outside this workshop, follow the database setup instructions in the spoiler section above.
+
+:::
 
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 
@@ -187,8 +201,8 @@ Run EnTAP using the following command:
 ml --force purge
 ml biocontainers
 ml entap
-EnTAP -\
-   -run \
+EnTAP \
+   --run \
    --run-ini ./entap_run.params \
    --entap-ini ./entap_config.ini \
    --threads ${SLURM_CPUS_ON_NODE}
@@ -217,7 +231,63 @@ EnTAP generates several output files, but the key results will be in the `entap_
 
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Annotation Coverage
+
+After running EnTAP, examine the output files in the `final_results/` directory. What percentage of your input transcripts received functional annotations?
+
+**Hint:** Compare the number of entries in `annotated.tsv` and `unannotated.tsv`.
+
+:::::::::::::: solution
+
+## Solution
+
+You can count the lines (excluding the header) in each file:
+
+```bash
+# Count annotated transcripts
+tail -n +2 entap_out/final_results/annotated.tsv | wc -l
+
+# Count unannotated transcripts
+tail -n +2 entap_out/final_results/unannotated.tsv | wc -l
+```
+
+The annotation rate is calculated as:
+
+```
+annotated / (annotated + unannotated) * 100
+```
+
+This gives you the percentage of transcripts that received at least one functional annotation from the databases used by EnTAP.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Uninformative Annotations
+
+Look at the `uninformative` parameter in the `entap_run.params` file. What does this parameter do and why is it important for functional annotation quality?
+
+:::::::::::::: solution
+
+## Solution
+
+The `uninformative` parameter specifies a list of keywords used to filter out low-quality or non-descriptive annotations. In the default configuration, it includes terms like:
+
+```
+uninformative=conserved,predicted,unknown,unnamed,hypothetical,putative,unidentified,uncharacterized,uncultured,uninformative,
+```
+
+When EnTAP encounters a DIAMOND hit whose description contains any of these keywords, it treats that hit as uninformative and attempts to find a better annotation from other database matches. This matters because many protein database entries carry vague descriptions such as "hypothetical protein" or "predicted protein" that provide no meaningful functional insight. By filtering these out, EnTAP ensures that only informative, descriptive functional assignments are kept in the final results, leading to higher-quality annotations for downstream analysis.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - EnTAP enhances functional annotation by integrating multiple evidence sources, including homology, protein domains, and gene ontology.
 - Proper setup of configuration files and databases is essential for accurate and efficient EnTAP execution.

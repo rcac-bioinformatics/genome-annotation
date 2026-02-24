@@ -182,7 +182,23 @@ A computational method used to identify exon-intron boundaries in gene models.
 **alternative polyadenylation**  
 The use of different polyadenylation sites within a gene, leading to mRNA isoforms with varying stability or regulatory properties.
 
-**functional enrichment analysis**  
+**functional enrichment analysis**
 A method used to identify biological processes or pathways overrepresented in a set of annotated genes.
 
+**OMArk**
+A software tool for proteome quality assessment that measures completeness, consistency, and contamination of protein-coding gene repertoires using hierarchical orthologous groups (HOGs).
 
+**AGAT**
+Another Gff Analysis Toolkit, a suite of tools for working with GFF/GTF files, including statistics computation, format conversion, and feature manipulation.
+
+**featureCounts**
+A program in the Subread package that assigns mapped sequencing reads to genomic features such as genes, exons, and promoters for quantification.
+
+**Subread**
+A bioinformatics package that includes tools for read alignment (Subread aligner) and read counting (featureCounts) for genomic and transcriptomic analyses.
+
+**Mikado**
+A tool for picking and combining transcript models from multiple sources, including the ability to compare predicted gene models against a reference annotation.
+
+**gffread**
+A utility for filtering, converting, and extracting sequences from GFF/GTF annotation files, commonly used to generate CDS and protein FASTA files from genome annotations.

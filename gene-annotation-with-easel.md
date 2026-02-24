@@ -1,6 +1,6 @@
 ---
 title: 'Annotation using Easel'
-teaching: 10
+teaching: 25
 exercises: 2
 ---
 
@@ -183,19 +183,28 @@ for the `param.yaml` file:
 
 ```yaml
 outdir: easel
-genome: /scratch/negishi/aseethar/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta
-bam: /scratch/negishi/aseethar/annotation_workshop/00_datasets/bamfiles/*.bam
+genome: /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta
+bam: /scratch/negishi/YOUR_USERNAME/annotation_workshop/00_datasets/bamfiles/*.bam
 busco_lineage: embryophyta
 order: Brassicales
 prefix: arabidopsis
 taxon: arabidopsis
-singularity_cache_dir: /scratch/negishi/aseethar/singularity_cache
+singularity_cache_dir: /scratch/negishi/YOUR_USERNAME/singularity_cache
 training_set: plant
 executor: slurm
 account: testpbs
 qos: normal
 project: testpbs
 ```
+
+::: callout
+
+## Update Paths in params.yaml
+
+Replace `YOUR_USERNAME` with your actual username in the `params.yaml` file. You can find your username by running `whoami` on the cluster. For example, if your username is `train01`, the genome path would be:
+`/scratch/negishi/train01/annotation_workshop/00_datasets/genome/athaliana_softmasked.fasta`
+
+:::
 
 Now we are ready to run the Easel workflow:
 
@@ -212,7 +221,7 @@ Our `slurm` file to run the Easel workflow:
 #SBATCH --output=%x.o%j
 #SBATCH --error=%x.e%j
 # Load the required modules
-ml purge
+ml --force purge
 ml biocontainers
 ml openjdk
 nextflow run \
@@ -226,11 +235,92 @@ This will run the Easel workflow on the RCAC HPC.
  
 ## Results and Outputs
 
+EASEL produces output in the `easel/` directory (as specified by `outdir` in `params.yaml`). The key output files are:
+
+| **File/Directory** | **Description** |
+|:-------------------|:----------------|
+| `easel/annotation/*.gff3` | Final gene predictions in GFF3 format |
+| `easel/annotation/*.cds.fa` | Predicted coding sequences |
+| `easel/annotation/*.pep.fa` | Predicted protein sequences |
+| `easel/busco/` | BUSCO completeness assessment results |
+| `easel/entap/` | Functional annotation results from EnTAP |
+| `easel/pipeline_info/` | Nextflow execution reports and timelines |
+
+You can check the gene count in the EASEL output:
+
+```bash
+awk '$3=="gene"' easel/annotation/*.gff3 | wc -l
+```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## Expected Output
+
+For Arabidopsis thaliana, EASEL should predict approximately 25,000-30,000 genes. The pipeline also generates a BUSCO report automatically, which you can find in the `easel/busco/` directory.
+
+Check the Nextflow execution report in `easel/pipeline_info/` to review runtime, resource usage, and any failed processes.
+
+::::::::::::::::::::::::::::::::::::::::::
 
 
+::::::::::::::::::::::::::::::::::::: challenge
 
+## Exercise 1: Adapting EASEL for a Different Organism
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+If you were annotating a vertebrate genome (e.g., zebrafish) instead of a plant genome, which parameters in the `params.yaml` file would you need to change? List all the parameters and explain why each would need updating.
+
+:::::::::::::: solution
+
+## Solution
+
+You would need to change the following parameters in `params.yaml`:
+
+- **`busco_lineage`**: Change from `embryophyta` (plants) to the appropriate vertebrate lineage (e.g., `actinopterygii` for ray-finned fish, or `vertebrata` for a broader assessment).
+- **`order`**: Change from `Brassicales` to the correct taxonomic order for your organism (e.g., `Cypriniformes` for zebrafish).
+- **`prefix`**: Change from `arabidopsis` to an appropriate prefix for your organism (e.g., `zebrafish` or `drerio`).
+- **`taxon`**: Change from `arabidopsis` to your target organism name (e.g., `zebrafish`).
+- **`training_set`**: Change from `plant` to the appropriate AUGUSTUS training set for your organism (e.g., `vertebrate` or a closely related species like `zebrafish`).
+
+The genome, bam, and other path-related parameters would also change, but those are specific to your data rather than to the organism type.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Resuming a Failed EASEL Run
+
+Your EASEL Nextflow pipeline failed partway through execution. How would you resume the run without recomputing already completed steps? Where would you look for error logs to diagnose the issue?
+
+:::::::::::::: solution
+
+## Solution
+
+To resume a failed Nextflow run, add the `-resume` flag to your `nextflow run` command:
+
+```bash
+nextflow run \
+   -hub gitlab PlantGenomicsLab/easel \
+   -params-file params.yaml \
+   -profile rcac \
+   --project testpbs \
+   -resume
+```
+
+Nextflow caches completed tasks, so only failed or pending steps will be re-executed.
+
+To diagnose the failure, check these locations:
+
+1. **`.nextflow.log`** in the working directory: Contains detailed Nextflow execution logs, including error messages and stack traces.
+2. **`work/` directory**: Each task runs in a subdirectory under `work/`. Navigate to the failed task's directory (shown in the error output) and check the `.command.log`, `.command.err`, and `.command.out` files for the specific error.
+3. **SLURM output files**: Check the `easel.o*` and `easel.e*` files for SLURM-level errors (e.g., memory limits, time limits).
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - EASEL is executed using Nextflow, which simplifies workflow management and ensures reproducibility.
 - Proper configuration of resource settings and HPC parameters is essential for successful job execution.

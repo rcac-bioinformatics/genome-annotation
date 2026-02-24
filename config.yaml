@@ -25,7 +25,7 @@ keywords: 'gene-annotation, braker, helixer, easel, entap, omark, busco'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
-life_cycle: 'stable'
+life_cycle: 'beta'
 
 # License of the lesson materials (recommended CC-BY 4.0)
 license: 'CC-BY 4.0'
@@ -47,7 +47,7 @@ episodes:
 - gene-annotation-with-helixer.Rmd
 - gene-annotation-with-easel.Rmd
 - functional-annotation-with-entap.Rmd
-- annotation-assesment.Rmd
+- annotation-assessment.Rmd
 
 
 #

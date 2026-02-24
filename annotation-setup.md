@@ -1,6 +1,6 @@
 ---
 title: 'Annotation Setup'
-teaching: 10
+teaching: 15
 exercises: 2
 ---
 
@@ -43,13 +43,12 @@ The steps below are provided for reference - to run on custom data.
 mkdir -p ${RCAC_SCRATCH}/annotation_workshop
 cd ${RCAC_SCRATCH}/annotation_workshop
 mkdir -p 00_datasets/{fastq,genome,bamfiles}
-mkdir -p 03_setup
 mkdir -p 04_braker
 mkdir -p 05_helixer
 mkdir -p 06_easel
 mkdir -p 07_entap
 mkdir -p 08_assessment
-rsync -avP SOURCE/00_datasets/ 00_datasets/
+rsync -avP /depot/workshop/data/annotation_workshop/00_datasets/ 00_datasets/
 ```
 
 ![Organization](https://github.com/user-attachments/assets/6184ce77-1cf7-49da-86d8-e56a80b29a6e)
@@ -72,7 +71,7 @@ gunzip Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
 ml --force purge
 ml biocontainers
 ml bioawk
-bioaw -c fastx '{print ">"$name; print $seq}' \
+bioawk -c fastx '{print ">"$name; print $seq}' \
    Arabidopsis_thaliana.TAIR10.dna.toplevel.fa |\
    fold > athaliana.fasta
 rm Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
@@ -88,7 +87,7 @@ ml star
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 genome="${WORKSHOP_DIR}/00_datasets/genome/athaliana.fasta"
 index="${WORKSHOP_DIR}/00_datasets/genome/star_index"
-STAR --runThreadN ${SLURM_JOB_CPUS_PER_NODE} \
+STAR --runThreadN ${SLURM_CPUS_ON_NODE} \
    --runMode genomeGenerate \
    --genomeDir ${index}  \
    --genomeSAindexNbases 12 \
@@ -101,7 +100,7 @@ STAR --runThreadN ${SLURM_JOB_CPUS_PER_NODE} \
 
 | Option                     | Description |
 |:----|-------------|
-| `--runThreadN $SLURM_JOB_CPUS_PER_NODE` | Specifies the number of CPU threads to use. In an HPC environment, `$SLURM_JOB_CPUS_PER_NODE` dynamically assigns available CPUs per node. |
+| `--runThreadN $SLURM_CPUS_ON_NODE` | Specifies the number of CPU threads to use. In an HPC environment, `$SLURM_CPUS_ON_NODE` dynamically assigns available CPUs per node. |
 | `--runMode genomeGenerate` | Runs STAR in genome index generation mode, required before alignment. |
 | `--genomeDir ${index}` | Path to the directory where the genome index will be stored. |
 | `--genomeSAindexNbases 12` | Defines the length of the SA pre-indexing string. A recommended value is `min(14, log2(GenomeLength)/2 - 1)`, but `12` is commonly used for smaller genomes. |
@@ -125,7 +124,7 @@ genome="${WORKSHOP_DIR}/00_datasets/genome/athaliana.fasta"
 index="${WORKSHOP_DIR}/00_datasets/genome/star_index"
 read1=$1
 read2=$2
-cpus=${SLURM_JOB_CPUS_PER_NODE}
+cpus=${SLURM_CPUS_ON_NODE}
 outname=$(basename ${read1} | cut -f 1 -d "_")
 STAR \
 --runThreadN ${cpus} \
@@ -169,7 +168,7 @@ STAR \
 #!/bin/bash
 # Define the directory containing FASTQ files
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
-FASTQ_DIR="WORKSHOP_DIR/00_datasets/fastq"
+FASTQ_DIR="${WORKSHOP_DIR}/00_datasets/fastq"
 # Loop through all R1 files and find corresponding R2 files
 for R1 in ${FASTQ_DIR}/*_R1.fq.gz; do
     R2="${R1/_R1.fq.gz/_R2.fq.gz}"  # Replace R1 with R2
@@ -186,7 +185,7 @@ done
 
 ```bash
 # Define the directory containing BAM files
-BAM_DIR="WORKSHOP_DIR/00_datasets/bamfiles"
+BAM_DIR="${WORKSHOP_DIR}/00_datasets/bamfiles"
 # Move all BAM files to the BAM directory
 mv *_Aligned.sortedByCoord.out.bam ${BAM_DIR}/
 ```
@@ -212,7 +211,7 @@ RepeatMasker \
    -pa ${SLURM_CPUS_ON_NODE} \
    -q \
    -xsmall \
-   -lib ${replib} \ 
+   -lib ${replib} \
    -nocut \
    -gff \
    ${genome}
@@ -227,7 +226,78 @@ mv athaliana.fasta.masked athaliana_softmasked.fasta
 
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Calculating STAR `--genomeSAindexNbases`
+
+The STAR aligner requires the `--genomeSAindexNbases` parameter to be tuned based on genome size.
+The recommended formula is `min(14, log2(GenomeLength)/2 - 1)`.
+
+The Arabidopsis thaliana genome is approximately 119 Mb (119,000,000 bp).
+What value should you use for `--genomeSAindexNbases`?
+
+What about for a larger genome, such as *Zea mays* (~2,300 Mb)?
+
+:::::::::::::: solution
+
+## Solution
+
+For **Arabidopsis thaliana** (~119 Mb):
+
+```
+log2(119000000) / 2 - 1 = 26.83 / 2 - 1 = 12.4
+min(14, 12.4) = 12
+```
+
+So `--genomeSAindexNbases 12` is the correct value (as used in this lesson).
+
+For **Zea mays** (~2,300 Mb):
+
+```
+log2(2300000000) / 2 - 1 = 31.1 / 2 - 1 = 14.55
+min(14, 14.55) = 14
+```
+
+So `--genomeSAindexNbases 14` (the default) would be appropriate for maize.
+
+As a rule of thumb: for genomes smaller than ~500 Mb, you should calculate and lower this value; for large genomes (over 1 Gb), the default of 14 is usually fine.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Choosing the Right Genome File
+
+Different annotation tools have different requirements for repeat masking.
+Given the genome files produced in this episode:
+
+- `athaliana.fasta` (unmasked)
+- `athaliana_softmasked.fasta` (soft-masked with RepeatMasker)
+
+Which genome file should you use for each of the following tools, and why?
+
+1. BRAKER3
+2. Helixer
+3. EASEL
+
+:::::::::::::: solution
+
+## Solution
+
+1. **BRAKER3** -- Use `athaliana_softmasked.fasta`. BRAKER3 benefits from soft-masked genomes because its underlying gene finder (Augustus/GeneMark) can recognize repeat regions (in lowercase) and avoid predicting genes within transposable elements.
+
+2. **Helixer** -- Use `athaliana.fasta` (unmasked). Helixer is a deep-learning-based tool that has been trained on both genic and repetitive sequences. It does not require or benefit from repeat masking.
+
+3. **EASEL** -- Use `athaliana_softmasked.fasta`. EASEL's internal pipeline expects a soft-masked genome to improve the accuracy of gene predictions by de-prioritizing repetitive regions.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Organizing files and directories ensures a reproducible and efficient workflow  
 - Mapping RNA-seq reads to the genome provides essential evidence for gene prediction  
