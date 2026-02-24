@@ -1,6 +1,6 @@
 ---
 title: 'Annotation using BRAKER'
-teaching: 10
+teaching: 40
 exercises: 2
 ---
 
@@ -24,7 +24,7 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes. This pipeline is particularly useful for annotating newly sequenced genomes. The flexibility of BRAKER3 allows users to provide various input datasets for improving gene prediction accuracy. In this example, we will use various scenarios to predict genes in a Maize genome using BRAKER3. Following are the scenarios we will cover
+BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes. This pipeline is particularly useful for annotating newly sequenced genomes. The flexibility of BRAKER3 allows users to provide various input datasets for improving gene prediction accuracy. In this example, we will use various scenarios to predict genes in an Arabidopsis thaliana genome using BRAKER3. Following are the scenarios we will cover
 
 
 ## Organizing the Data
@@ -127,7 +127,7 @@ ml snakemake
 snakemake --cores ${SLURM_CPUS_ON_NODE} selectViridiplantae
 ```
 
-When this is done, you should see a folder named `clade` with `Viridiplantae.fa` in the `orthodb-clades` directory. We will use this as one of the input datasets for BRAKER3. \
+When this is done, you should see a folder named `clades` with `Viridiplantae.fa` in the `orthodb-clades` directory. We will use this as one of the input datasets for BRAKER3. \
 The following command will run BRAKER3 with the input genome and protein sequences:
 
 
@@ -135,6 +135,7 @@ The following command will run BRAKER3 with the input genome and protein sequenc
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
+#SBATCH --account=workshop
 #SBATCH --time=04-00:00:00
 #SBATCH --job-name=braker_case2
 #SBATCH --output=%x.o%j
@@ -173,6 +174,7 @@ The results of the BRAKER3 run will be stored in the respective `braker_case2` d
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
+#SBATCH --account=workshop
 #SBATCH --time=04-00:00:00
 #SBATCH --job-name=braker_case3
 #SBATCH --output=%x.o%j
@@ -185,7 +187,7 @@ ml braker3/v3.0.7.5
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 BAM_DIR="${WORKSHOP_DIR}/00_datasets/bamfiles"
 BAM_FILES=$(find "${BAM_DIR}" -name "*.bam" | tr '\n' ',')
-proteins="${WORKSHOP_DIR}/04_braker/braker_case2/orthodb-clades/clade/Viridiplantae.fa"
+proteins="${WORKSHOP_DIR}/04_braker/braker_case2/orthodb-clades/clades/Viridiplantae.fa"
 genome="${WORKSHOP_DIR}/00_datasets/genome/athaliana_softmasked.fasta"
 # runtime parameters
 AUGUSTUS_CONFIG_PATH="${WORKSHOP_DIR}/04_braker/augustus/config"
@@ -214,6 +216,7 @@ The results of the BRAKER3 run will be stored in the respective `braker_case3` d
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
+#SBATCH --account=workshop
 #SBATCH --time=04-00:00:00
 #SBATCH --job-name=braker_case4
 #SBATCH --output=%x.o%j
@@ -237,7 +240,7 @@ braker.pl \
    --GENEMARK_PATH=${GENEMARK_PATH} \
    --esmode \
    --genome=${genome} \
-   --species=Zm_$(date +"%Y%m%d").c4 \
+   --species=At_$(date +"%Y%m%d").c4 \
    --workingdir=${workdir} \
    --gff3 \
    --threads ${SLURM_CPUS_ON_NODE}
@@ -252,6 +255,7 @@ The results of the BRAKER3 run will be stored in the respective `braker_case4` d
 #!/bin/bash
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
+#SBATCH --account=workshop
 #SBATCH --time=04-00:00:00
 #SBATCH --job-name=braker_case5
 #SBATCH --output=%x.o%j
@@ -288,10 +292,80 @@ Runtime for this job is ~7 mins.
 
 ## Results and Outputs
 
-coming soon!
+Each BRAKER3 run produces several output files in the respective case directory. The most important files are:
+
+| **File** | **Description** |
+|:---------|:----------------|
+| `braker.gff3` | Gene predictions in GFF3 format (Cases 1-4) |
+| `braker.aa` | Predicted protein sequences |
+| `braker.codingseq` | Predicted coding sequences (CDS) |
+| `hintsfile.gff` | Evidence hints used for gene prediction |
+| `augustus.ab_initio.gff3` | Gene predictions from Case 5 (pretrained model) |
+
+You can count the number of predicted genes in each case using:
+
+```bash
+for case in braker_case{1..4}; do
+    echo "${case}: $(awk '$3=="gene"' ${case}/braker.gff3 | wc -l) genes"
+done
+echo "braker_case5: $(awk '$3=="gene"' braker_case5/Augustus/augustus.ab_initio.gff3 | wc -l) genes"
+```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## Expected Gene Counts
+
+The TAIR10 reference annotation for Arabidopsis contains approximately 27,600 protein-coding genes. Your results should be in a similar range:
+
+| **Case** | **Evidence Used** | **Expected Gene Count** | **Runtime** |
+|:---------|:------------------|:-----------------------:|:-----------:|
+| Case 1 | RNA-seq only | ~25,000-28,000 | ~55 min |
+| Case 2 | Proteins only | ~26,000-30,000 | ~170 min |
+| Case 3 | RNA-seq + Proteins | ~26,000-29,000 | ~120 min |
+| Case 4 | Ab initio (no evidence) | ~20,000-35,000 | ~60 min |
+| Case 5 | Pretrained model | ~26,000-28,000 | ~7 min |
+
+Cases that use evidence data (Cases 1-3) generally produce more accurate gene models. Case 3 (combined evidence) typically gives the best results. Case 4 (ab initio) tends to over-predict or under-predict genes depending on the genome. Case 5 uses a pretrained Arabidopsis model and produces results quickly, but may not generalize to other species.
+
+::::::::::::::::::::::::::::::::::::::::::
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Compare BRAKER3 Cases
+
+After running all five BRAKER3 cases, compare the gene counts from each case to the TAIR10 reference annotation (approximately 27,600 protein-coding genes). Which case produces results closest to the reference? Why do you think that is?
+
+:::::::::::::: solution
+
+## Solution
+
+Case 3 (RNA-seq + Proteins) typically produces results closest to the TAIR10 reference, because it leverages both transcriptomic and proteomic evidence to guide gene prediction. The RNA-seq data provides direct evidence of expressed genes and splice sites, while the protein data provides evolutionary conservation information. Combining both evidence types allows BRAKER3 to make more accurate gene models than using either source alone. Case 5 (pretrained model) also performs well for Arabidopsis specifically, since the pretrained AUGUSTUS model was trained on high-quality Arabidopsis annotations. However, this approach would not generalize to organisms without existing pretrained models.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Choosing a BRAKER3 Strategy
+
+Imagine you are annotating a newly sequenced genome for a non-model plant species. You have RNA-seq data from three tissue types but no closely related protein database. Which BRAKER3 case would you choose, and why? What if you had no RNA-seq data at all?
+
+:::::::::::::: solution
+
+## Solution
+
+With RNA-seq data from three tissue types but no protein database, you should use **Case 1** (RNA-seq only). The RNA-seq evidence from multiple tissues will help BRAKER3 identify expressed genes and accurately predict splice sites across a broad set of genes. You could also consider downloading OrthoDB protein sequences for the relevant clade (as shown in Case 2) and then running **Case 3** (RNA-seq + Proteins) for potentially even better results.
+
+If you had no RNA-seq data at all, you could use **Case 2** (proteins only) with OrthoDB proteins from the closest available clade, or **Case 4** (ab initio) as a last resort. Ab initio prediction does not require any external evidence but typically produces less accurate gene models. It is generally recommended to generate at least some RNA-seq data before attempting genome annotation, as this significantly improves prediction quality.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - BRAKER3 is a pipeline that combines GeneMark-ET and AUGUSTUS to predict genes in eukaryotic genomes
 - BRAKER3 can be used with different input datasets to improve gene prediction accuracy

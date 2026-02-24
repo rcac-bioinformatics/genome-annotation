@@ -1,6 +1,6 @@
 ---
 title: 'Annotation using Helixer'
-teaching: 10
+teaching: 20
 exercises: 2
 ---
 
@@ -23,7 +23,7 @@ exercises: 2
 
 
 
-Helixer is a deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes. Helixer is trained on a wide range of eukaryotic genomes and can predict genes in both plant and animal genomes. Helixer can predict genes wihtout any extrinisic information such as RNA-seq data or homology information, purely based on the sequence of the genome.
+Helixer is a deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes. Helixer is trained on a wide range of eukaryotic genomes and can predict genes in both plant and animal genomes. Helixer can predict genes without any extrinsic information such as RNA-seq data or homology information, purely based on the sequence of the genome.
 
 
 :::::::::::::::::::::::::::::::::::::::  prereq
@@ -38,7 +38,7 @@ Due to the GPU requirement for Helixer, you need to run this section on the Gilb
 ```bash
 WORKSHOP_DIR="${RCAC_SCRATCH}/annotation_workshop"
 mkdir -p ${WORKSHOP_DIR}/05_helixer
-cp <depot_location>/genome/athaliana.fasta ${WORKSHOP_DIR}/05_helixer/athaliana.fasta
+cp /depot/workshop/data/annotation_workshop/00_datasets/genome/athaliana.fasta ${WORKSHOP_DIR}/05_helixer/athaliana.fasta
 ```
 
 ![Folder organization](https://github.com/user-attachments/assets/a1767236-304b-4912-8200-e2ea97ec63b8)
@@ -80,7 +80,7 @@ fetch_helixer_models.py --lineage land_plant
 This will download all lineage models in the models directory. You can also download models for specific lineages using the `--lineage` option as shown above.
 
 By default, files will be downloaded to `~/.local/share/Helixer` directory.
-You should see the follwing files:
+You should see the following files:
 
 ```
 .
@@ -101,7 +101,7 @@ The model size is determined by the number of parameters in the model. The large
 
 ## Running Helixer
 
-Helixer requires GPU for prediction. For running Helixer, you need to request a GPU node. You will also need the genome sequence in fasta format. For this tutorial, we will use Maize genome (Zea mays subsp. mays), and use the `land_plant` model to predict genes.
+Helixer requires GPU for prediction. For running Helixer, you need to request a GPU node. You will also need the genome sequence in fasta format. For this tutorial, we will use the Arabidopsis thaliana genome, and use the `land_plant` model to predict genes.
 
 ```bash
 #!/bin/bash
@@ -127,10 +127,10 @@ Helixer.py \
 ```
 
 
-A typical job will take ~40 mins to finish depedning on the GPU the job gets allocated.
+A typical job will take ~40 mins to finish depending on the GPU the job gets allocated.
 
 
-You can count the nubmer of predictions in your gff3 file using the following command:
+You can count the number of predictions in your gff3 file using the following command:
 
 ```bash
 awk '$3=="gene"' athaliana_helixer.gff | wc -l
@@ -152,7 +152,7 @@ To get `cds` and `pep` files, you can use the following command:
 ml --force purge
 ml biocontainers
 ml cufflinks
-gffread Arabidopsis_thaliana.gff3 \
+gffread athaliana_helixer.gff \
    -g athaliana.fasta \
    -y helixer_pep.fa \
    -x helixer_cds.fa
@@ -161,14 +161,56 @@ gffread Arabidopsis_thaliana.gff3 \
 
 As you may have noticed, the number of mRNA and gene features are the same. 
 This is because isoforms aren’t predicted by Helixer and you only have one transcript per gene.
-Exons are indetified with high confidence and alternative isoforms are usually collapsed into a single gene model. 
+Exons are identified with high confidence and alternative isoforms are usually collapsed into a single gene model. 
 This is one of the known limitations of Helixer.
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Understanding Helixer GFF Output
+
+Look at the feature counts from the Helixer GFF output. Why is the number of mRNA features the same as the number of gene features?
+
+:::::::::::::: solution
+
+## Solution
+
+The number of mRNA and gene features are the same because Helixer does not predict alternative isoforms. Each gene has exactly one transcript (mRNA) associated with it. Unlike tools that incorporate RNA-seq evidence, Helixer's deep learning model produces a single gene model per locus, collapsing any potential alternative splicing into one representative transcript.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Helixer vs. BRAKER3
+
+What are the advantages and disadvantages of using Helixer compared to BRAKER3 for gene annotation?
+
+:::::::::::::: solution
+
+## Solution
+
+**Advantages of Helixer:**
+
+- Does not require any extrinsic evidence data (RNA-seq or protein data), making it useful when such data is unavailable.
+- Runs faster when GPU hardware is available.
+- Simpler setup with fewer input requirements.
+
+**Disadvantages of Helixer:**
+
+- Cannot predict alternative isoforms (only one transcript per gene).
+- Requires GPU hardware, which may not be available on all HPC clusters.
+- May be less accurate for species that are poorly represented in the training data.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Helixer is a deep learning-based gene prediction tool that uses a convolutional neural network (CNN) to predict genes in eukaryotic genomes.
-- Helixer can predict genes wihtout any extrinisic information such as RNA-seq data or homology information, purely based on the sequence of the genome.
+- Helixer can predict genes without any extrinsic information such as RNA-seq data or homology information, purely based on the sequence of the genome.
 - Helixer requires a trained model and GPU for prediction. 
 - Helixer predicts genes in the GFF3 format, but will not predict isoforms.
 

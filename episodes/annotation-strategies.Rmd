@@ -1,6 +1,6 @@
 ---
 title: 'Annotation Strategies'
-teaching: 10
+teaching: 20
 exercises: 2
 ---
 
@@ -176,7 +176,7 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 
 ::: callout
 
-## How to we access gene predictions?
+## How do we assess gene predictions?
 
 - **Busco and Omark** assess gene set completeness by checking the presence of conserved orthologs across species, helping identify missing or fragmented genes  
 - **Gff3 metrics** provide structural statistics on gene models, including exon-intron distribution, gene lengths, and coding sequence properties, highlighting inconsistencies in annotation  
@@ -187,7 +187,46 @@ For this workshop, we focus only on **protein-coding genes** and their annotatio
 :::
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Matching Tools to Data
+
+You are annotating a newly sequenced fungal genome. You have short-read RNA-seq data from three tissue types but no protein sequences from closely related species. Which annotation strategy (ab initio, evidence-based, hybrid) and which tool from this workshop would you choose? Why?
+
+:::::::::::::: solution
+
+## Solution
+
+A **hybrid approach** using **BRAKER3 Case 1** (RNA-seq mode) would be the best choice. BRAKER3 can use the RNA-seq BAM files as evidence to train GeneMark-ET and AUGUSTUS, combining ab initio gene prediction with transcript evidence. This approach leverages your available data without requiring protein homology. If you later obtain protein sequences, you could re-run with Case 3 (combined mode) for improved accuracy.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Evaluating Trade-offs
+
+Consider two annotation scenarios:
+1. A well-studied crop species with extensive RNA-seq, protein databases, and a closely related reference annotation
+2. A non-model organism with no transcriptomic data and few related species in databases
+
+For each scenario, which annotation method(s) would you prioritize and why?
+
+:::::::::::::: solution
+
+## Solution
+
+**Scenario 1** (well-studied crop): Use a **multi-evidence hybrid approach** like BRAKER3 Case 3 (RNA-seq + proteins). The rich evidence data will produce highly accurate gene models. Follow up with EnTAP for functional annotation using the available databases. You could also run Helixer for comparison.
+
+**Scenario 2** (non-model organism): Start with **Helixer** since it requires no external evidence and can predict genes using only the genome sequence. Also run **BRAKER3 Case 4** (ab initio mode) as a complement. If you can obtain protein sequences from the nearest available clade via OrthoDB, run BRAKER3 Case 2 as well. Compare all results using BUSCO to identify the best prediction.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Genome annotation strategies include **ab initio, evidence-based, hybrid, multi-evidence, and large model-based methods**, each with different strengths and data requirements.  
 - **Ab initio methods** predict genes using sequence patterns, while **evidence-based methods** use RNA-seq, proteins, and evolutionary conservation for refinement.  

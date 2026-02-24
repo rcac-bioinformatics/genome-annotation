@@ -1,6 +1,6 @@
 ---
-title: 'Annotation Assesment'
-teaching: 10
+title: 'Annotation Assessment'
+teaching: 30
 exercises: 2
 ---
 
@@ -29,10 +29,33 @@ exercises: 2
 
 The folder organization is as follows:
 
+```
+08_assessment/
+├── braker_case1.gff3
+├── braker_case2.gff3
+├── braker_case3.gff3
+├── braker_case4.gff3
+├── braker_case5.gff3
+├── athaliana_helixer.gff3
+├── easel.gff3
+├── busco_results/
+├── gff3_stats/
+└── featureCounts/
+```
 
+::: callout
 
+## Running Assessment Tools
 
+The commands in this episode can be run as SLURM batch jobs or interactively on a compute node. For interactive use, request a compute node with:
 
+```bash
+salloc -A workshop -n 16 -t 2:00:00
+```
+
+All `#!/bin/bash` headers in the scripts below can be extended with `#SBATCH` directives if you prefer batch submission (see the BRAKER episode for examples).
+
+:::
 
 The annotation files (`gff3`) are from the previous steps. But are collected in this folder for convenience.
 
@@ -49,7 +72,7 @@ cd ${workdir}
 for i in *.gff3; do
     base=$(basename ${i%.*})
     gffread \
-       -g ${WORKSHOP_DIR}/00_datasets/genome/athaliana.fa \
+       -g ${WORKSHOP_DIR}/00_datasets/genome/athaliana.fasta \
        -x ${base}_cds.fa \
        -y ${base}_pep.fa $i
 done
@@ -116,8 +139,22 @@ mkdir -p busco_results
 for f in */*_busco/short_summary*busco.txt; do
    cp $f busco_results/;
 done
-generate_plot.py –wd busco_results
+generate_plot.py --wd busco_results
 ```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## Interpreting BUSCO Results
+
+BUSCO scores reflect how many conserved single-copy orthologs are found in your predicted proteome. A good annotation should have:
+
+- **Complete (C)** > 90% -- most conserved genes are found as complete single-copy or duplicated
+- **Fragmented (F)** < 5% -- few genes are only partially recovered
+- **Missing (M)** < 10% -- few conserved genes are absent
+
+Compare scores across annotation methods to identify the most complete prediction. Ab initio methods (BRAKER Case 4) typically score lower than evidence-based methods.
+
+::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Omark assesment
@@ -140,6 +177,7 @@ for pep in braker*_pep.fa; do
     rm ${base}.primary.ids
 done
 cp helixer_pep.fa helixer.primary.pep.fa
+cp easel_pep.fa easel.primary.pep.fa
 ```
 
 Running OMark:
@@ -168,6 +206,9 @@ for pep in *.primary.pep.fa; do
 done
 
 ```
+
+The following OMArk results are for the TAIR10 reference annotation, shown as a baseline for comparison. Run OMArk on your predicted annotations and compare against these values.
+
 :::::::::::::::::::::::::::::::::::::::::: spoiler
 
 ## **OMark Results Summary**
@@ -238,10 +279,24 @@ for gff3 in *.gff3; do
       -p \
       -B \
       -o ${base}_merged_counts.txt \
-      --tmpDir /tmp ${RCAC_SCRATCH}/annotation_workshop/00_datasets/bamfiles/*.bam
+      --tmpDir /tmp ${WORKSHOP_DIR}/00_datasets/bamfiles/*.bam
 done
 
 ```
+
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## Interpreting featureCounts Results
+
+featureCounts reports how many RNA-seq reads map to predicted gene features. Key metrics to check:
+
+- **Assigned reads** -- higher percentages indicate that more of the transcriptome is captured by the gene models
+- **Unassigned_NoFeatures** -- reads that do not overlap any predicted feature, suggesting missing genes
+- **Unassigned_Ambiguity** -- reads mapping to multiple overlapping features
+
+A good annotation should assign 60-80% of reads to predicted features. Annotations with low assignment rates may be missing genes in expressed regions.
+
+::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Reference annotation comparison
@@ -261,16 +316,72 @@ for gff3 in *.gff3; do
     base=$(basename ${gff3%.*})
     mikado compare \
       --protein-coding \
-      -r ${RCAC_SCRATCH}/annotation_workshop/00_datasets/genome/athaliana_TAIR10.gff3 \
+      -r ${WORKSHOP_DIR}/00_datasets/genome/athaliana_TAIR10.gff3 \
       -p ${gff3} \
       -o ref-TAIR10_vs_prediction_${base}_compared \
       --log ${base}_compare.log
 done
 ```
 
+:::::::::::::::::::::::::::::::::::::::::: spoiler
+
+## Interpreting Mikado Compare Results
+
+Mikado compare evaluates how closely your predicted gene models match the reference annotation. Key metrics:
+
+- **Sensitivity** -- proportion of reference genes that are correctly predicted (higher is better)
+- **Precision** -- proportion of predicted genes that match the reference (higher is better)
+- **F1 score** -- harmonic mean of sensitivity and precision
+
+At the transcript level:
+- Sensitivity > 60% is reasonable for a first-pass annotation
+- Precision > 70% indicates low false-positive rate
+
+Compare results across your annotation methods to determine which produces the best balance of sensitivity and precision.
+
+::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 1: Compare BUSCO Scores
+
+Review the BUSCO results across all annotation methods (BRAKER cases 1-5, Helixer, and EASEL). Rank them from highest to lowest completeness. Which method produced the most complete annotation? Which performed the worst? Can you explain why?
+
+:::::::::::::: solution
+
+## Solution
+
+Evidence-based methods (BRAKER Case 1 with RNA-seq, Case 2 with proteins, and Case 3 combining both) typically score highest, with completeness (C) values above 90%. Helixer and EASEL also tend to perform well since they leverage external evidence or pre-trained models. Ab initio prediction (BRAKER Case 4) usually scores the lowest because it relies solely on intrinsic sequence features without external evidence. BRAKER Case 5 (pretrained) should perform better than pure ab initio but may still lag behind evidence-informed runs. The ranking highlights the importance of incorporating experimental evidence into gene prediction.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Exercise 2: Most Informative Assessment Metric
+
+Consider the three assessment approaches used in this episode: BUSCO, featureCounts, and mikado compare. Which metric do you think is the most informative for evaluating an annotation, and why? Are there situations where one metric might be misleading?
+
+:::::::::::::: solution
+
+## Solution
+
+There is no single "best" metric -- each captures a different aspect of annotation quality:
+
+- **BUSCO** measures gene completeness using conserved orthologs, but it only assesses a subset of genes (those that are universally conserved). Lineage-specific or novel genes are not evaluated.
+- **featureCounts** measures how well the annotation captures expressed regions of the genome. However, high assignment rates can occur even with over-predicted gene models, and lowly expressed genes may not be well represented in the RNA-seq data.
+- **mikado compare** directly evaluates structural accuracy against a reference, but it requires a high-quality reference annotation, which is not always available.
+
+A comprehensive assessment should use all three metrics together. BUSCO and OMArk evaluate gene content completeness, featureCounts checks consistency with expression data, and mikado compare validates structural accuracy. An annotation that scores well across all metrics is more reliable than one that excels in only one.
+
+:::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Summary
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - `busco` and `omark` assess how well conserved genes are represented in the predicted gene set  
 - `gff3` metrics provide structural insights and highlight discrepancies compared to known annotations  

@@ -1,11 +1,11 @@
 # This template CITATION.cff file was generated with cffinit.
 # Visit https://bit.ly/cffinit to replace its contents
 # with information about your lesson.
-# Remember to update this file periodically, 
+# Remember to update this file periodically,
 # ensuring that the author list and other fields remain accurate.
 
 cff-version: 1.2.0
-title: FIXME
+title: 'Genome Annotation: Hands-on Training'
 message: >-
   Please cite this lesson using the information in this file
   when you refer to it in publications, and/or if you
@@ -13,10 +13,15 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  - given-names: Arun
+    family-names: Seetharam
+  - given-names: Charles
+    family-names: Christoffer
 abstract: >-
-  FIXME Replace this with a short abstract describing the
-  lesson, e.g. its target audience and main intended
-  learning objectives.
+  A hands-on workshop teaching eukaryotic genome annotation
+  on HPC clusters. Covers structural annotation with BRAKER3,
+  Helixer, and EASEL, functional annotation with EnTAP, and
+  quality assessment with BUSCO, OMArk, and AGAT. Uses
+  Arabidopsis thaliana as the model organism on Purdue RCAC
+  clusters.
 license: CC-BY-4.0
